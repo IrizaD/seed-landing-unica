@@ -188,7 +188,7 @@ function Headline({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="uppercase leading-tight mb-3"
       style={{ fontFamily:"var(--font-barlow)", fontWeight:900,
-        fontSize:"clamp(1.55rem, 5.5vw, 2rem)", color:"#fff", letterSpacing:"-0.01em" }}>
+        fontSize:"clamp(1.55rem, 3vw, 2.1rem)", color:"#fff", letterSpacing:"-0.01em" }}>
       {children}
     </h2>
   );
@@ -242,14 +242,14 @@ export default function SeedFunnel() {
         style={{ background:"radial-gradient(ellipse 80% 60% at 10% 80%, rgba(14,80,180,0.10) 0%, transparent 60%)" }}/>
 
       {/* ── STICKY HEADER ─────────────────────────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 px-5 pt-5 pb-3"
+      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-5 pb-3"
         style={{ background:"rgba(6,8,15,0.85)", backdropFilter:"blur(8px)" }}>
-        <div style={{ maxWidth:"520px", margin:"0 auto" }}>
+        <div style={{ maxWidth:"700px", margin:"0 auto" }}>
           <Image
             src="/logo-seed.webp"
             alt="Seminario de Emprendedor a Empresario Digital"
-            width={180}
-            height={43}
+            width={220}
+            height={53}
             style={{ objectFit:"contain", objectPosition:"left" }}
             priority
           />
@@ -283,7 +283,7 @@ export default function SeedFunnel() {
 
       {/* ── SCROLLABLE CONTENT ────────────────────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto relative z-10">
-        <div className="px-5 pt-4 pb-2" style={{ maxWidth:"520px", margin:"0 auto" }}>
+        <div className="px-5 md:px-12 pt-4 pb-2" style={{ maxWidth:"700px", margin:"0 auto" }}>
 
           {/* Animated content */}
           <div style={{ opacity:visible?1:0, transform:visible?"translateY(0)":"translateY(14px)", transition:"opacity 0.25s ease, transform 0.25s ease" }}>
@@ -293,7 +293,7 @@ export default function SeedFunnel() {
               <div>
                 <h1 className="uppercase leading-tight mb-3"
                   style={{ fontFamily:"var(--font-barlow)", fontWeight:900,
-                    fontSize:"clamp(2rem, 7vw, 2.8rem)", color:"#fff", letterSpacing:"-0.02em" }}>
+                    fontSize:"clamp(2rem, 5vw, 3rem)", color:"#fff", letterSpacing:"-0.02em" }}>
                   Aprende a vender
                   <br/>
                   <span style={{ color:"#14C9B8", fontStyle:"italic" }}>por internet</span>
@@ -570,9 +570,9 @@ export default function SeedFunnel() {
       </div>
 
       {/* ── STICKY FOOTER ─────────────────────────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 px-5 pt-3 pb-6"
+      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-3 pb-6"
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
-        <div style={{ maxWidth:"520px", margin:"0 auto" }}>
+        <div style={{ maxWidth:"700px", margin:"0 auto" }}>
 
           {/* Steps 0–4: next-step button */}
           {step === 0 && <TealBtn onClick={() => goToStep(1)}>QUIERO SABER MÁS →</TealBtn>}
