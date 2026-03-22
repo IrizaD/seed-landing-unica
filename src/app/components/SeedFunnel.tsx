@@ -98,7 +98,7 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
       <div className="relative flex-shrink-0">
         <button type="button" onClick={() => setOpen((v) => !v)}
           className="flex items-center gap-1.5 rounded-xl transition-all duration-200 focus:outline-none"
-          style={{ background:"#0d1117", border:`1px solid ${open?"#14C9B8":"#1e2535"}`, padding:"14px 12px", color:"#fff", minWidth:"90px" }}>
+          style={{ background:"#0d1117", border:`1px solid ${open?"#14C9B8":"#1e2535"}`, padding:"12px 12px", color:"#fff", minWidth:"90px" }}>
           <span className="text-base leading-none">{selected.flag}</span>
           <span className="text-sm font-semibold">{selected.dial}</span>
           <svg width="10" height="10" viewBox="0 0 12 12" fill="none"
@@ -136,7 +136,7 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
       <input type="tel" required placeholder="55 1234 5678" value={phone}
         onChange={(e) => onPhoneChange(e.target.value)}
         className="flex-1 rounded-xl text-sm transition-all duration-200 focus:outline-none"
-        style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px" }}
+        style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px" }}
         onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
         onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
     </div>
@@ -159,13 +159,13 @@ function DateChip({ date }: { date: EventDate }) {
   );
 }
 
-function TealBtn({ children, onClick, type = "button", disabled }: {
-  children: React.ReactNode; onClick?: () => void; type?: "button" | "submit"; disabled?: boolean;
+function TealBtn({ children, onClick, type = "button", form, disabled }: {
+  children: React.ReactNode; onClick?: () => void; type?: "button" | "submit"; form?: string; disabled?: boolean;
 }) {
   return (
-    <button type={type} onClick={onClick} disabled={disabled}
+    <button type={type} form={form} onClick={onClick} disabled={disabled}
       className="w-full font-black rounded-xl transition-all duration-200 active:scale-[0.98]"
-      style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#06080f", padding:"16px 24px",
+      style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#06080f", padding:"15px 24px",
         fontSize:"0.95rem", fontFamily:"var(--font-barlow)", fontWeight:800,
         cursor: disabled ? "not-allowed" : "pointer" }}
       onMouseEnter={(e) => { if (!disabled) (e.currentTarget as HTMLElement).style.background = "#1FE5D2"; }}
@@ -174,7 +174,6 @@ function TealBtn({ children, onClick, type = "button", disabled }: {
     </button>
   );
 }
-
 
 function Row({ icon, children }: { icon: string; children: React.ReactNode }) {
   return (
@@ -185,19 +184,11 @@ function Row({ icon, children }: { icon: string; children: React.ReactNode }) {
   );
 }
 
-function StepLabel({ label }: { label: string }) {
-  return (
-    <p className="text-xs font-semibold tracking-[0.22em] uppercase mb-2" style={{ color:"#14C9B8" }}>
-      {label}
-    </p>
-  );
-}
-
 function Headline({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="uppercase leading-tight mb-4"
+    <h2 className="uppercase leading-tight mb-3"
       style={{ fontFamily:"var(--font-barlow)", fontWeight:900,
-        fontSize:"clamp(1.6rem, 5.5vw, 2.1rem)", color:"#fff", letterSpacing:"-0.01em" }}>
+        fontSize:"clamp(1.55rem, 5.5vw, 2rem)", color:"#fff", letterSpacing:"-0.01em" }}>
       {children}
     </h2>
   );
@@ -205,7 +196,7 @@ function Headline({ children }: { children: React.ReactNode }) {
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border" style={{ background:"#0d1117", borderColor:"#1e2535", padding:"18px 20px" }}>
+    <div className="rounded-xl border" style={{ background:"#0d1117", borderColor:"#1e2535", padding:"14px 16px" }}>
       {children}
     </div>
   );
@@ -241,32 +232,29 @@ export default function SeedFunnel() {
   const showBar = step >= 1 && step <= 5;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-5 py-12 relative overflow-hidden"
-      style={{ background:"#06080f" }}>
+    <div style={{ height:"100dvh" }} className="flex flex-col overflow-hidden relative"
+      aria-label="Registro al seminario">
 
       {/* Background image */}
       <div className="pointer-events-none fixed inset-0" aria-hidden="true"
         style={{ backgroundImage:"url('/bg-glow.png')", backgroundSize:"cover", backgroundPosition:"center", opacity:0.6 }}/>
-      {/* Overlay to deepen contrast */}
       <div className="pointer-events-none fixed inset-0" aria-hidden="true"
         style={{ background:"radial-gradient(ellipse 80% 60% at 10% 80%, rgba(14,80,180,0.10) 0%, transparent 60%)" }}/>
 
-      <div className="w-full relative z-10" style={{ maxWidth:"520px" }}>
-
-        {/* Header */}
-        <div className="mb-10">
-          {/* Logo — always visible */}
+      {/* ── STICKY HEADER ─────────────────────────────────────────────────────── */}
+      <div className="flex-shrink-0 relative z-10 px-5 pt-5 pb-3"
+        style={{ background:"rgba(6,8,15,0.85)", backdropFilter:"blur(8px)" }}>
+        <div style={{ maxWidth:"520px", margin:"0 auto" }}>
           <Image
             src="/logo-seed.webp"
             alt="Seminario de Emprendedor a Empresario Digital"
-            width={200}
-            height={48}
+            width={180}
+            height={43}
             style={{ objectFit:"contain", objectPosition:"left" }}
             priority
           />
-          {/* Back + progress — only on steps 1-5 */}
           {showBar && (
-            <div className="flex items-center justify-between mt-5">
+            <div className="flex items-center justify-between mt-3">
               <button
                 type="button"
                 onClick={() => goToStep(step - 1)}
@@ -291,361 +279,353 @@ export default function SeedFunnel() {
             </div>
           )}
         </div>
+      </div>
 
-        {/* Animated content */}
-        <div style={{ opacity:visible?1:0, transform:visible?"translateY(0)":"translateY(16px)", transition:"opacity 0.25s ease, transform 0.25s ease" }}>
+      {/* ── SCROLLABLE CONTENT ────────────────────────────────────────────────── */}
+      <div className="flex-1 overflow-y-auto relative z-10">
+        <div className="px-5 pt-4 pb-2" style={{ maxWidth:"520px", margin:"0 auto" }}>
 
-          {/* ── 0: HOOK ──────────────────────────────────────────── */}
-          {step === 0 && (
-            <div>
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style={{ color:"#14C9B8" }}>
-                Seminario gratuito · Esta semana
-              </p>
+          {/* Animated content */}
+          <div style={{ opacity:visible?1:0, transform:visible?"translateY(0)":"translateY(14px)", transition:"opacity 0.25s ease, transform 0.25s ease" }}>
 
-              <h1 className="uppercase leading-tight mb-3"
-                style={{ fontFamily:"var(--font-barlow)", fontWeight:900,
-                  fontSize:"clamp(2rem, 7vw, 2.8rem)", color:"#fff", letterSpacing:"-0.02em" }}>
-                Aprende a vender
-                <br/>
-                <span style={{ color:"#14C9B8", fontStyle:"italic" }}>por internet</span>
-              </h1>
+            {/* ── 0: HOOK ────────────────────────────────────────────── */}
+            {step === 0 && (
+              <div>
+                <h1 className="uppercase leading-tight mb-3"
+                  style={{ fontFamily:"var(--font-barlow)", fontWeight:900,
+                    fontSize:"clamp(2rem, 7vw, 2.8rem)", color:"#fff", letterSpacing:"-0.02em" }}>
+                  Aprende a vender
+                  <br/>
+                  <span style={{ color:"#14C9B8", fontStyle:"italic" }}>por internet</span>
+                </h1>
 
-              <div className="mb-5" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
+                <div className="mb-4" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
 
-              <p className="leading-relaxed mb-6" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
-                El Seminario de Emprendedor a Empresario Digital te muestra cómo usar redes sociales, publicidad e IA para vender más allá de tu círculo, sin necesidad de saber de tecnología.
-              </p>
-
-              <div className="mb-6">
-                <DateChip date={eventDate}/>
-              </div>
-
-              <TealBtn onClick={() => goToStep(1)}>
-                QUIERO SABER MÁS →
-              </TealBtn>
-
-              <div className="flex items-center gap-2.5 mt-5">
-                <div className="flex -space-x-2">
-                  {["#2d4a6e","#1e3a5f","#264d6b","#1a3c5a"].map((bg, i) => (
-                    <div key={i} className="rounded-full border-2 flex items-center justify-center text-xs font-bold"
-                      style={{ width:"26px", height:"26px", background:bg, borderColor:"#06080f", color:"#7ab3d4" }}>
-                      {["J","M","A","L"][i]}
-                    </div>
-                  ))}
-                </div>
-                <div className="flex items-center gap-1">
-                  {[1,2,3,4,5].map((s) => (
-                    <svg key={s} width="10" height="10" viewBox="0 0 12 12" fill="#14C9B8">
-                      <path d="M6 1l1.3 2.7 3 .4-2.2 2.1.5 3L6 7.8 3.4 9.2l.5-3L1.7 4.1l3-.4z"/>
-                    </svg>
-                  ))}
-                  <span className="text-xs ml-1" style={{ color:"#7a8299" }}>+100,000 vidas cambiadas</span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* ── 1: EL PROBLEMA ───────────────────────────────────── */}
-          {step === 1 && (
-            <div>
-              <StepLabel label="¿Te suena familiar?" />
-              <Headline>
-                Tu negocio podría<br/>quedarse obsoleto
-              </Headline>
-
-              <p className="leading-relaxed mb-5" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
-                Tener un buen producto ya no alcanza: si no apareces en redes, no existes para la mitad de tus clientes potenciales.
-              </p>
-
-              <p className="text-xs font-semibold tracking-wider uppercase mb-2" style={{ color:"#3d4a5c" }}>
-                ¿Te identificas con alguno de estos?
-              </p>
-
-              <Card>
-                <div className="space-y-3.5">
-                  <Row icon="📍">Solo vendes a quien ya te conoce, un radio de acción chico sin importar qué tan bueno seas</Row>
-                  <Row icon="⏳">Cada venta depende de que <strong style={{ color:"#cdd5e0" }}>tú</strong> estés ahí, y el negocio solo avanza cuando tú lo empujas</Row>
-                  <Row icon="📉">Tu competencia crece en redes y tú lo ves sin saber <strong style={{ color:"#cdd5e0" }}>por dónde entrar</strong></Row>
-                  <Row icon="😰">Lo intentaste y aprendiste algo, pero sin una guía clara crecer en digital se siente lento</Row>
-                </div>
-              </Card>
-
-              <div className="mt-4 mb-5 rounded-xl border" style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"12px 16px" }}>
-                <p className="text-sm leading-relaxed" style={{ color:"#cdd5e0" }}>
-                  <strong style={{ color:"#14C9B8" }}>Tiene solución</strong> y no necesitas saber de tecnología para aplicarla
+                <p className="leading-relaxed mb-5" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
+                  El Seminario de Emprendedor a Empresario Digital te muestra cómo usar redes sociales, publicidad e IA para vender más allá de tu círculo, sin necesidad de saber de tecnología.
                 </p>
-              </div>
 
-              <TealBtn onClick={() => goToStep(2)}>DIME CÓMO →</TealBtn>
-            </div>
-          )}
-
-          {/* ── 2: LO QUE APRENDERÁN ─────────────────────────────── */}
-          {step === 2 && (
-            <div>
-              <StepLabel label="El evento" />
-              <Headline>
-                Lo que vas a aprender<br/>en el seminario
-              </Headline>
-
-              <p className="leading-relaxed mb-5" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
-                Una sesión en vivo donde vas directo a lo que funciona para vender por internet, sin importar en qué punto está tu negocio.
-              </p>
-
-              <Card>
-                <div className="space-y-3.5">
-                  <Row icon="📱"><strong style={{ color:"#cdd5e0" }}>Redes sociales:</strong> cómo publicar para que la gente llegue a ti queriendo comprar, no solo a ver</Row>
-                  <Row icon="🎯"><strong style={{ color:"#cdd5e0" }}>Publicidad:</strong> cómo invertir sin tirar el dinero y crear anuncios que sí venden</Row>
-                  <Row icon="🤖"><strong style={{ color:"#cdd5e0" }}>IA:</strong> herramientas concretas que puedes usar desde mañana en tu negocio</Row>
-                  <Row icon="🌐"><strong style={{ color:"#cdd5e0" }}>Escala geográfica:</strong> cómo vender fuera de tu ciudad o tu país sin moverte de donde estás</Row>
-                  <Row icon="🤝"><strong style={{ color:"#cdd5e0" }}>Networking:</strong> conexiones con otros empresarios donde 1+1 termina valiendo 3</Row>
+                <div className="mb-5">
+                  <DateChip date={eventDate}/>
                 </div>
-              </Card>
 
-              <div className="mt-5">
-                <TealBtn onClick={() => goToStep(3)}>¿QUIÉNES LO IMPARTEN? →</TealBtn>
-              </div>
-            </div>
-          )}
-
-          {/* ── 3: CREDIBILIDAD ──────────────────────────────────── */}
-          {step === 3 && (
-            <div>
-              <StepLabel label="Los expertos" />
-              <Headline>
-                Aprende de quienes<br/><span style={{ color:"#14C9B8" }}>ya lo lograron</span>
-              </Headline>
-
-              <p className="leading-relaxed mb-5" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
-                No es teoría lo que vas a escuchar, es lo que ellos aplicaron para construir sus propios negocios en el mundo digital
-              </p>
-
-              <div className="space-y-3 mb-5">
-                <Card>
-                  <div className="flex items-center gap-3 mb-2.5">
-                    <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black text-sm"
-                      style={{ width:"42px", height:"42px", background:"linear-gradient(135deg,#14C9B8,#0a8a80)", color:"#06080f" }}>
-                      JS
-                    </div>
-                    <div>
-                      <p className="font-bold text-sm" style={{ color:"#fff" }}>Jorge Serratos</p>
-                      <p className="text-xs" style={{ color:"#3d4a5c" }}>Conferencista · Autor Bestseller</p>
-                    </div>
+                <div className="flex items-center gap-2.5">
+                  <div className="flex -space-x-2">
+                    {["#2d4a6e","#1e3a5f","#264d6b","#1a3c5a"].map((bg, i) => (
+                      <div key={i} className="rounded-full border-2 flex items-center justify-center text-xs font-bold"
+                        style={{ width:"26px", height:"26px", background:bg, borderColor:"#06080f", color:"#7ab3d4" }}>
+                        {["J","M","A","L"][i]}
+                      </div>
+                    ))}
                   </div>
-                  <p className="text-sm leading-relaxed" style={{ color:"#7a8299" }}>
-                    Fundador del movimiento Sinergéticos y del podcast #1 de negocios en México según Spotify, con más de 100,000 personas que han pasado por sus programas y conferencias en México y EE.UU.
-                  </p>
-                </Card>
-
-                <Card>
-                  <div className="flex items-center gap-3 mb-2.5">
-                    <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black text-sm"
-                      style={{ width:"42px", height:"42px", background:"linear-gradient(135deg,#1e3a5f,#2d6aad)", color:"#7ab3d4" }}>
-                      ML
-                    </div>
-                    <div>
-                      <p className="font-bold text-sm" style={{ color:"#fff" }}>Manuel de León</p>
-                      <p className="text-xs" style={{ color:"#3d4a5c" }}>Empresario & Conferencista</p>
-                    </div>
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color:"#7a8299" }}>
-                    Referente en la industria digital y de negocios, de los que cuando comparten no solo te inspiran sino que te hacen ver que lo que quieres construir es más alcanzable de lo que crees
-                  </p>
-                </Card>
-              </div>
-
-              <p className="text-xs font-semibold tracking-wider uppercase mb-2" style={{ color:"#3d4a5c" }}>
-                El resultado de su trabajo
-              </p>
-
-              <div className="grid grid-cols-3 gap-2 mb-5">
-                {[
-                  { n:"+100K", l:"personas impactadas" },
-                  { n:"5+",   l:"años de trayectoria" },
-                  { n:"100%", l:"en vivo y gratis" },
-                ].map((s) => (
-                  <div key={s.n} className="text-center rounded-xl border py-3"
-                    style={{ background:"#0d1117", borderColor:"#1e2535" }}>
-                    <p className="font-black text-lg" style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)" }}>{s.n}</p>
-                    <p className="text-xs mt-0.5" style={{ color:"#3d4a5c" }}>{s.l}</p>
-                  </div>
-                ))}
-              </div>
-
-              <TealBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</TealBtn>
-            </div>
-          )}
-
-          {/* ── 4: FECHA / URGENCIA ──────────────────────────────── */}
-          {step === 4 && (
-            <div>
-              <StepLabel label="Esta semana" />
-              <Headline>
-                Tu lugar todavía<br/><span style={{ color:"#14C9B8" }}>está disponible</span>
-              </Headline>
-
-              <div className="rounded-xl border mb-4"
-                style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.22)", padding:"18px 20px" }}>
-                <div className="flex items-center gap-3">
-                  <div className="flex-shrink-0 rounded-xl flex flex-col items-center justify-center"
-                    style={{ width:"52px", height:"52px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
-                    <p className="text-xs font-bold uppercase" style={{ color:"#14C9B8", lineHeight:1 }}>JUE</p>
-                    <p className="font-black text-xl leading-none mt-0.5" style={{ color:"#fff", fontFamily:"var(--font-barlow)" }}>8PM</p>
-                  </div>
-                  <div>
-                    <p className="font-bold text-sm" style={{ color:"#fff" }}>{eventDate.formatted}</p>
-                    <p className="text-xs mt-0.5" style={{ color:"#3d4a5c" }}>8:00 PM hora México · En vivo · Gratis</p>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-xs font-semibold tracking-wider uppercase mb-2" style={{ color:"#3d4a5c" }}>
-                Cómo funciona
-              </p>
-
-              <Card>
-                <div className="space-y-3">
-                  <Row icon="✅">Es <strong style={{ color:"#cdd5e0" }}>gratis</strong>, sin costo ni sorpresas al final</Row>
-                  <Row icon="💻">100% online, entras desde donde estés</Row>
-                  <Row icon="⚡">En vivo, puedes preguntar en el momento</Row>
-                  <Row icon="🎯">Los cupos son limitados y se llenan por orden de llegada</Row>
-                </div>
-              </Card>
-
-              <div className="mt-5">
-                <TealBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</TealBtn>
-              </div>
-            </div>
-          )}
-
-          {/* ── 5: FORM ──────────────────────────────────────────── */}
-          {step === 5 && (
-            <div>
-              <StepLabel label="Último paso" />
-              <Headline>
-                Tu lugar está<br/>casi asegurado
-              </Headline>
-
-              <p className="text-sm mb-5" style={{ color:"#3d4a5c" }}>
-                Solo necesitamos estos datos para confirmarte
-              </p>
-
-              <div className="flex items-center gap-3 rounded-xl border mb-6"
-                style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.2)", padding:"12px 16px" }}>
-                <span className="text-xl">📅</span>
-                <div>
-                  <p className="text-sm font-bold" style={{ color:"#fff" }}>{eventDate.formatted}</p>
-                  <p className="text-xs" style={{ color:"#3d4a5c" }}>8:00 PM hora México · En vivo · Gratis</p>
-                </div>
-              </div>
-
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <div>
-                  <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
-                    Nombre completo
-                  </label>
-                  <input type="text" required placeholder="Tu nombre completo"
-                    value={form.nombre} onChange={(e) => setForm((p) => ({ ...p, nombre:e.target.value }))}
-                    className="w-full rounded-xl text-sm transition-all duration-200 focus:outline-none"
-                    style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px" }}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
-                    onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
-                    WhatsApp
-                  </label>
-                  <PhoneInput
-                    dialCode={form.dialCode} phone={form.phone}
-                    onDialChange={(d) => setForm((p) => ({ ...p, dialCode:d }))}
-                    onPhoneChange={(v) => setForm((p) => ({ ...p, phone:v }))}/>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
-                    Correo electrónico
-                  </label>
-                  <input type="email" required placeholder="tu@correo.com"
-                    value={form.email} onChange={(e) => setForm((p) => ({ ...p, email:e.target.value }))}
-                    className="w-full rounded-xl text-sm transition-all duration-200 focus:outline-none"
-                    style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px" }}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
-                    onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
-                </div>
-
-                <TealBtn type="submit" disabled={submitting}>
-                  {submitting ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <svg className="animate-spin-slow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <circle cx="12" cy="12" r="10" strokeOpacity="0.2"/>
-                        <path d="M12 2a10 10 0 0 1 10 10"/>
+                  <div className="flex items-center gap-1">
+                    {[1,2,3,4,5].map((s) => (
+                      <svg key={s} width="10" height="10" viewBox="0 0 12 12" fill="#14C9B8">
+                        <path d="M6 1l1.3 2.7 3 .4-2.2 2.1.5 3L6 7.8 3.4 9.2l.5-3L1.7 4.1l3-.4z"/>
                       </svg>
-                      RESERVANDO...
-                    </span>
-                  ) : "¡RESERVAR MI LUGAR GRATIS →"}
-                </TealBtn>
+                    ))}
+                    <span className="text-xs ml-1" style={{ color:"#7a8299" }}>+100,000 vidas cambiadas</span>
+                  </div>
+                </div>
+              </div>
+            )}
 
-                <p className="text-center text-xs" style={{ color:"#3d4a5c" }}>
-                  Sin spam. Solo información relevante del evento.
+            {/* ── 1: EL PROBLEMA ─────────────────────────────────────── */}
+            {step === 1 && (
+              <div>
+                <Headline>
+                  Tu negocio podría<br/>quedarse obsoleto
+                </Headline>
+
+                <p className="leading-relaxed mb-4" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
+                  Tener un buen producto ya no alcanza: si no apareces en redes, no existes para la mitad de tus clientes potenciales.
                 </p>
-              </form>
-            </div>
+
+                <Card>
+                  <div className="space-y-2.5">
+                    <Row icon="📍">Solo vendes a quien ya te conoce, un radio de acción chico sin importar qué tan bueno seas</Row>
+                    <Row icon="⏳">Cada venta depende de que <strong style={{ color:"#cdd5e0" }}>tú</strong> estés ahí, y el negocio solo avanza cuando tú lo empujas</Row>
+                    <Row icon="📉">Tu competencia crece en redes y tú lo ves sin saber <strong style={{ color:"#cdd5e0" }}>por dónde entrar</strong></Row>
+                    <Row icon="😰">Lo intentaste y aprendiste algo, pero sin una guía clara crecer en digital se siente lento</Row>
+                  </div>
+                </Card>
+
+                <div className="mt-3 rounded-xl border"
+                  style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"11px 15px" }}>
+                  <p className="text-sm leading-relaxed" style={{ color:"#cdd5e0" }}>
+                    <strong style={{ color:"#14C9B8" }}>Tiene solución</strong> y no necesitas saber de tecnología para aplicarla
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* ── 2: LO QUE APRENDERÁN ───────────────────────────────── */}
+            {step === 2 && (
+              <div>
+                <Headline>
+                  Lo que vas a aprender<br/>en el seminario
+                </Headline>
+
+                <p className="leading-relaxed mb-4" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
+                  Una sesión en vivo donde vas directo a lo que funciona para vender por internet, sin importar en qué punto está tu negocio.
+                </p>
+
+                <Card>
+                  <div className="space-y-2.5">
+                    <Row icon="📱"><strong style={{ color:"#cdd5e0" }}>Redes sociales:</strong> cómo publicar para que la gente llegue a ti queriendo comprar, no solo a ver</Row>
+                    <Row icon="🎯"><strong style={{ color:"#cdd5e0" }}>Publicidad:</strong> cómo invertir sin tirar el dinero y crear anuncios que sí venden</Row>
+                    <Row icon="🤖"><strong style={{ color:"#cdd5e0" }}>IA:</strong> herramientas concretas que puedes usar desde mañana en tu negocio</Row>
+                    <Row icon="🌐"><strong style={{ color:"#cdd5e0" }}>Escala geográfica:</strong> cómo vender fuera de tu ciudad o tu país sin moverte de donde estás</Row>
+                    <Row icon="🤝"><strong style={{ color:"#cdd5e0" }}>Networking:</strong> conexiones con otros empresarios donde 1+1 termina valiendo 3</Row>
+                  </div>
+                </Card>
+              </div>
+            )}
+
+            {/* ── 3: CREDIBILIDAD ────────────────────────────────────── */}
+            {step === 3 && (
+              <div>
+                <Headline>
+                  Aprende de quienes<br/><span style={{ color:"#14C9B8" }}>ya lo lograron</span>
+                </Headline>
+
+                <p className="leading-relaxed mb-4" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
+                  No es teoría lo que vas a escuchar, es lo que ellos aplicaron para construir sus propios negocios en el mundo digital
+                </p>
+
+                <div className="space-y-2.5 mb-4">
+                  <Card>
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black text-sm"
+                        style={{ width:"40px", height:"40px", background:"linear-gradient(135deg,#14C9B8,#0a8a80)", color:"#06080f" }}>
+                        JS
+                      </div>
+                      <div>
+                        <p className="font-bold text-sm" style={{ color:"#fff" }}>Jorge Serratos</p>
+                        <p className="text-xs" style={{ color:"#3d4a5c" }}>Conferencista · Autor Bestseller</p>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed" style={{ color:"#7a8299" }}>
+                      Fundador del movimiento Sinergéticos y del podcast #1 de negocios en México según Spotify, con más de 100,000 personas que han pasado por sus programas y conferencias en México y EE.UU.
+                    </p>
+                  </Card>
+
+                  <Card>
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black text-sm"
+                        style={{ width:"40px", height:"40px", background:"linear-gradient(135deg,#1e3a5f,#2d6aad)", color:"#7ab3d4" }}>
+                        ML
+                      </div>
+                      <div>
+                        <p className="font-bold text-sm" style={{ color:"#fff" }}>Manuel de León</p>
+                        <p className="text-xs" style={{ color:"#3d4a5c" }}>Empresario & Conferencista</p>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed" style={{ color:"#7a8299" }}>
+                      Referente en la industria digital y de negocios, de los que cuando comparten no solo te inspiran sino que te hacen ver que lo que quieres construir es más alcanzable de lo que crees
+                    </p>
+                  </Card>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { n:"+100K", l:"personas impactadas" },
+                    { n:"#1",   l:"podcast de negocios" },
+                    { n:"100%", l:"en vivo y gratis" },
+                  ].map((s) => (
+                    <div key={s.n} className="text-center rounded-xl border py-2.5"
+                      style={{ background:"#0d1117", borderColor:"#1e2535" }}>
+                      <p className="font-black text-lg" style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)" }}>{s.n}</p>
+                      <p className="text-xs mt-0.5" style={{ color:"#3d4a5c" }}>{s.l}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* ── 4: FECHA / URGENCIA ────────────────────────────────── */}
+            {step === 4 && (
+              <div>
+                <Headline>
+                  Tu lugar todavía<br/><span style={{ color:"#14C9B8" }}>está disponible</span>
+                </Headline>
+
+                <div className="rounded-xl border mb-4"
+                  style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.22)", padding:"14px 16px" }}>
+                  <div className="flex items-center gap-3">
+                    <div className="flex-shrink-0 rounded-xl flex flex-col items-center justify-center"
+                      style={{ width:"48px", height:"48px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
+                      <p className="text-xs font-bold uppercase" style={{ color:"#14C9B8", lineHeight:1 }}>JUE</p>
+                      <p className="font-black text-xl leading-none mt-0.5" style={{ color:"#fff", fontFamily:"var(--font-barlow)" }}>8PM</p>
+                    </div>
+                    <div>
+                      <p className="font-bold text-sm" style={{ color:"#fff" }}>{eventDate.formatted}</p>
+                      <p className="text-xs mt-0.5" style={{ color:"#3d4a5c" }}>8:00 PM hora México · En vivo · Gratis</p>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-xs font-semibold tracking-wider uppercase mb-2" style={{ color:"#3d4a5c" }}>
+                  Cómo funciona
+                </p>
+
+                <Card>
+                  <div className="space-y-2.5">
+                    <Row icon="✅">Es <strong style={{ color:"#cdd5e0" }}>gratis</strong>, sin costo ni sorpresas al final</Row>
+                    <Row icon="💻">100% online, entras desde donde estés</Row>
+                    <Row icon="⚡">En vivo, puedes preguntar en el momento</Row>
+                    <Row icon="🎯">Los cupos son limitados y se llenan por orden de llegada</Row>
+                  </div>
+                </Card>
+              </div>
+            )}
+
+            {/* ── 5: FORM ────────────────────────────────────────────── */}
+            {step === 5 && (
+              <div>
+                <Headline>
+                  Tu lugar está<br/>casi asegurado
+                </Headline>
+
+                <div className="flex items-center gap-3 rounded-xl border mb-4"
+                  style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.2)", padding:"11px 14px" }}>
+                  <span className="text-xl">📅</span>
+                  <div>
+                    <p className="text-sm font-bold" style={{ color:"#fff" }}>{eventDate.formatted}</p>
+                    <p className="text-xs" style={{ color:"#3d4a5c" }}>8:00 PM hora México · En vivo · Gratis</p>
+                  </div>
+                </div>
+
+                <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+                  <div>
+                    <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
+                      Nombre completo
+                    </label>
+                    <input type="text" required placeholder="Tu nombre completo"
+                      value={form.nombre} onChange={(e) => setForm((p) => ({ ...p, nombre:e.target.value }))}
+                      className="w-full rounded-xl text-sm transition-all duration-200 focus:outline-none"
+                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
+                      onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
+                      WhatsApp
+                    </label>
+                    <PhoneInput
+                      dialCode={form.dialCode} phone={form.phone}
+                      onDialChange={(d) => setForm((p) => ({ ...p, dialCode:d }))}
+                      onPhoneChange={(v) => setForm((p) => ({ ...p, phone:v }))}/>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
+                      Correo electrónico
+                    </label>
+                    <input type="email" required placeholder="tu@correo.com"
+                      value={form.email} onChange={(e) => setForm((p) => ({ ...p, email:e.target.value }))}
+                      className="w-full rounded-xl text-sm transition-all duration-200 focus:outline-none"
+                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
+                      onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {/* ── 6: GRACIAS ─────────────────────────────────────────── */}
+            {step === 6 && (
+              <div className="text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="flex items-center justify-center rounded-full border-2"
+                    style={{ width:"64px", height:"64px", borderColor:"#14C9B8", background:"rgba(20,201,184,0.07)" }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14C9B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <p className="text-xs font-semibold tracking-[0.22em] uppercase mb-2" style={{ color:"#14C9B8" }}>
+                  ¡Registro confirmado!
+                </p>
+                <Headline>
+                  Tu lugar está reservado,{" "}
+                  <span style={{ color:"#14C9B8" }}>
+                    {form.nombre.trim().split(" ")[0] || "amigo"}
+                  </span>
+                </Headline>
+
+                <p className="text-sm leading-relaxed mb-4" style={{ color:"#7a8299" }}>
+                  Te enviamos un correo de confirmación, así que revisa también tu carpeta de spam por si acaso.
+                </p>
+
+                <Card>
+                  <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-2.5" style={{ color:"#14C9B8" }}>
+                    Detalles del evento
+                  </p>
+                  <div className="space-y-2.5">
+                    <Row icon="📅">{eventDate.formatted} · 8:00 PM hora México</Row>
+                    <Row icon="💻">Seminario en vivo · 100% online</Row>
+                    <Row icon="🎯">Con Jorge Serratos y expertos invitados</Row>
+                  </div>
+                </Card>
+              </div>
+            )}
+
+          </div>
+        </div>
+      </div>
+
+      {/* ── STICKY FOOTER ─────────────────────────────────────────────────────── */}
+      <div className="flex-shrink-0 relative z-10 px-5 pt-3 pb-6"
+        style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
+        <div style={{ maxWidth:"520px", margin:"0 auto" }}>
+
+          {/* Steps 0–4: next-step button */}
+          {step === 0 && <TealBtn onClick={() => goToStep(1)}>QUIERO SABER MÁS →</TealBtn>}
+          {step === 1 && <TealBtn onClick={() => goToStep(2)}>DIME CÓMO →</TealBtn>}
+          {step === 2 && <TealBtn onClick={() => goToStep(3)}>¿QUIÉNES LO IMPARTEN? →</TealBtn>}
+          {step === 3 && <TealBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</TealBtn>}
+          {step === 4 && <TealBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</TealBtn>}
+
+          {/* Step 5: external submit button tied to form */}
+          {step === 5 && (
+            <>
+              <TealBtn type="submit" form="seed-form" disabled={submitting}>
+                {submitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin-slow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <circle cx="12" cy="12" r="10" strokeOpacity="0.2"/>
+                      <path d="M12 2a10 10 0 0 1 10 10"/>
+                    </svg>
+                    RESERVANDO...
+                  </span>
+                ) : "¡RESERVAR MI LUGAR GRATIS →"}
+              </TealBtn>
+              <p className="text-center text-xs mt-2" style={{ color:"#3d4a5c" }}>
+                Sin spam. Solo información relevante del evento.
+              </p>
+            </>
           )}
 
-          {/* ── 6: GRACIAS ───────────────────────────────────────── */}
+          {/* Step 6: WhatsApp CTA */}
           {step === 6 && (
-            <div className="text-center">
-              <div className="flex justify-center mb-5">
-                <div className="flex items-center justify-center rounded-full border-2"
-                  style={{ width:"72px", height:"72px", borderColor:"#14C9B8", background:"rgba(20,201,184,0.07)" }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14C9B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                </div>
-              </div>
-
-              <StepLabel label="¡Registro confirmado!" />
-              <Headline>
-                Tu lugar está reservado,{" "}
-                <span style={{ color:"#14C9B8" }}>
-                  {form.nombre.trim().split(" ")[0] || "amigo"}
-                </span>
-              </Headline>
-
-              <p className="text-sm leading-relaxed mb-6" style={{ color:"#7a8299" }}>
-                Te enviamos un correo de confirmación, así que revisa también tu carpeta de spam por si acaso.
-              </p>
-
-              <Card>
-                <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-3" style={{ color:"#14C9B8" }}>
-                  Detalles del evento
-                </p>
-                <div className="space-y-2.5">
-                  <Row icon="📅">{eventDate.formatted} · 8:00 PM hora México</Row>
-                  <Row icon="💻">Seminario en vivo · 100% online</Row>
-                  <Row icon="🎯">Con Jorge Serratos y expertos invitados</Row>
-                </div>
-              </Card>
-
-              <div className="mt-4">
-                <button
-                  className="w-full font-bold rounded-xl transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2.5"
-                  style={{ background:"#25D366", color:"#fff", padding:"15px 24px", fontSize:"0.9rem" }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#1ebe5a")}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#25D366")}>
-                  <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                  </svg>
-                  Unirme al grupo de WhatsApp
-                </button>
-              </div>
-            </div>
+            <button
+              className="w-full font-bold rounded-xl transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2.5"
+              style={{ background:"#25D366", color:"#fff", padding:"15px 24px", fontSize:"0.9rem" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#1ebe5a")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#25D366")}>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Unirme al grupo de WhatsApp
+            </button>
           )}
 
         </div>
       </div>
-      <div className="h-8"/>
+
     </div>
   );
 }
