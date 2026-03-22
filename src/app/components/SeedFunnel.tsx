@@ -338,7 +338,7 @@ export default function SeedFunnel() {
                 <div className="mb-5" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
 
                 <p className="mb-5" style={{ fontSize:"1.0625rem", color:"#9aa3b2", lineHeight:1.65, letterSpacing:"0.01em" }}>
-                  Aprende a usar redes, publicidad e IA para vender más — aunque no sepas de tecnología.
+                  Descubre cómo escalar tu negocio con redes sociales, publicidad e IA — aunque nunca hayas vendido por internet.
                 </p>
 
                 <div className="mb-4">
@@ -366,17 +366,17 @@ export default function SeedFunnel() {
 
                 <Card>
                   <div className="space-y-4">
-                    <Row icon="📍">Solo vendes a quien ya te conoce, sin importar qué tan bueno seas</Row>
-                    <Row icon="⏳">Cada venta depende de que <strong style={{ color:"#fff" }}>tú</strong> estés presente — el negocio no avanza solo</Row>
-                    <Row icon="📉">Tu competencia crece en redes mientras tú buscas por dónde entrar</Row>
-                    <Row icon="😰">Lo intentaste, pero sin una guía clara el mundo digital se siente lento</Row>
+                    <Row icon="📍">Tu negocio solo llega donde tú puedes ir — y el mercado que pierdes no espera</Row>
+                    <Row icon="⏳">Cada venta depende de que <strong style={{ color:"#fff" }}>tú</strong> estés presente: si no estás, no entra dinero</Row>
+                    <Row icon="📉">Tu competencia ya vende en redes mientras tú sigues buscando por dónde entrar</Row>
+                    <Row icon="😰">Lo intentaste antes, pero sin el método correcto el mundo digital se siente imposible</Row>
                   </div>
                 </Card>
 
                 <div className="mt-5 rounded-xl border"
                   style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"16px 18px" }}>
                   <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65 }}>
-                    <strong style={{ color:"#14C9B8" }}>Tiene solución</strong> y no necesitas saber de tecnología para aplicarla
+                    <strong style={{ color:"#14C9B8" }}>No necesitas ser experto en tecnología.</strong> Solo necesitas el método correcto — y eso es exactamente lo que vamos a darte.
                   </p>
                 </div>
               </div>
@@ -391,11 +391,11 @@ export default function SeedFunnel() {
 
                 <Card>
                   <div className="space-y-4">
-                    <Row icon="📱"><strong style={{ color:"#fff" }}>Redes sociales:</strong> publica para que lleguen a ti queriendo comprar</Row>
-                    <Row icon="🎯"><strong style={{ color:"#fff" }}>Publicidad:</strong> invierte sin desperdiciar y crea anuncios que sí venden</Row>
-                    <Row icon="🤖"><strong style={{ color:"#fff" }}>IA:</strong> herramientas que puedes usar desde mañana en tu negocio</Row>
-                    <Row icon="🌐"><strong style={{ color:"#fff" }}>Escala:</strong> vende fuera de tu ciudad sin moverte de donde estás</Row>
-                    <Row icon="🤝"><strong style={{ color:"#fff" }}>Networking:</strong> conexiones con empresarios donde 1+1 vale 3</Row>
+                    <Row icon="📱"><strong style={{ color:"#fff" }}>Redes sociales:</strong> crea contenido que atrae clientes aunque no tengas miles de seguidores</Row>
+                    <Row icon="🎯"><strong style={{ color:"#fff" }}>Publicidad:</strong> invierte sin adivinar — anuncios que convierten desde el primer día</Row>
+                    <Row icon="🤖"><strong style={{ color:"#fff" }}>IA:</strong> automatiza lo que hoy te quita horas y aplícalo en tu negocio esta semana</Row>
+                    <Row icon="🌐"><strong style={{ color:"#fff" }}>Escala:</strong> llega a clientes en cualquier ciudad sin abrir una sucursal</Row>
+                    <Row icon="🤝"><strong style={{ color:"#fff" }}>Networking:</strong> conecta con empresarios donde 1+1 vale 3 — la filosofía Sinergéticos</Row>
                   </div>
                 </Card>
               </div>
@@ -421,7 +421,7 @@ export default function SeedFunnel() {
                       </div>
                     </div>
                     <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65 }}>
-                      Fundador del movimiento Sinergéticos y del podcast #1 de negocios en México según Spotify, con más de 100,000 personas que han pasado por sus programas y conferencias en México y EE.UU.
+                      Fundador del movimiento Sinergéticos y del podcast #1 de negocios en México según Spotify. Más de 100,000 personas han transformado su negocio con su método en México y EE.UU.
                     </p>
                   </Card>
 
@@ -437,7 +437,7 @@ export default function SeedFunnel() {
                       </div>
                     </div>
                     <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65 }}>
-                      Referente en la industria digital con casos concretos de negocios que escalaron en línea.
+                      Empresario digital que ha llevado negocios tradicionales a vender en línea con resultados concretos. En el seminario comparte exactamente cómo lo hizo — paso a paso.
                     </p>
                   </Card>
                 </div>
@@ -486,10 +486,10 @@ export default function SeedFunnel() {
 
                 <Card>
                   <div className="space-y-4">
-                    <Row icon="✅">Es <strong style={{ color:"#fff" }}>gratis</strong>, sin costo ni sorpresas al final</Row>
-                    <Row icon="💻">100% online, entras desde donde estés</Row>
-                    <Row icon="⚡">En vivo, puedes preguntar en el momento</Row>
-                    <Row icon="🎯">Los cupos son limitados y se llenan por orden de llegada</Row>
+                    <Row icon="✅">Es <strong style={{ color:"#fff" }}>completamente gratis</strong> — sin costo oculto ni sorpresas al final</Row>
+                    <Row icon="💻">100% online, entras desde cualquier dispositivo, donde estés</Row>
+                    <Row icon="⚡">En vivo con Jorge Serratos — puedes preguntar en el momento</Row>
+                    <Row icon="🎯">Los lugares son limitados y se asignan por orden de registro</Row>
                   </div>
                 </Card>
               </div>
@@ -499,11 +499,11 @@ export default function SeedFunnel() {
             {step === 5 && (
               <div>
                 <Headline>
-                  Tu lugar está<br/>casi asegurado
+                  Un paso más y<br/>tu lugar queda reservado
                 </Headline>
 
                 <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"20px" }}>
-                  Solo te pedimos 3 datos para reservar tu lugar.
+                  Completa tus datos y asegura tu lugar — es gratis, sin compromisos.
                 </p>
 
                 <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -570,7 +570,7 @@ export default function SeedFunnel() {
                 </Headline>
 
                 <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"20px" }}>
-                  Si no llega el correo en 5 minutos, revisa tu carpeta de spam.
+                  Revisa tu correo y WhatsApp — te confirmamos en los próximos minutos. Si no llega, revisa tu carpeta de spam.
                 </p>
 
                 <Card>
@@ -595,11 +595,11 @@ export default function SeedFunnel() {
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"700px", margin:"0 auto" }}>
 
-          {step === 0 && <GhostBtn onClick={() => goToStep(1)}>CONOCER EL SEMINARIO →</GhostBtn>}
-          {step === 1 && <GhostBtn onClick={() => goToStep(2)}>DIME CÓMO →</GhostBtn>}
+          {step === 0 && <GhostBtn onClick={() => goToStep(1)}>QUIERO SABER MÁS →</GhostBtn>}
+          {step === 1 && <GhostBtn onClick={() => goToStep(2)}>VER LA SOLUCIÓN →</GhostBtn>}
           {step === 2 && <GhostBtn onClick={() => goToStep(3)}>¿QUIÉNES LO IMPARTEN? →</GhostBtn>}
           {step === 3 && <GhostBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</GhostBtn>}
-          {step === 4 && <GhostBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</GhostBtn>}
+          {step === 4 && <GhostBtn onClick={() => goToStep(5)}>QUIERO MI LUGAR GRATIS →</GhostBtn>}
 
 
           {step === 5 && (
