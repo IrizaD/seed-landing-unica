@@ -309,25 +309,6 @@ export default function SeedFunnel() {
                   <DateChip date={eventDate}/>
                 </div>
 
-                <div className="flex items-center gap-2.5 mb-2">
-                  <div className="flex -space-x-2">
-                    {["#2d4a6e","#1e3a5f","#264d6b","#1a3c5a"].map((bg, i) => (
-                      <div key={i} className="rounded-full border-2 flex items-center justify-center text-xs font-bold"
-                        style={{ width:"26px", height:"26px", background:bg, borderColor:"#06080f", color:"#7ab3d4" }}>
-                        {["J","M","A","L"][i]}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {[1,2,3,4,5].map((s) => (
-                      <svg key={s} width="10" height="10" viewBox="0 0 12 12" fill="#14C9B8">
-                        <path d="M6 1l1.3 2.7 3 .4-2.2 2.1.5 3L6 7.8 3.4 9.2l.5-3L1.7 4.1l3-.4z"/>
-                      </svg>
-                    ))}
-                    <span className="text-xs ml-1" style={{ color:"#7a8299" }}>+100,000 vidas cambiadas</span>
-                  </div>
-                </div>
-
                 <div className="flex justify-center">
                   <Image
                     src="/manujorge.png"
