@@ -112,8 +112,8 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
             <div style={{ padding:"8px", borderBottom:"1px solid #1e2535" }}>
               <input autoFocus type="text" placeholder="Buscar país..." value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full text-sm focus:outline-none"
-                style={{ background:"#111827", border:"1px solid #1e2535", color:"#fff", borderRadius:"8px", padding:"8px 10px" }}/>
+                className="w-full focus:outline-none"
+                style={{ background:"#111827", border:"1px solid #1e2535", color:"#fff", borderRadius:"8px", padding:"8px 10px", fontSize:"16px" }}/>
             </div>
             <div style={{ maxHeight:"200px", overflowY:"auto" }}>
               {filtered.map((c) => (
@@ -135,8 +135,8 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
       </div>
       <input type="tel" required placeholder="55 1234 5678" value={phone}
         onChange={(e) => onPhoneChange(e.target.value)}
-        className="flex-1 rounded-xl text-sm transition-all duration-200 focus:outline-none"
-        style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px" }}
+        className="flex-1 rounded-xl transition-all duration-200 focus:outline-none"
+        style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px", fontSize:"16px" }}
         onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
         onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
     </div>
@@ -503,8 +503,8 @@ export default function SeedFunnel() {
                     </label>
                     <input type="text" required placeholder="Tu nombre completo"
                       value={form.nombre} onChange={(e) => setForm((p) => ({ ...p, nombre:e.target.value }))}
-                      className="w-full rounded-xl text-sm transition-all duration-200 focus:outline-none"
-                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px" }}
+                      className="w-full rounded-xl transition-all duration-200 focus:outline-none"
+                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px", fontSize:"16px" }}
                       onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
                       onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
                   </div>
@@ -525,8 +525,8 @@ export default function SeedFunnel() {
                     </label>
                     <input type="email" required placeholder="tu@correo.com"
                       value={form.email} onChange={(e) => setForm((p) => ({ ...p, email:e.target.value }))}
-                      className="w-full rounded-xl text-sm transition-all duration-200 focus:outline-none"
-                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px" }}
+                      className="w-full rounded-xl transition-all duration-200 focus:outline-none"
+                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px", fontSize:"16px" }}
                       onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
                       onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
                   </div>
