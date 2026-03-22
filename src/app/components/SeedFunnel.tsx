@@ -338,7 +338,7 @@ export default function SeedFunnel() {
                 <div className="mb-5" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
 
                 <p className="mb-5" style={{ fontSize:"1.0625rem", color:"#9aa3b2", lineHeight:1.65, letterSpacing:"0.01em" }}>
-                  Descubre cómo escalar tu negocio con redes sociales, publicidad e IA — aunque nunca hayas vendido por internet.
+                  Aprende a vender más con redes sociales, publicidad e IA. Aunque nunca hayas vendido por internet.
                 </p>
 
                 <div className="mb-4">
@@ -366,17 +366,17 @@ export default function SeedFunnel() {
 
                 <Card>
                   <div className="space-y-4">
-                    <Row icon="📍">Tu negocio solo llega donde tú puedes ir — y el mercado que pierdes no espera</Row>
-                    <Row icon="⏳">Cada venta depende de que <strong style={{ color:"#fff" }}>tú</strong> estés presente: si no estás, no entra dinero</Row>
-                    <Row icon="📉">Tu competencia ya vende en redes mientras tú sigues buscando por dónde entrar</Row>
-                    <Row icon="😰">Lo intentaste antes, pero sin el método correcto el mundo digital se siente imposible</Row>
+                    <Row icon="📍">Tu negocio solo llega donde tú llegas. El cliente que no te conoce, no te compra</Row>
+                    <Row icon="⏳">Si <strong style={{ color:"#fff" }}>tú</strong> no estás, no hay venta. El negocio para cuando tú paras</Row>
+                    <Row icon="📉">Tu competencia ya vende en redes. Tú todavía buscas por dónde empezar</Row>
+                    <Row icon="😰">Ya lo intentaste. Sin el método correcto, el mundo digital se siente imposible</Row>
                   </div>
                 </Card>
 
                 <div className="mt-5 rounded-xl border"
                   style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"16px 18px" }}>
                   <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65 }}>
-                    <strong style={{ color:"#14C9B8" }}>No necesitas ser experto en tecnología.</strong> Solo necesitas el método correcto — y eso es exactamente lo que vamos a darte.
+                    <strong style={{ color:"#14C9B8" }}>No necesitas saber de tecnología.</strong> Solo necesitas el método correcto. Eso es lo que vamos a enseñarte.
                   </p>
                 </div>
               </div>
@@ -391,11 +391,11 @@ export default function SeedFunnel() {
 
                 <Card>
                   <div className="space-y-4">
-                    <Row icon="📱"><strong style={{ color:"#fff" }}>Redes sociales:</strong> crea contenido que atrae clientes aunque no tengas miles de seguidores</Row>
-                    <Row icon="🎯"><strong style={{ color:"#fff" }}>Publicidad:</strong> invierte sin adivinar — anuncios que convierten desde el primer día</Row>
-                    <Row icon="🤖"><strong style={{ color:"#fff" }}>IA:</strong> automatiza lo que hoy te quita horas y aplícalo en tu negocio esta semana</Row>
-                    <Row icon="🌐"><strong style={{ color:"#fff" }}>Escala:</strong> llega a clientes en cualquier ciudad sin abrir una sucursal</Row>
-                    <Row icon="🤝"><strong style={{ color:"#fff" }}>Networking:</strong> conecta con empresarios donde 1+1 vale 3 — la filosofía Sinergéticos</Row>
+                    <Row icon="📱"><strong style={{ color:"#fff" }}>Redes sociales:</strong> publica para que la gente quiera comprarte, sin necesitar miles de seguidores</Row>
+                    <Row icon="🎯"><strong style={{ color:"#fff" }}>Publicidad:</strong> invierte sin tirar dinero y crea anuncios que sí venden</Row>
+                    <Row icon="🤖"><strong style={{ color:"#fff" }}>IA:</strong> herramientas concretas que puedes usar esta semana para ahorrarte horas de trabajo</Row>
+                    <Row icon="🌐"><strong style={{ color:"#fff" }}>Escala:</strong> vende fuera de tu ciudad sin moverte de donde estás</Row>
+                    <Row icon="🤝"><strong style={{ color:"#fff" }}>Networking:</strong> entra a una red de empresarios donde 1+1 vale 3, la filosofía Sinergéticos</Row>
                   </div>
                 </Card>
               </div>
@@ -437,7 +437,7 @@ export default function SeedFunnel() {
                       </div>
                     </div>
                     <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65 }}>
-                      Empresario digital que ha llevado negocios tradicionales a vender en línea con resultados concretos. En el seminario comparte exactamente cómo lo hizo — paso a paso.
+                      Tomó negocios tradicionales y los llevó a vender en línea. En el seminario te explica cómo lo hizo, sin rodeos.
                     </p>
                   </Card>
                 </div>
@@ -486,9 +486,9 @@ export default function SeedFunnel() {
 
                 <Card>
                   <div className="space-y-4">
-                    <Row icon="✅">Es <strong style={{ color:"#fff" }}>completamente gratis</strong> — sin costo oculto ni sorpresas al final</Row>
+                    <Row icon="✅">Es <strong style={{ color:"#fff" }}>gratis</strong>. Sin costos ocultos ni sorpresas al final</Row>
                     <Row icon="💻">100% online, entras desde cualquier dispositivo, donde estés</Row>
-                    <Row icon="⚡">En vivo con Jorge Serratos — puedes preguntar en el momento</Row>
+                    <Row icon="⚡">En vivo con Jorge Serratos. Puedes hacer tus preguntas en el momento</Row>
                     <Row icon="🎯">Los lugares son limitados y se asignan por orden de registro</Row>
                   </div>
                 </Card>
@@ -503,7 +503,7 @@ export default function SeedFunnel() {
                 </Headline>
 
                 <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"20px" }}>
-                  Completa tus datos y asegura tu lugar — es gratis, sin compromisos.
+                  Llena tus datos y listo. Es gratis, sin compromisos.
                 </p>
 
                 <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-5">
