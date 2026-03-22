@@ -578,7 +578,7 @@ export default function SeedFunnel() {
           {step === 3 && <GhostBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</GhostBtn>}
           {step === 4 && <GhostBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</GhostBtn>}
 
-          {step <= 4 && (
+          {step >= 1 && step <= 4 && (
             <div className="mt-3">
               <TealBtn onClick={() => goToStep(5)}>SALTAR AL REGISTRO →</TealBtn>
             </div>
