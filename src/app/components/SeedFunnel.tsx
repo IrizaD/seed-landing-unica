@@ -179,18 +179,20 @@ function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: (
   return (
     <button type="button" onClick={onClick}
       className="w-full rounded-xl transition-all duration-200 active:scale-[0.98]"
-      style={{ background:"rgba(20,201,184,0.06)", border:"1px solid rgba(20,201,184,0.5)", color:"#d0d8e8",
-        padding:"15px 24px", fontSize:"0.9375rem", fontFamily:"var(--font-barlow)", fontWeight:700,
-        letterSpacing:"0.04em", lineHeight:1.2, cursor:"pointer" }}
+      style={{ background:"linear-gradient(135deg, rgba(20,201,184,0.12) 0%, rgba(20,201,184,0.04) 100%)",
+        border:"1.5px solid #14C9B8", color:"#fff",
+        padding:"16px 24px", fontSize:"1rem", fontFamily:"var(--font-barlow)", fontWeight:800,
+        letterSpacing:"0.06em", lineHeight:1.2, cursor:"pointer",
+        boxShadow:"0 0 18px rgba(20,201,184,0.2), inset 0 1px 0 rgba(255,255,255,0.05)" }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "rgba(20,201,184,0.85)";
+        (e.currentTarget as HTMLElement).style.background = "linear-gradient(135deg, rgba(20,201,184,0.22) 0%, rgba(20,201,184,0.08) 100%)";
+        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(20,201,184,0.4), inset 0 1px 0 rgba(255,255,255,0.05)";
         (e.currentTarget as HTMLElement).style.color = "#14C9B8";
-        (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.1)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "rgba(20,201,184,0.5)";
-        (e.currentTarget as HTMLElement).style.color = "#d0d8e8";
-        (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.06)";
+        (e.currentTarget as HTMLElement).style.background = "linear-gradient(135deg, rgba(20,201,184,0.12) 0%, rgba(20,201,184,0.04) 100%)";
+        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 18px rgba(20,201,184,0.2), inset 0 1px 0 rgba(255,255,255,0.05)";
+        (e.currentTarget as HTMLElement).style.color = "#fff";
       }}>
       {children}
     </button>
