@@ -174,41 +174,33 @@ function TealBtn({ children, onClick, type = "button", form, disabled }: {
   );
 }
 
-// Botón secundario — ghost con borde teal tenue
+// Botón secundario — sólido teal con glow
 function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
     <button type="button" onClick={onClick}
-      className="w-full rounded-xl transition-all duration-200 active:scale-[0.97]"
+      className="w-full rounded-xl transition-all duration-200 active:scale-[0.98]"
       style={{
-        background:"rgba(20,201,184,0.07)",
-        backdropFilter:"blur(12px)",
-        WebkitBackdropFilter:"blur(12px)",
-        border:"1.5px solid rgba(20,201,184,0.6)",
-        color:"#e0f7f5",
-        padding:"17px 24px",
-        fontSize:"1rem",
+        background:"#14C9B8",
+        border:"none",
+        color:"#06080f",
+        padding:"18px 24px",
+        fontSize:"1.0625rem",
         fontFamily:"var(--font-barlow)",
         fontWeight:800,
-        letterSpacing:"0.07em",
+        letterSpacing:"0.04em",
         lineHeight:1.2,
         cursor:"pointer",
-        boxShadow:"0 0 24px rgba(20,201,184,0.18), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(20,201,184,0.15)"
+        boxShadow:"0 0 20px rgba(20,201,184,0.45)"
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLElement;
-        el.style.background = "rgba(20,201,184,0.14)";
-        el.style.borderColor = "#14C9B8";
-        el.style.color = "#14C9B8";
-        el.style.boxShadow = "0 0 36px rgba(20,201,184,0.35), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(20,201,184,0.2)";
-        el.style.transform = "scale(1.01)";
+        el.style.background = "#1FE5D2";
+        el.style.boxShadow = "0 0 32px rgba(20,201,184,0.65)";
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLElement;
-        el.style.background = "rgba(20,201,184,0.07)";
-        el.style.borderColor = "rgba(20,201,184,0.6)";
-        el.style.color = "#e0f7f5";
-        el.style.boxShadow = "0 0 24px rgba(20,201,184,0.18), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(20,201,184,0.15)";
-        el.style.transform = "scale(1)";
+        el.style.background = "#14C9B8";
+        el.style.boxShadow = "0 0 20px rgba(20,201,184,0.45)";
       }}>
       {children}
     </button>
@@ -311,7 +303,7 @@ export default function SeedFunnel() {
                   boxShadow:"0 0 14px rgba(20,201,184,0.35)", textTransform:"uppercase" }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#1FE5D2"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(20,201,184,0.55)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#14C9B8"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.35)"; }}>
-                Registro
+                Registrarme ahora
                 <span style={{ background:"rgba(0,0,0,0.15)", borderRadius:"999px", padding:"2px 6px", fontSize:"0.7rem" }}>→</span>
               </button>
             </div>
