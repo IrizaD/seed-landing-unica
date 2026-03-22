@@ -179,16 +179,18 @@ function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: (
   return (
     <button type="button" onClick={onClick}
       className="w-full rounded-xl transition-all duration-200 active:scale-[0.98]"
-      style={{ background:"transparent", border:"1px solid rgba(20,201,184,0.35)", color:"#9aa3b2",
-        padding:"14px 24px", fontSize:"0.9375rem", fontFamily:"var(--font-barlow)", fontWeight:600,
-        letterSpacing:"0.03em", lineHeight:1.2, cursor:"pointer" }}
+      style={{ background:"rgba(20,201,184,0.06)", border:"1px solid rgba(20,201,184,0.5)", color:"#d0d8e8",
+        padding:"15px 24px", fontSize:"0.9375rem", fontFamily:"var(--font-barlow)", fontWeight:700,
+        letterSpacing:"0.04em", lineHeight:1.2, cursor:"pointer" }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "rgba(20,201,184,0.65)";
+        (e.currentTarget as HTMLElement).style.borderColor = "rgba(20,201,184,0.85)";
         (e.currentTarget as HTMLElement).style.color = "#14C9B8";
+        (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.1)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "rgba(20,201,184,0.35)";
-        (e.currentTarget as HTMLElement).style.color = "#9aa3b2";
+        (e.currentTarget as HTMLElement).style.borderColor = "rgba(20,201,184,0.5)";
+        (e.currentTarget as HTMLElement).style.color = "#d0d8e8";
+        (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.06)";
       }}>
       {children}
     </button>
@@ -285,9 +287,14 @@ export default function SeedFunnel() {
                 Atrás
               </button>
               <button type="button" onClick={() => goToStep(5)}
-                className="font-bold rounded-xl transition-all duration-200 active:scale-[0.98]"
-                style={{ background:"#14C9B8", color:"#06080f", padding:"8px 16px", fontSize:"0.8125rem", border:"none", letterSpacing:"0.03em" }}>
-                Registrarme ahora →
+                className="font-bold rounded-full transition-all duration-200 active:scale-[0.97] flex items-center gap-1.5"
+                style={{ background:"#14C9B8", color:"#06080f", padding:"7px 14px 7px 16px", fontSize:"0.8rem",
+                  border:"none", letterSpacing:"0.04em", fontFamily:"var(--font-barlow)", fontWeight:800,
+                  boxShadow:"0 0 14px rgba(20,201,184,0.35)", textTransform:"uppercase" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#1FE5D2"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(20,201,184,0.55)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#14C9B8"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.35)"; }}>
+                Registro
+                <span style={{ background:"rgba(0,0,0,0.15)", borderRadius:"999px", padding:"2px 6px", fontSize:"0.7rem" }}>→</span>
               </button>
             </div>
           )}
