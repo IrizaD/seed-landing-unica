@@ -572,15 +572,15 @@ export default function SeedFunnel() {
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"700px", margin:"0 auto" }}>
 
-          {step === 0 && <TealBtn onClick={() => goToStep(1)}>CONOCER EL SEMINARIO →</TealBtn>}
-          {step === 1 && <TealBtn onClick={() => goToStep(2)}>DIME CÓMO →</TealBtn>}
-          {step === 2 && <TealBtn onClick={() => goToStep(3)}>¿QUIÉNES LO IMPARTEN? →</TealBtn>}
-          {step === 3 && <TealBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</TealBtn>}
-          {step === 4 && <TealBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</TealBtn>}
+          {step === 0 && <GhostBtn onClick={() => goToStep(1)}>CONOCER EL SEMINARIO →</GhostBtn>}
+          {step === 1 && <GhostBtn onClick={() => goToStep(2)}>DIME CÓMO →</GhostBtn>}
+          {step === 2 && <GhostBtn onClick={() => goToStep(3)}>¿QUIÉNES LO IMPARTEN? →</GhostBtn>}
+          {step === 3 && <GhostBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</GhostBtn>}
+          {step === 4 && <GhostBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</GhostBtn>}
 
           {step <= 4 && (
             <div className="mt-3">
-              <GhostBtn onClick={() => goToStep(5)}>Saltar al registro →</GhostBtn>
+              <TealBtn onClick={() => goToStep(5)}>SALTAR AL REGISTRO →</TealBtn>
             </div>
           )}
 
