@@ -574,12 +574,22 @@ export default function SeedFunnel() {
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"700px", margin:"0 auto" }}>
 
-          {/* Steps 0–4: next-step button */}
+          {/* Steps 0–4: next-step button + skip to form */}
           {step === 0 && <TealBtn onClick={() => goToStep(1)}>QUIERO SABER MÁS →</TealBtn>}
           {step === 1 && <TealBtn onClick={() => goToStep(2)}>DIME CÓMO →</TealBtn>}
           {step === 2 && <TealBtn onClick={() => goToStep(3)}>¿QUIÉNES LO IMPARTEN? →</TealBtn>}
           {step === 3 && <TealBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</TealBtn>}
           {step === 4 && <TealBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</TealBtn>}
+
+          {step <= 4 && (
+            <button type="button" onClick={() => goToStep(5)}
+              className="w-full text-center text-xs mt-2 transition-colors duration-200"
+              style={{ background:"none", border:"none", color:"#3d4a5c", cursor:"pointer", padding:"4px 0" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#14C9B8")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#3d4a5c")}>
+              Ya quiero unirme →
+            </button>
+          )}
 
           {/* Step 5: external submit button tied to form */}
           {step === 5 && (
