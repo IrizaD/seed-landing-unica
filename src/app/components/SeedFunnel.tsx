@@ -309,7 +309,7 @@ export default function SeedFunnel() {
                   <DateChip date={eventDate}/>
                 </div>
 
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2.5 mb-2">
                   <div className="flex -space-x-2">
                     {["#2d4a6e","#1e3a5f","#264d6b","#1a3c5a"].map((bg, i) => (
                       <div key={i} className="rounded-full border-2 flex items-center justify-center text-xs font-bold"
@@ -326,6 +326,17 @@ export default function SeedFunnel() {
                     ))}
                     <span className="text-xs ml-1" style={{ color:"#7a8299" }}>+100,000 vidas cambiadas</span>
                   </div>
+                </div>
+
+                <div className="flex justify-center">
+                  <Image
+                    src="/manujorge.png"
+                    alt="Jorge Serratos y Manuel de León"
+                    width={520}
+                    height={520}
+                    className="w-full"
+                    style={{ objectFit:"contain", objectPosition:"center bottom", maxHeight:"42vh" }}
+                  />
                 </div>
               </div>
             )}
