@@ -237,7 +237,7 @@ export default function SeedFunnel() {
 
       {/* Background image */}
       <div className="pointer-events-none fixed inset-0" aria-hidden="true"
-        style={{ backgroundImage:"url('/bg-glow.png')", backgroundSize:"cover", backgroundPosition:"center", opacity:0.6 }}/>
+        style={{ backgroundImage:"url('/bg-glow.webp')", backgroundSize:"cover", backgroundPosition:"center", opacity:0.6 }}/>
       <div className="pointer-events-none fixed inset-0" aria-hidden="true"
         style={{ background:"radial-gradient(ellipse 80% 60% at 10% 80%, rgba(14,80,180,0.10) 0%, transparent 60%)" }}/>
 
@@ -311,7 +311,7 @@ export default function SeedFunnel() {
 
                 <div className="flex justify-center">
                   <Image
-                    src="/manujorge.png"
+                    src="/manujorge.webp"
                     alt="Jorge Serratos y Manuel de León"
                     width={520}
                     height={520}
