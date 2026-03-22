@@ -178,21 +178,37 @@ function TealBtn({ children, onClick, type = "button", form, disabled }: {
 function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
     <button type="button" onClick={onClick}
-      className="w-full rounded-xl transition-all duration-200 active:scale-[0.98]"
-      style={{ background:"linear-gradient(135deg, rgba(20,201,184,0.12) 0%, rgba(20,201,184,0.04) 100%)",
-        border:"1.5px solid #14C9B8", color:"#fff",
-        padding:"16px 24px", fontSize:"1rem", fontFamily:"var(--font-barlow)", fontWeight:800,
-        letterSpacing:"0.06em", lineHeight:1.2, cursor:"pointer",
-        boxShadow:"0 0 18px rgba(20,201,184,0.2), inset 0 1px 0 rgba(255,255,255,0.05)" }}
+      className="w-full rounded-xl transition-all duration-200 active:scale-[0.97]"
+      style={{
+        background:"rgba(20,201,184,0.07)",
+        backdropFilter:"blur(12px)",
+        WebkitBackdropFilter:"blur(12px)",
+        border:"1.5px solid rgba(20,201,184,0.6)",
+        color:"#e0f7f5",
+        padding:"17px 24px",
+        fontSize:"1rem",
+        fontFamily:"var(--font-barlow)",
+        fontWeight:800,
+        letterSpacing:"0.07em",
+        lineHeight:1.2,
+        cursor:"pointer",
+        boxShadow:"0 0 24px rgba(20,201,184,0.18), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(20,201,184,0.15)"
+      }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.background = "linear-gradient(135deg, rgba(20,201,184,0.22) 0%, rgba(20,201,184,0.08) 100%)";
-        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(20,201,184,0.4), inset 0 1px 0 rgba(255,255,255,0.05)";
-        (e.currentTarget as HTMLElement).style.color = "#14C9B8";
+        const el = e.currentTarget as HTMLElement;
+        el.style.background = "rgba(20,201,184,0.14)";
+        el.style.borderColor = "#14C9B8";
+        el.style.color = "#14C9B8";
+        el.style.boxShadow = "0 0 36px rgba(20,201,184,0.35), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(20,201,184,0.2)";
+        el.style.transform = "scale(1.01)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.background = "linear-gradient(135deg, rgba(20,201,184,0.12) 0%, rgba(20,201,184,0.04) 100%)";
-        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 18px rgba(20,201,184,0.2), inset 0 1px 0 rgba(255,255,255,0.05)";
-        (e.currentTarget as HTMLElement).style.color = "#fff";
+        const el = e.currentTarget as HTMLElement;
+        el.style.background = "rgba(20,201,184,0.07)";
+        el.style.borderColor = "rgba(20,201,184,0.6)";
+        el.style.color = "#e0f7f5";
+        el.style.boxShadow = "0 0 24px rgba(20,201,184,0.18), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(20,201,184,0.15)";
+        el.style.transform = "scale(1)";
       }}>
       {children}
     </button>
