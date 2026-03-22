@@ -64,9 +64,7 @@ function getNextThursday(): EventDate {
   if (days === 0 && mx.getHours() >= 20) days = 7;
   const t   = new Date(mx);
   t.setDate(mx.getDate() + days);
-  return {
-    formatted: `Jueves ${t.getDate()} de ${MONTHS_ES[t.getMonth()]}, ${t.getFullYear()}`,
-  };
+  return { formatted: `Jueves ${t.getDate()} de ${MONTHS_ES[t.getMonth()]}, ${t.getFullYear()}` };
 }
 
 // ─── PhoneInput ───────────────────────────────────────────────────────────────
@@ -98,9 +96,9 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
       <div className="relative flex-shrink-0">
         <button type="button" onClick={() => setOpen((v) => !v)}
           className="flex items-center gap-1.5 rounded-xl transition-all duration-200 focus:outline-none"
-          style={{ background:"#0d1117", border:`1px solid ${open?"#14C9B8":"#1e2535"}`, padding:"12px 12px", color:"#fff", minWidth:"90px" }}>
-          <span className="text-base leading-none">{selected.flag}</span>
-          <span className="text-sm font-semibold">{selected.dial}</span>
+          style={{ background:"#0d1117", border:`1px solid ${open?"#14C9B8":"#1e2535"}`, padding:"14px 12px", color:"#fff", minWidth:"96px" }}>
+          <span className="text-lg leading-none">{selected.flag}</span>
+          <span style={{ fontSize:"16px", fontWeight:600 }}>{selected.dial}</span>
           <svg width="10" height="10" viewBox="0 0 12 12" fill="none"
             style={{ color:"#7a8299", marginLeft:"2px", transform:open?"rotate(180deg)":"rotate(0deg)", transition:"transform 0.2s" }}>
             <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -108,27 +106,27 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
         </button>
         {open && (
           <div className="absolute left-0 top-full mt-1 rounded-xl overflow-hidden z-50"
-            style={{ background:"#0d1117", border:"1px solid #1e2535", width:"220px", boxShadow:"0 16px 40px rgba(0,0,0,0.6)" }}>
+            style={{ background:"#0d1117", border:"1px solid #1e2535", width:"240px", boxShadow:"0 16px 40px rgba(0,0,0,0.6)" }}>
             <div style={{ padding:"8px", borderBottom:"1px solid #1e2535" }}>
               <input autoFocus type="text" placeholder="Buscar país..." value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full focus:outline-none"
-                style={{ background:"#111827", border:"1px solid #1e2535", color:"#fff", borderRadius:"8px", padding:"8px 10px", fontSize:"16px" }}/>
+                style={{ background:"#111827", border:"1px solid #1e2535", color:"#fff", borderRadius:"8px", padding:"10px 12px", fontSize:"16px" }}/>
             </div>
-            <div style={{ maxHeight:"200px", overflowY:"auto" }}>
+            <div style={{ maxHeight:"220px", overflowY:"auto" }}>
               {filtered.map((c) => (
                 <button key={c.code+c.dial} type="button"
                   onClick={() => { onDialChange(c.dial); setOpen(false); setSearch(""); }}
-                  className="w-full flex items-center gap-2.5 text-left text-sm transition-colors"
-                  style={{ padding:"10px 14px", color:c.dial===dialCode?"#14C9B8":"#ccc", background:c.dial===dialCode?"rgba(20,201,184,0.08)":"transparent" }}
+                  className="w-full flex items-center gap-2.5 text-left transition-colors"
+                  style={{ padding:"14px 14px", fontSize:"15px", color:c.dial===dialCode?"#14C9B8":"#ccc", background:c.dial===dialCode?"rgba(20,201,184,0.08)":"transparent" }}
                   onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.06)")}
                   onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = c.dial===dialCode?"rgba(20,201,184,0.08)":"transparent")}>
-                  <span className="text-base">{c.flag}</span>
+                  <span className="text-lg">{c.flag}</span>
                   <span className="flex-1 truncate">{c.name}</span>
-                  <span style={{ color:"#3d4a5c", fontSize:"0.75rem" }}>{c.dial}</span>
+                  <span style={{ color:"#7a8299", fontSize:"13px" }}>{c.dial}</span>
                 </button>
               ))}
-              {filtered.length === 0 && <p className="text-center text-sm py-4" style={{ color:"#3d4a5c" }}>Sin resultados</p>}
+              {filtered.length === 0 && <p className="text-center py-4" style={{ color:"#7a8299", fontSize:"15px" }}>Sin resultados</p>}
             </div>
           </div>
         )}
@@ -136,7 +134,7 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
       <input type="tel" required placeholder="55 1234 5678" value={phone}
         onChange={(e) => onPhoneChange(e.target.value)}
         className="flex-1 rounded-xl transition-all duration-200 focus:outline-none"
-        style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px", fontSize:"16px" }}
+        style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px", fontSize:"16px", letterSpacing:"0.01em" }}
         onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
         onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
     </div>
@@ -148,26 +146,27 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
 function DateChip({ date }: { date: EventDate }) {
   return (
     <div className="inline-flex items-center gap-2 rounded-full"
-      style={{ background:"rgba(20,201,184,0.08)", border:"1px solid rgba(20,201,184,0.22)", padding:"7px 14px" }}>
-      <span className="relative flex h-2 w-2 flex-shrink-0">
-        <span className="animate-ping-teal absolute inline-flex h-full w-full rounded-full" style={{ background:"#14C9B8", opacity:0.6 }}/>
-        <span className="relative inline-flex rounded-full h-2 w-2" style={{ background:"#14C9B8" }}/>
+      style={{ background:"rgba(20,201,184,0.08)", border:"1px solid rgba(20,201,184,0.22)", padding:"9px 16px" }}>
+      <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
+        <span className="animate-ping-teal absolute inline-flex h-full w-full rounded-full" style={{ background:"#14C9B8", opacity:0.4 }}/>
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ background:"#14C9B8" }}/>
       </span>
-      <span className="text-xs font-semibold" style={{ color:"#14C9B8" }}>{date.formatted}</span>
-      <span className="text-xs" style={{ color:"#3d4a5c" }}>· 8:00 PM hora México</span>
+      <span style={{ color:"#14C9B8", fontSize:"14px", fontWeight:700 }}>{date.formatted}</span>
+      <span style={{ color:"#7a8299", fontSize:"13px" }}>· 8:00 PM hora México</span>
     </div>
   );
 }
 
+// Botón principal — teal sólido
 function TealBtn({ children, onClick, type = "button", form, disabled }: {
   children: React.ReactNode; onClick?: () => void; type?: "button" | "submit"; form?: string; disabled?: boolean;
 }) {
   return (
     <button type={type} form={form} onClick={onClick} disabled={disabled}
-      className="w-full font-black rounded-xl transition-all duration-200 active:scale-[0.98]"
-      style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#06080f", padding:"15px 24px",
-        fontSize:"0.95rem", fontFamily:"var(--font-barlow)", fontWeight:800,
-        cursor: disabled ? "not-allowed" : "pointer" }}
+      className="w-full rounded-xl transition-all duration-200 active:scale-[0.98]"
+      style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#06080f", padding:"18px 24px",
+        fontSize:"1.0625rem", fontFamily:"var(--font-barlow)", fontWeight:800, letterSpacing:"0.04em",
+        lineHeight:1.2, cursor: disabled ? "not-allowed" : "pointer" }}
       onMouseEnter={(e) => { if (!disabled) (e.currentTarget as HTMLElement).style.background = "#1FE5D2"; }}
       onMouseLeave={(e) => { if (!disabled) (e.currentTarget as HTMLElement).style.background = "#14C9B8"; }}>
       {children}
@@ -175,10 +174,31 @@ function TealBtn({ children, onClick, type = "button", form, disabled }: {
   );
 }
 
+// Botón secundario — ghost con borde teal tenue
+function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick}
+      className="w-full rounded-xl transition-all duration-200 active:scale-[0.98]"
+      style={{ background:"transparent", border:"1px solid rgba(20,201,184,0.35)", color:"#9aa3b2",
+        padding:"14px 24px", fontSize:"0.9375rem", fontFamily:"var(--font-barlow)", fontWeight:600,
+        letterSpacing:"0.03em", lineHeight:1.2, cursor:"pointer" }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = "rgba(20,201,184,0.65)";
+        (e.currentTarget as HTMLElement).style.color = "#14C9B8";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = "rgba(20,201,184,0.35)";
+        (e.currentTarget as HTMLElement).style.color = "#9aa3b2";
+      }}>
+      {children}
+    </button>
+  );
+}
+
 function Row({ icon, children }: { icon: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-3 text-sm leading-snug" style={{ color:"#7a8299" }}>
-      <span className="flex-shrink-0 text-base mt-0.5">{icon}</span>
+    <div className="flex items-start gap-3" style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, letterSpacing:"0.01em" }}>
+      <span className="flex-shrink-0 text-xl mt-0.5">{icon}</span>
       <span>{children}</span>
     </div>
   );
@@ -186,9 +206,9 @@ function Row({ icon, children }: { icon: string; children: React.ReactNode }) {
 
 function Headline({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="uppercase leading-tight mb-3"
-      style={{ fontFamily:"var(--font-barlow)", fontWeight:900,
-        fontSize:"clamp(1.55rem, 3vw, 2.1rem)", color:"#fff", letterSpacing:"-0.01em" }}>
+    <h2 className="uppercase mb-4"
+      style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.15,
+        fontSize:"clamp(1.75rem, 4.5vw, 2.25rem)", color:"#fff", letterSpacing:"-0.01em" }}>
       {children}
     </h2>
   );
@@ -196,7 +216,7 @@ function Headline({ children }: { children: React.ReactNode }) {
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border" style={{ background:"#0d1117", borderColor:"#1e2535", padding:"14px 16px" }}>
+    <div className="rounded-xl border" style={{ background:"#0d1117", borderColor:"#1e2535", padding:"20px 20px" }}>
       {children}
     </div>
   );
@@ -210,7 +230,7 @@ export default function SeedFunnel() {
   const [form, setForm]       = useState<FormData>({ nombre:"", phone:"", dialCode:"+52", email:"" });
   const [submitting, setSubmitting] = useState(false);
   const [eventDate]           = useState<EventDate>(getNextThursday);
-  const TOTAL                 = 6; // steps 1–5 tracked
+  const TOTAL                 = 6;
 
   useEffect(() => {
     setForm((p) => ({ ...p, dialCode: detectDialCode() }));
@@ -224,7 +244,6 @@ export default function SeedFunnel() {
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     setSubmitting(true);
-    // TODO: connect to webhook / CRM
     await new Promise((r) => setTimeout(r, 1400));
     goToStep(6);
   }
@@ -235,9 +254,9 @@ export default function SeedFunnel() {
     <div style={{ height:"100dvh" }} className="flex flex-col overflow-hidden relative"
       aria-label="Registro al seminario">
 
-      {/* Background image */}
+      {/* Background */}
       <div className="pointer-events-none fixed inset-0" aria-hidden="true"
-        style={{ backgroundImage:"url('/bg-glow.webp')", backgroundSize:"cover", backgroundPosition:"center", opacity:0.6 }}/>
+        style={{ backgroundImage:"url('/bg-glow.png')", backgroundSize:"cover", backgroundPosition:"center", opacity:0.6 }}/>
       <div className="pointer-events-none fixed inset-0" aria-hidden="true"
         style={{ background:"radial-gradient(ellipse 80% 60% at 10% 80%, rgba(14,80,180,0.10) 0%, transparent 60%)" }}/>
 
@@ -248,23 +267,19 @@ export default function SeedFunnel() {
           <Image
             src="/logo-seed.webp"
             alt="Seminario de Emprendedor a Empresario Digital"
-            width={220}
-            height={53}
+            width={220} height={53}
             style={{ objectFit:"contain", objectPosition:"left" }}
             priority
           />
           {showBar && (
             <div className="flex items-center justify-between mt-3">
-              <button
-                type="button"
-                onClick={() => goToStep(step - 1)}
-                className="flex items-center gap-1.5 rounded-lg transition-all duration-200 focus:outline-none text-xs font-semibold"
-                style={{ color:"#7a8299", background:"none", border:"none", padding:0 }}
+              <button type="button" onClick={() => goToStep(step - 1)}
+                className="flex items-center gap-2 rounded-lg transition-all duration-200 focus:outline-none font-semibold"
+                style={{ color:"#9aa3b2", background:"none", border:"none", padding:"10px 0", fontSize:"0.875rem" }}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#14C9B8")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#7a8299")}
-                aria-label="Paso anterior"
-              >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#9aa3b2")}
+                aria-label="Paso anterior">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 Atrás
@@ -272,7 +287,7 @@ export default function SeedFunnel() {
               <div className="flex items-center gap-1.5">
                 {Array.from({ length: TOTAL }).map((_, i) => (
                   <div key={i} className="rounded-full transition-all duration-500"
-                    style={{ height:"4px", width: i < step ? "20px" : "4px",
+                    style={{ height:"5px", width: i < step ? "22px" : "5px",
                       background: i < step ? "#14C9B8" : "#1e2535" }}/>
                 ))}
               </div>
@@ -283,40 +298,37 @@ export default function SeedFunnel() {
 
       {/* ── SCROLLABLE CONTENT ────────────────────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto relative z-10">
-        <div className="px-5 md:px-12 pt-4 pb-2" style={{ maxWidth:"700px", margin:"0 auto" }}>
-
-          {/* Animated content */}
+        <div className="px-5 md:px-12 pt-5 pb-2" style={{ maxWidth:"700px", margin:"0 auto" }}>
           <div style={{ opacity:visible?1:0, transform:visible?"translateY(0)":"translateY(14px)", transition:"opacity 0.25s ease, transform 0.25s ease" }}>
 
             {/* ── 0: HOOK ────────────────────────────────────────────── */}
             {step === 0 && (
               <div>
-                <h1 className="uppercase leading-tight mb-3"
-                  style={{ fontFamily:"var(--font-barlow)", fontWeight:900,
+                <h1 className="uppercase mb-4"
+                  style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.1,
                     fontSize:"clamp(2rem, 5vw, 3rem)", color:"#fff", letterSpacing:"-0.02em" }}>
                   Aprende a vender
                   <br/>
                   <span style={{ color:"#14C9B8", fontStyle:"italic" }}>por internet</span>
                 </h1>
 
-                <div className="mb-4" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
+                <div className="mb-5" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
 
-                <p className="leading-relaxed mb-5" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
-                  El Seminario de Emprendedor a Empresario Digital te muestra cómo usar redes sociales, publicidad e IA para vender más allá de tu círculo, sin necesidad de saber de tecnología.
+                <p className="mb-5" style={{ fontSize:"1.0625rem", color:"#9aa3b2", lineHeight:1.65, letterSpacing:"0.01em" }}>
+                  Aprende a usar redes, publicidad e IA para vender más — aunque no sepas de tecnología.
                 </p>
 
-                <div className="mb-5">
+                <div className="mb-4">
                   <DateChip date={eventDate}/>
                 </div>
 
                 <div className="flex justify-center">
                   <Image
-                    src="/manujorge.webp"
+                    src="/manujorge.png"
                     alt="Jorge Serratos y Manuel de León"
-                    width={520}
-                    height={520}
+                    width={520} height={520}
                     className="w-full"
-                    style={{ objectFit:"contain", objectPosition:"center bottom", maxHeight:"42vh" }}
+                    style={{ objectFit:"contain", objectPosition:"center bottom", maxHeight:"38vh" }}
                   />
                 </div>
               </div>
@@ -329,22 +341,18 @@ export default function SeedFunnel() {
                   Tu negocio podría<br/>quedarse obsoleto
                 </Headline>
 
-                <p className="leading-relaxed mb-4" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
-                  Tener un buen producto ya no alcanza: si no apareces en redes, no existes para la mitad de tus clientes potenciales.
-                </p>
-
                 <Card>
-                  <div className="space-y-2.5">
-                    <Row icon="📍">Solo vendes a quien ya te conoce, un radio de acción chico sin importar qué tan bueno seas</Row>
-                    <Row icon="⏳">Cada venta depende de que <strong style={{ color:"#cdd5e0" }}>tú</strong> estés ahí, y el negocio solo avanza cuando tú lo empujas</Row>
-                    <Row icon="📉">Tu competencia crece en redes y tú lo ves sin saber <strong style={{ color:"#cdd5e0" }}>por dónde entrar</strong></Row>
-                    <Row icon="😰">Lo intentaste y aprendiste algo, pero sin una guía clara crecer en digital se siente lento</Row>
+                  <div className="space-y-4">
+                    <Row icon="📍">Solo vendes a quien ya te conoce, sin importar qué tan bueno seas</Row>
+                    <Row icon="⏳">Cada venta depende de que <strong style={{ color:"#fff" }}>tú</strong> estés presente — el negocio no avanza solo</Row>
+                    <Row icon="📉">Tu competencia crece en redes mientras tú buscas por dónde entrar</Row>
+                    <Row icon="😰">Lo intentaste, pero sin una guía clara el mundo digital se siente lento</Row>
                   </div>
                 </Card>
 
-                <div className="mt-3 rounded-xl border"
-                  style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"11px 15px" }}>
-                  <p className="text-sm leading-relaxed" style={{ color:"#cdd5e0" }}>
+                <div className="mt-5 rounded-xl border"
+                  style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"16px 18px" }}>
+                  <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65 }}>
                     <strong style={{ color:"#14C9B8" }}>Tiene solución</strong> y no necesitas saber de tecnología para aplicarla
                   </p>
                 </div>
@@ -358,17 +366,13 @@ export default function SeedFunnel() {
                   Lo que vas a aprender<br/>en el seminario
                 </Headline>
 
-                <p className="leading-relaxed mb-4" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
-                  Una sesión en vivo donde vas directo a lo que funciona para vender por internet, sin importar en qué punto está tu negocio.
-                </p>
-
                 <Card>
-                  <div className="space-y-2.5">
-                    <Row icon="📱"><strong style={{ color:"#cdd5e0" }}>Redes sociales:</strong> cómo publicar para que la gente llegue a ti queriendo comprar, no solo a ver</Row>
-                    <Row icon="🎯"><strong style={{ color:"#cdd5e0" }}>Publicidad:</strong> cómo invertir sin tirar el dinero y crear anuncios que sí venden</Row>
-                    <Row icon="🤖"><strong style={{ color:"#cdd5e0" }}>IA:</strong> herramientas concretas que puedes usar desde mañana en tu negocio</Row>
-                    <Row icon="🌐"><strong style={{ color:"#cdd5e0" }}>Escala geográfica:</strong> cómo vender fuera de tu ciudad o tu país sin moverte de donde estás</Row>
-                    <Row icon="🤝"><strong style={{ color:"#cdd5e0" }}>Networking:</strong> conexiones con otros empresarios donde 1+1 termina valiendo 3</Row>
+                  <div className="space-y-4">
+                    <Row icon="📱"><strong style={{ color:"#fff" }}>Redes sociales:</strong> publica para que lleguen a ti queriendo comprar</Row>
+                    <Row icon="🎯"><strong style={{ color:"#fff" }}>Publicidad:</strong> invierte sin desperdiciar y crea anuncios que sí venden</Row>
+                    <Row icon="🤖"><strong style={{ color:"#fff" }}>IA:</strong> herramientas que puedes usar desde mañana en tu negocio</Row>
+                    <Row icon="🌐"><strong style={{ color:"#fff" }}>Escala:</strong> vende fuera de tu ciudad sin moverte de donde estás</Row>
+                    <Row icon="🤝"><strong style={{ color:"#fff" }}>Networking:</strong> conexiones con empresarios donde 1+1 vale 3</Row>
                   </div>
                 </Card>
               </div>
@@ -381,40 +385,36 @@ export default function SeedFunnel() {
                   Aprende de quienes<br/><span style={{ color:"#14C9B8" }}>ya lo lograron</span>
                 </Headline>
 
-                <p className="leading-relaxed mb-4" style={{ fontSize:"0.95rem", color:"#7a8299" }}>
-                  No es teoría lo que vas a escuchar, es lo que ellos aplicaron para construir sus propios negocios en el mundo digital
-                </p>
-
-                <div className="space-y-2.5 mb-4">
+                <div className="space-y-3 mb-5">
                   <Card>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black text-sm"
-                        style={{ width:"40px", height:"40px", background:"linear-gradient(135deg,#14C9B8,#0a8a80)", color:"#06080f" }}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
+                        style={{ width:"46px", height:"46px", background:"linear-gradient(135deg,#14C9B8,#0a8a80)", color:"#06080f", fontSize:"15px" }}>
                         JS
                       </div>
                       <div>
-                        <p className="font-bold text-sm" style={{ color:"#fff" }}>Jorge Serratos</p>
-                        <p className="text-xs" style={{ color:"#3d4a5c" }}>Conferencista · Autor Bestseller</p>
+                        <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>Jorge Serratos</p>
+                        <p style={{ color:"#7a8299", fontSize:"13px" }}>Conferencista · Autor Bestseller</p>
                       </div>
                     </div>
-                    <p className="text-sm leading-relaxed" style={{ color:"#7a8299" }}>
+                    <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65 }}>
                       Fundador del movimiento Sinergéticos y del podcast #1 de negocios en México según Spotify, con más de 100,000 personas que han pasado por sus programas y conferencias en México y EE.UU.
                     </p>
                   </Card>
 
                   <Card>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black text-sm"
-                        style={{ width:"40px", height:"40px", background:"linear-gradient(135deg,#1e3a5f,#2d6aad)", color:"#7ab3d4" }}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
+                        style={{ width:"46px", height:"46px", background:"linear-gradient(135deg,#1e3a5f,#2d6aad)", color:"#7ab3d4", fontSize:"15px" }}>
                         ML
                       </div>
                       <div>
-                        <p className="font-bold text-sm" style={{ color:"#fff" }}>Manuel de León</p>
-                        <p className="text-xs" style={{ color:"#3d4a5c" }}>Empresario & Conferencista</p>
+                        <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>Manuel de León</p>
+                        <p style={{ color:"#7a8299", fontSize:"13px" }}>Empresario & Conferencista</p>
                       </div>
                     </div>
-                    <p className="text-sm leading-relaxed" style={{ color:"#7a8299" }}>
-                      Referente en la industria digital y de negocios, de los que cuando comparten no solo te inspiran sino que te hacen ver que lo que quieres construir es más alcanzable de lo que crees
+                    <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65 }}>
+                      Referente en la industria digital con casos concretos de negocios que escalaron en línea.
                     </p>
                   </Card>
                 </div>
@@ -425,10 +425,10 @@ export default function SeedFunnel() {
                     { n:"#1",   l:"podcast de negocios" },
                     { n:"100%", l:"en vivo y gratis" },
                   ].map((s) => (
-                    <div key={s.n} className="text-center rounded-xl border py-2.5"
+                    <div key={s.n} className="text-center rounded-xl border py-3"
                       style={{ background:"#0d1117", borderColor:"#1e2535" }}>
-                      <p className="font-black text-lg" style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)" }}>{s.n}</p>
-                      <p className="text-xs mt-0.5" style={{ color:"#3d4a5c" }}>{s.l}</p>
+                      <p style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.4rem" }}>{s.n}</p>
+                      <p style={{ color:"#7a8299", fontSize:"13px", marginTop:"2px" }}>{s.l}</p>
                     </div>
                   ))}
                 </div>
@@ -442,28 +442,28 @@ export default function SeedFunnel() {
                   Tu lugar todavía<br/><span style={{ color:"#14C9B8" }}>está disponible</span>
                 </Headline>
 
-                <div className="rounded-xl border mb-4"
-                  style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.22)", padding:"14px 16px" }}>
-                  <div className="flex items-center gap-3">
+                <div className="rounded-xl border mb-5"
+                  style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.22)", padding:"18px 20px" }}>
+                  <div className="flex items-center gap-4">
                     <div className="flex-shrink-0 rounded-xl flex flex-col items-center justify-center"
-                      style={{ width:"48px", height:"48px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
-                      <p className="text-xs font-bold uppercase" style={{ color:"#14C9B8", lineHeight:1 }}>JUE</p>
-                      <p className="font-black text-xl leading-none mt-0.5" style={{ color:"#fff", fontFamily:"var(--font-barlow)" }}>8PM</p>
+                      style={{ width:"54px", height:"54px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
+                      <p style={{ color:"#14C9B8", fontSize:"11px", fontWeight:700, lineHeight:1, textTransform:"uppercase" }}>JUE</p>
+                      <p style={{ color:"#fff", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.25rem", lineHeight:1, marginTop:"2px" }}>8PM</p>
                     </div>
                     <div>
-                      <p className="font-bold text-sm" style={{ color:"#fff" }}>{eventDate.formatted}</p>
-                      <p className="text-xs mt-0.5" style={{ color:"#3d4a5c" }}>8:00 PM hora México · En vivo · Gratis</p>
+                      <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>{eventDate.formatted}</p>
+                      <p style={{ color:"#7a8299", fontSize:"13px", marginTop:"3px" }}>8:00 PM hora México · En vivo · Gratis</p>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-xs font-semibold tracking-wider uppercase mb-2" style={{ color:"#3d4a5c" }}>
+                <p style={{ color:"#9aa3b2", fontSize:"0.875rem", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"10px" }}>
                   Cómo funciona
                 </p>
 
                 <Card>
-                  <div className="space-y-2.5">
-                    <Row icon="✅">Es <strong style={{ color:"#cdd5e0" }}>gratis</strong>, sin costo ni sorpresas al final</Row>
+                  <div className="space-y-4">
+                    <Row icon="✅">Es <strong style={{ color:"#fff" }}>gratis</strong>, sin costo ni sorpresas al final</Row>
                     <Row icon="💻">100% online, entras desde donde estés</Row>
                     <Row icon="⚡">En vivo, puedes preguntar en el momento</Row>
                     <Row icon="🎯">Los cupos son limitados y se llenan por orden de llegada</Row>
@@ -479,30 +479,27 @@ export default function SeedFunnel() {
                   Tu lugar está<br/>casi asegurado
                 </Headline>
 
-                <div className="flex items-center gap-3 rounded-xl border mb-4"
-                  style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.2)", padding:"11px 14px" }}>
-                  <span className="text-xl">📅</span>
-                  <div>
-                    <p className="text-sm font-bold" style={{ color:"#fff" }}>{eventDate.formatted}</p>
-                    <p className="text-xs" style={{ color:"#3d4a5c" }}>8:00 PM hora México · En vivo · Gratis</p>
-                  </div>
-                </div>
+                <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"20px" }}>
+                  Solo te pedimos 3 datos para reservar tu lugar.
+                </p>
 
-                <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+                <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-5">
                   <div>
-                    <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
+                    <label className="block font-semibold uppercase mb-2"
+                      style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
                       Nombre completo
                     </label>
-                    <input type="text" required placeholder="Tu nombre completo"
+                    <input type="text" required placeholder="Tu nombre completo" inputMode="text"
                       value={form.nombre} onChange={(e) => setForm((p) => ({ ...p, nombre:e.target.value }))}
                       className="w-full rounded-xl transition-all duration-200 focus:outline-none"
-                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px", fontSize:"16px" }}
+                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px", fontSize:"16px", letterSpacing:"0.01em" }}
                       onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
                       onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
+                    <label className="block font-semibold uppercase mb-2"
+                      style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
                       WhatsApp
                     </label>
                     <PhoneInput
@@ -512,13 +509,14 @@ export default function SeedFunnel() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color:"#3d4a5c" }}>
+                    <label className="block font-semibold uppercase mb-2"
+                      style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
                       Correo electrónico
                     </label>
                     <input type="email" required placeholder="tu@correo.com"
                       value={form.email} onChange={(e) => setForm((p) => ({ ...p, email:e.target.value }))}
                       className="w-full rounded-xl transition-all duration-200 focus:outline-none"
-                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"12px 16px", fontSize:"16px" }}
+                      style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px", fontSize:"16px", letterSpacing:"0.01em" }}
                       onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
                       onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
                   </div>
@@ -529,16 +527,16 @@ export default function SeedFunnel() {
             {/* ── 6: GRACIAS ─────────────────────────────────────────── */}
             {step === 6 && (
               <div className="text-center">
-                <div className="flex justify-center mb-4">
+                <div className="flex justify-center mb-5">
                   <div className="flex items-center justify-center rounded-full border-2"
-                    style={{ width:"64px", height:"64px", borderColor:"#14C9B8", background:"rgba(20,201,184,0.07)" }}>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14C9B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    style={{ width:"72px", height:"72px", borderColor:"#14C9B8", background:"rgba(20,201,184,0.07)" }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14C9B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </div>
                 </div>
 
-                <p className="text-xs font-semibold tracking-[0.22em] uppercase mb-2" style={{ color:"#14C9B8" }}>
+                <p style={{ color:"#14C9B8", fontSize:"0.8125rem", fontWeight:700, letterSpacing:"0.22em", textTransform:"uppercase", marginBottom:"10px" }}>
                   ¡Registro confirmado!
                 </p>
                 <Headline>
@@ -548,15 +546,15 @@ export default function SeedFunnel() {
                   </span>
                 </Headline>
 
-                <p className="text-sm leading-relaxed mb-4" style={{ color:"#7a8299" }}>
-                  Te enviamos un correo de confirmación, así que revisa también tu carpeta de spam por si acaso.
+                <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"20px" }}>
+                  Si no llega el correo en 5 minutos, revisa tu carpeta de spam.
                 </p>
 
                 <Card>
-                  <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-2.5" style={{ color:"#14C9B8" }}>
+                  <p style={{ color:"#14C9B8", fontSize:"0.8125rem", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"12px" }}>
                     Detalles del evento
                   </p>
-                  <div className="space-y-2.5">
+                  <div className="space-y-4">
                     <Row icon="📅">{eventDate.formatted} · 8:00 PM hora México</Row>
                     <Row icon="💻">Seminario en vivo · 100% online</Row>
                     <Row icon="🎯">Con Jorge Serratos y expertos invitados</Row>
@@ -570,34 +568,28 @@ export default function SeedFunnel() {
       </div>
 
       {/* ── STICKY FOOTER ─────────────────────────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-3 pb-6"
+      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-4 pb-6"
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"700px", margin:"0 auto" }}>
 
-          {/* Steps 0–4: next-step button + skip to form */}
-          {step === 0 && <TealBtn onClick={() => goToStep(1)}>QUIERO SABER MÁS →</TealBtn>}
+          {step === 0 && <TealBtn onClick={() => goToStep(1)}>CONOCER EL SEMINARIO →</TealBtn>}
           {step === 1 && <TealBtn onClick={() => goToStep(2)}>DIME CÓMO →</TealBtn>}
           {step === 2 && <TealBtn onClick={() => goToStep(3)}>¿QUIÉNES LO IMPARTEN? →</TealBtn>}
           {step === 3 && <TealBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</TealBtn>}
           {step === 4 && <TealBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</TealBtn>}
 
           {step <= 4 && (
-            <button type="button" onClick={() => goToStep(5)}
-              className="w-full text-center text-xs mt-2 transition-colors duration-200"
-              style={{ background:"none", border:"none", color:"#3d4a5c", cursor:"pointer", padding:"4px 0" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#14C9B8")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#3d4a5c")}>
-              Ya quiero unirme →
-            </button>
+            <div className="mt-3">
+              <GhostBtn onClick={() => goToStep(5)}>Saltar al registro →</GhostBtn>
+            </div>
           )}
 
-          {/* Step 5: external submit button tied to form */}
           {step === 5 && (
             <>
               <TealBtn type="submit" form="seed-form" disabled={submitting}>
                 {submitting ? (
                   <span className="flex items-center justify-center gap-2">
-                    <svg className="animate-spin-slow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="animate-spin-slow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <circle cx="12" cy="12" r="10" strokeOpacity="0.2"/>
                       <path d="M12 2a10 10 0 0 1 10 10"/>
                     </svg>
@@ -605,20 +597,19 @@ export default function SeedFunnel() {
                   </span>
                 ) : "¡RESERVAR MI LUGAR GRATIS →"}
               </TealBtn>
-              <p className="text-center text-xs mt-2" style={{ color:"#3d4a5c" }}>
+              <p className="text-center mt-2" style={{ color:"#7a8299", fontSize:"13px" }}>
                 Sin spam. Solo información relevante del evento.
               </p>
             </>
           )}
 
-          {/* Step 6: WhatsApp CTA */}
           {step === 6 && (
             <button
               className="w-full font-bold rounded-xl transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2.5"
-              style={{ background:"#25D366", color:"#fff", padding:"15px 24px", fontSize:"0.9rem" }}
+              style={{ background:"#25D366", color:"#fff", padding:"18px 24px", fontSize:"1.0625rem" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#1ebe5a")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#25D366")}>
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
               </svg>
               Unirme al grupo de WhatsApp
