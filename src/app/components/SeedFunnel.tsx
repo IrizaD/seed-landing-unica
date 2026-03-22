@@ -284,13 +284,11 @@ export default function SeedFunnel() {
                 </svg>
                 Atrás
               </button>
-              <div className="flex items-center gap-1.5">
-                {Array.from({ length: TOTAL }).map((_, i) => (
-                  <div key={i} className="rounded-full transition-all duration-500"
-                    style={{ height:"5px", width: i < step ? "22px" : "5px",
-                      background: i < step ? "#14C9B8" : "#1e2535" }}/>
-                ))}
-              </div>
+              <button type="button" onClick={() => goToStep(5)}
+                className="font-bold rounded-xl transition-all duration-200 active:scale-[0.98]"
+                style={{ background:"#14C9B8", color:"#06080f", padding:"8px 16px", fontSize:"0.8125rem", border:"none", letterSpacing:"0.03em" }}>
+                Registrarme ahora →
+              </button>
             </div>
           )}
         </div>
@@ -578,11 +576,6 @@ export default function SeedFunnel() {
           {step === 3 && <GhostBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</GhostBtn>}
           {step === 4 && <GhostBtn onClick={() => goToStep(5)}>RESERVAR MI LUGAR AHORA →</GhostBtn>}
 
-          {step >= 1 && step <= 4 && (
-            <div className="mt-3">
-              <TealBtn onClick={() => goToStep(5)}>SALTAR AL REGISTRO →</TealBtn>
-            </div>
-          )}
 
           {step === 5 && (
             <>
