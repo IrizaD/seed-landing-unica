@@ -343,8 +343,8 @@ export default function SeedFunnel() {
                     src="/manujorge.png"
                     alt={COPY.step0.imageAlt}
                     width={520} height={520}
-                    className="w-full"
-                    style={{ objectFit:"contain", objectPosition:"center bottom", maxHeight:"30vh" }}
+                    className="w-full max-h-[30vh] md:max-h-[58vh]"
+                    style={{ objectFit:"contain", objectPosition:"center bottom" }}
                   />
                 </div>
               </div>
