@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { COPY } from "@/app/content/funnel-copy";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -294,7 +295,7 @@ export default function SeedFunnel() {
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                Atrás
+                {COPY.header.backLabel}
               </button>
               <button type="button" onClick={() => goToStep(5)}
                 className="font-bold rounded-full transition-all duration-200 active:scale-[0.97] flex items-center gap-1.5"
@@ -303,7 +304,7 @@ export default function SeedFunnel() {
                   boxShadow:"0 0 14px rgba(20,201,184,0.35)", textTransform:"uppercase" }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#1FE5D2"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(20,201,184,0.55)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#14C9B8"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.35)"; }}>
-                Registrarme ahora
+                {COPY.header.ctaLabel}
                 <span style={{ background:"rgba(0,0,0,0.15)", borderRadius:"999px", padding:"2px 6px", fontSize:"0.7rem" }}>→</span>
               </button>
             </div>
@@ -322,15 +323,15 @@ export default function SeedFunnel() {
                 <h1 className="uppercase mb-2"
                   style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.1,
                     fontSize:"clamp(1.5rem, 5vw, 3rem)", color:"#fff", letterSpacing:"-0.02em" }}>
-                  Aprende a vender
+                  {COPY.step0.headlineLine1}
                   <br/>
-                  <span style={{ color:"#14C9B8", fontStyle:"italic" }}>por internet</span>
+                  <span style={{ color:"#14C9B8", fontStyle:"italic" }}>{COPY.step0.headlineLine2}</span>
                 </h1>
 
                 <div className="mb-3" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
 
                 <p className="mb-3" style={{ fontSize:"0.9rem", color:"#9aa3b2", lineHeight:1.5, letterSpacing:"0.01em" }}>
-                  Aprende a vender más con redes sociales, publicidad e IA. Aunque nunca hayas vendido por internet.
+                  {COPY.step0.body}
                 </p>
 
                 <div className="mb-2">
@@ -340,7 +341,7 @@ export default function SeedFunnel() {
                 <div className="flex justify-center">
                   <Image
                     src="/manujorge.png"
-                    alt="Jorge Serratos y Manuel de León"
+                    alt={COPY.step0.imageAlt}
                     width={520} height={520}
                     className="w-full"
                     style={{ objectFit:"contain", objectPosition:"center bottom", maxHeight:"30vh" }}
@@ -353,22 +354,21 @@ export default function SeedFunnel() {
             {step === 1 && (
               <div>
                 <Headline>
-                  Tu negocio podría<br/>quedarse obsoleto
+                  {COPY.step1.headlineLine1}<br/>{COPY.step1.headlineLine2}
                 </Headline>
 
                 <Card>
                   <div className="space-y-3">
-                    <Row icon="📍">Tu negocio solo llega donde tú llegas. El cliente que no te conoce, no te compra</Row>
-                    <Row icon="⏳">Si <strong style={{ color:"#fff" }}>tú</strong> no estás, no hay venta. El negocio para cuando tú paras</Row>
-                    <Row icon="📉">Tu competencia ya vende en redes. Tú todavía buscas por dónde empezar</Row>
-                    <Row icon="😰">Ya lo intentaste. Sin el método correcto, el mundo digital se siente imposible</Row>
+                    {COPY.step1.rows.map((r) => (
+                      <Row key={r.icon} icon={r.icon}>{r.text}</Row>
+                    ))}
                   </div>
                 </Card>
 
                 <div className="mt-3 rounded-xl border"
                   style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"12px 14px" }}>
                   <p style={{ color:"#cdd5e0", fontSize:"0.9rem", lineHeight:1.5 }}>
-                    <strong style={{ color:"#14C9B8" }}>No necesitas saber de tecnología.</strong> Solo necesitas el método correcto. Eso es lo que vamos a enseñarte.
+                    <strong style={{ color:"#14C9B8" }}>{COPY.step1.calloutBold}</strong>{COPY.step1.calloutBody}
                   </p>
                 </div>
               </div>
@@ -378,16 +378,16 @@ export default function SeedFunnel() {
             {step === 2 && (
               <div>
                 <Headline>
-                  Lo que vas a aprender<br/>en el seminario
+                  {COPY.step2.headlineLine1}<br/>{COPY.step2.headlineLine2}
                 </Headline>
 
                 <Card>
                   <div className="space-y-3">
-                    <Row icon="📱"><strong style={{ color:"#fff" }}>Redes sociales:</strong> publica para que la gente quiera comprarte, sin necesitar miles de seguidores</Row>
-                    <Row icon="🎯"><strong style={{ color:"#fff" }}>Publicidad:</strong> invierte sin tirar dinero y crea anuncios que sí venden</Row>
-                    <Row icon="🤖"><strong style={{ color:"#fff" }}>IA:</strong> herramientas concretas que puedes usar esta semana para ahorrarte horas de trabajo</Row>
-                    <Row icon="🌐"><strong style={{ color:"#fff" }}>Escala:</strong> vende fuera de tu ciudad sin moverte de donde estás</Row>
-                    <Row icon="🤝"><strong style={{ color:"#fff" }}>Networking:</strong> entra a una red de empresarios donde 1+1 vale 3, la filosofía Sinergéticos</Row>
+                    {COPY.step2.rows.map((r) => (
+                      <Row key={r.icon} icon={r.icon}>
+                        <strong style={{ color:"#fff" }}>{r.label}</strong>{r.text}
+                      </Row>
+                    ))}
                   </div>
                 </Card>
               </div>
@@ -397,53 +397,35 @@ export default function SeedFunnel() {
             {step === 3 && (
               <div>
                 <Headline>
-                  Aprende de quienes<br/><span style={{ color:"#14C9B8" }}>ya lo lograron</span>
+                  {COPY.step3.headlineLine1}<br/><span style={{ color:"#14C9B8" }}>{COPY.step3.headlineLine2}</span>
                 </Headline>
 
                 <div className="space-y-2 mb-3">
-                  <Card>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
-                        style={{ width:"40px", height:"40px", background:"linear-gradient(135deg,#14C9B8,#0a8a80)", color:"#06080f", fontSize:"14px" }}>
-                        JS
+                  {COPY.step3.speakers.map((s, i) => (
+                    <Card key={s.initials}>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
+                          style={{ width:"40px", height:"40px", fontSize:"14px",
+                            background: i === 0 ? "linear-gradient(135deg,#14C9B8,#0a8a80)" : "linear-gradient(135deg,#1e3a5f,#2d6aad)",
+                            color: i === 0 ? "#06080f" : "#7ab3d4" }}>
+                          {s.initials}
+                        </div>
+                        <div>
+                          <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>{s.name}</p>
+                          <p style={{ color:"#7a8299", fontSize:"12px" }}>{s.title}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>Jorge Serratos</p>
-                        <p style={{ color:"#7a8299", fontSize:"12px" }}>Conferencista · Autor Bestseller</p>
-                      </div>
-                    </div>
-                    <p style={{ color:"#9aa3b2", fontSize:"0.875rem", lineHeight:1.5 }}>
-                      Fundador del movimiento Sinergéticos y del podcast #1 de negocios en México según Spotify. Más de 100,000 personas han transformado su negocio con su método en México y EE.UU.
-                    </p>
-                  </Card>
-
-                  <Card>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
-                        style={{ width:"40px", height:"40px", background:"linear-gradient(135deg,#1e3a5f,#2d6aad)", color:"#7ab3d4", fontSize:"14px" }}>
-                        ML
-                      </div>
-                      <div>
-                        <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>Manuel de León</p>
-                        <p style={{ color:"#7a8299", fontSize:"12px" }}>Empresario & Conferencista</p>
-                      </div>
-                    </div>
-                    <p style={{ color:"#9aa3b2", fontSize:"0.875rem", lineHeight:1.5 }}>
-                      Tomó negocios tradicionales y los llevó a vender en línea. En el seminario te explica cómo lo hizo, sin rodeos.
-                    </p>
-                  </Card>
+                      <p style={{ color:"#9aa3b2", fontSize:"0.875rem", lineHeight:1.5 }}>{s.bio}</p>
+                    </Card>
+                  ))}
                 </div>
 
                 <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { n:"+100K", l:"personas impactadas" },
-                    { n:"#1",   l:"podcast de negocios" },
-                    { n:"100%", l:"en vivo y gratis" },
-                  ].map((s) => (
-                    <div key={s.n} className="text-center rounded-xl border py-3"
+                  {COPY.step3.stats.map((s) => (
+                    <div key={s.number} className="text-center rounded-xl border py-3"
                       style={{ background:"#0d1117", borderColor:"#1e2535" }}>
-                      <p style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.4rem" }}>{s.n}</p>
-                      <p style={{ color:"#7a8299", fontSize:"13px", marginTop:"2px" }}>{s.l}</p>
+                      <p style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.4rem" }}>{s.number}</p>
+                      <p style={{ color:"#7a8299", fontSize:"13px", marginTop:"2px" }}>{s.label}</p>
                     </div>
                   ))}
                 </div>
@@ -454,7 +436,7 @@ export default function SeedFunnel() {
             {step === 4 && (
               <div>
                 <Headline>
-                  Tu lugar todavía<br/><span style={{ color:"#14C9B8" }}>está disponible</span>
+                  {COPY.step4.headlineLine1}<br/><span style={{ color:"#14C9B8" }}>{COPY.step4.headlineLine2}</span>
                 </Headline>
 
                 <div className="rounded-xl border mb-3"
@@ -467,21 +449,20 @@ export default function SeedFunnel() {
                     </div>
                     <div>
                       <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>{eventDate.formatted}</p>
-                      <p style={{ color:"#7a8299", fontSize:"12px", marginTop:"2px" }}>8:00 PM hora México · En vivo · Gratis</p>
+                      <p style={{ color:"#7a8299", fontSize:"12px", marginTop:"2px" }}>{COPY.step4.eventTime}</p>
                     </div>
                   </div>
                 </div>
 
                 <p style={{ color:"#9aa3b2", fontSize:"0.8rem", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"8px" }}>
-                  Cómo funciona
+                  {COPY.step4.howItWorksLabel}
                 </p>
 
                 <Card>
                   <div className="space-y-3">
-                    <Row icon="✅">Es <strong style={{ color:"#fff" }}>gratis</strong>. Sin costos ocultos ni sorpresas al final</Row>
-                    <Row icon="💻">100% online, entras desde cualquier dispositivo, donde estés</Row>
-                    <Row icon="⚡">En vivo con Jorge Serratos. Puedes hacer tus preguntas en el momento</Row>
-                    <Row icon="🎯">Los lugares son limitados y se asignan por orden de registro</Row>
+                    {COPY.step4.rows.map((r) => (
+                      <Row key={r.icon} icon={r.icon}>{r.text}</Row>
+                    ))}
                   </div>
                 </Card>
               </div>
@@ -491,20 +472,20 @@ export default function SeedFunnel() {
             {step === 5 && (
               <div>
                 <Headline>
-                  Un paso más y<br/>tu lugar queda reservado
+                  {COPY.step5.headlineLine1}<br/>{COPY.step5.headlineLine2}
                 </Headline>
 
                 <p style={{ color:"#9aa3b2", fontSize:"0.9rem", lineHeight:1.5, marginBottom:"12px" }}>
-                  Llena tus datos y listo. Es gratis, sin compromisos.
+                  {COPY.step5.body}
                 </p>
 
                 <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-3">
                   <div>
                     <label className="block font-semibold uppercase mb-2"
                       style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
-                      Nombre completo
+                      {COPY.step5.form.nameLabel}
                     </label>
-                    <input type="text" required placeholder="Tu nombre completo" inputMode="text"
+                    <input type="text" required placeholder={COPY.step5.form.namePlaceholder} inputMode="text"
                       value={form.nombre} onChange={(e) => setForm((p) => ({ ...p, nombre:e.target.value }))}
                       className="w-full rounded-xl transition-all duration-200 focus:outline-none"
                       style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px", fontSize:"16px", letterSpacing:"0.01em" }}
@@ -515,7 +496,7 @@ export default function SeedFunnel() {
                   <div>
                     <label className="block font-semibold uppercase mb-2"
                       style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
-                      WhatsApp
+                      {COPY.step5.form.phoneLabel}
                     </label>
                     <PhoneInput
                       dialCode={form.dialCode} phone={form.phone}
@@ -526,9 +507,9 @@ export default function SeedFunnel() {
                   <div>
                     <label className="block font-semibold uppercase mb-2"
                       style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
-                      Correo electrónico
+                      {COPY.step5.form.emailLabel}
                     </label>
-                    <input type="email" required placeholder="tu@correo.com"
+                    <input type="email" required placeholder={COPY.step5.form.emailPlaceholder}
                       value={form.email} onChange={(e) => setForm((p) => ({ ...p, email:e.target.value }))}
                       className="w-full rounded-xl transition-all duration-200 focus:outline-none"
                       style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px", fontSize:"16px", letterSpacing:"0.01em" }}
@@ -552,27 +533,28 @@ export default function SeedFunnel() {
                 </div>
 
                 <p style={{ color:"#14C9B8", fontSize:"0.8125rem", fontWeight:700, letterSpacing:"0.22em", textTransform:"uppercase", marginBottom:"10px" }}>
-                  ¡Registro confirmado!
+                  {COPY.step6.badge}
                 </p>
                 <Headline>
-                  Tu lugar está reservado,{" "}
+                  {COPY.step6.headlineLine1}{" "}
                   <span style={{ color:"#14C9B8" }}>
                     {form.nombre.trim().split(" ")[0] || "amigo"}
                   </span>
                 </Headline>
 
                 <p style={{ color:"#9aa3b2", fontSize:"0.9rem", lineHeight:1.5, marginBottom:"12px" }}>
-                  Revisa tu correo y WhatsApp — te confirmamos en los próximos minutos. Si no llega, revisa tu carpeta de spam.
+                  {COPY.step6.body}
                 </p>
 
                 <Card>
                   <p style={{ color:"#14C9B8", fontSize:"0.75rem", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"10px" }}>
-                    Detalles del evento
+                    {COPY.step6.detailsLabel}
                   </p>
                   <div className="space-y-3">
-                    <Row icon="📅">{eventDate.formatted} · 8:00 PM hora México</Row>
-                    <Row icon="💻">Seminario en vivo · 100% online</Row>
-                    <Row icon="🎯">Con Jorge Serratos y expertos invitados</Row>
+                    <Row icon={COPY.step6.rows[0].icon}>{eventDate.formatted} {COPY.step6.rows[0].text}</Row>
+                    {COPY.step6.rows.slice(1).map((r) => (
+                      <Row key={r.icon} icon={r.icon}>{r.text}</Row>
+                    ))}
                   </div>
                 </Card>
               </div>
@@ -587,11 +569,11 @@ export default function SeedFunnel() {
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"700px", margin:"0 auto" }}>
 
-          {step === 0 && <GhostBtn onClick={() => goToStep(1)}>QUIERO SABER MÁS →</GhostBtn>}
-          {step === 1 && <GhostBtn onClick={() => goToStep(2)}>VER LA SOLUCIÓN →</GhostBtn>}
-          {step === 2 && <GhostBtn onClick={() => goToStep(3)}>¿QUIÉNES LO IMPARTEN? →</GhostBtn>}
-          {step === 3 && <GhostBtn onClick={() => goToStep(4)}>VER FECHA Y HORA →</GhostBtn>}
-          {step === 4 && <GhostBtn onClick={() => goToStep(5)}>QUIERO MI LUGAR GRATIS →</GhostBtn>}
+          {step === 0 && <GhostBtn onClick={() => goToStep(1)}>{COPY.step0.cta}</GhostBtn>}
+          {step === 1 && <GhostBtn onClick={() => goToStep(2)}>{COPY.step1.cta}</GhostBtn>}
+          {step === 2 && <GhostBtn onClick={() => goToStep(3)}>{COPY.step2.cta}</GhostBtn>}
+          {step === 3 && <GhostBtn onClick={() => goToStep(4)}>{COPY.step3.cta}</GhostBtn>}
+          {step === 4 && <GhostBtn onClick={() => goToStep(5)}>{COPY.step4.cta}</GhostBtn>}
 
 
           {step === 5 && (
@@ -603,12 +585,12 @@ export default function SeedFunnel() {
                       <circle cx="12" cy="12" r="10" strokeOpacity="0.2"/>
                       <path d="M12 2a10 10 0 0 1 10 10"/>
                     </svg>
-                    RESERVANDO...
+                    {COPY.step5.ctaLoading}
                   </span>
-                ) : "¡RESERVAR MI LUGAR GRATIS →"}
+                ) : COPY.step5.cta}
               </TealBtn>
               <p className="text-center mt-2" style={{ color:"#7a8299", fontSize:"13px" }}>
-                Sin spam. Solo información relevante del evento.
+                {COPY.step5.disclaimer}
               </p>
             </>
           )}
