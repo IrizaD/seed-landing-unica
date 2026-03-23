@@ -164,7 +164,7 @@ function TealBtn({ children, onClick, type = "button", form, disabled }: {
   return (
     <button type={type} form={form} onClick={onClick} disabled={disabled}
       className="w-full rounded-xl transition-all duration-200 active:scale-[0.98]"
-      style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#06080f", padding:"18px 24px",
+      style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#06080f", padding:"15px 24px",
         fontSize:"1.0625rem", fontFamily:"var(--font-barlow)", fontWeight:800, letterSpacing:"0.04em",
         lineHeight:1.2, cursor: disabled ? "not-allowed" : "pointer" }}
       onMouseEnter={(e) => { if (!disabled) (e.currentTarget as HTMLElement).style.background = "#1FE5D2"; }}
@@ -183,7 +183,7 @@ function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: (
         background:"#14C9B8",
         border:"none",
         color:"#06080f",
-        padding:"18px 24px",
+        padding:"15px 24px",
         fontSize:"1.0625rem",
         fontFamily:"var(--font-barlow)",
         fontWeight:800,
@@ -209,8 +209,8 @@ function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: (
 
 function Row({ icon, children }: { icon: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-3" style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, letterSpacing:"0.01em" }}>
-      <span className="flex-shrink-0 text-xl mt-0.5">{icon}</span>
+    <div className="flex items-start gap-2.5" style={{ color:"#9aa3b2", fontSize:"0.9rem", lineHeight:1.5, letterSpacing:"0.01em" }}>
+      <span className="flex-shrink-0 text-base mt-0.5">{icon}</span>
       <span>{children}</span>
     </div>
   );
@@ -218,9 +218,9 @@ function Row({ icon, children }: { icon: string; children: React.ReactNode }) {
 
 function Headline({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="uppercase mb-4"
-      style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.15,
-        fontSize:"clamp(1.75rem, 4.5vw, 2.25rem)", color:"#fff", letterSpacing:"-0.01em" }}>
+    <h2 className="uppercase mb-2"
+      style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.1,
+        fontSize:"clamp(1.3rem, 4.5vw, 2.25rem)", color:"#fff", letterSpacing:"-0.01em" }}>
       {children}
     </h2>
   );
@@ -228,7 +228,7 @@ function Headline({ children }: { children: React.ReactNode }) {
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border" style={{ background:"#0d1117", borderColor:"#1e2535", padding:"20px 20px" }}>
+    <div className="rounded-xl border" style={{ background:"#0d1117", borderColor:"#1e2535", padding:"14px 16px" }}>
       {children}
     </div>
   );
@@ -273,7 +273,7 @@ export default function SeedFunnel() {
         style={{ background:"radial-gradient(ellipse 80% 60% at 10% 80%, rgba(14,80,180,0.10) 0%, transparent 60%)" }}/>
 
       {/* ── STICKY HEADER ─────────────────────────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-5 pb-3"
+      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-3 pb-2"
         style={{ background:"rgba(6,8,15,0.85)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"700px", margin:"0 auto" }}>
           <Image
@@ -313,27 +313,27 @@ export default function SeedFunnel() {
 
       {/* ── SCROLLABLE CONTENT ────────────────────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto relative z-10">
-        <div className="px-5 md:px-12 pt-5 pb-2" style={{ maxWidth:"700px", margin:"0 auto" }}>
+        <div className="px-5 md:px-12 pt-3 pb-1" style={{ maxWidth:"700px", margin:"0 auto" }}>
           <div style={{ opacity:visible?1:0, transform:visible?"translateY(0)":"translateY(14px)", transition:"opacity 0.25s ease, transform 0.25s ease" }}>
 
             {/* ── 0: HOOK ────────────────────────────────────────────── */}
             {step === 0 && (
               <div>
-                <h1 className="uppercase mb-4"
+                <h1 className="uppercase mb-2"
                   style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.1,
-                    fontSize:"clamp(2rem, 5vw, 3rem)", color:"#fff", letterSpacing:"-0.02em" }}>
+                    fontSize:"clamp(1.5rem, 5vw, 3rem)", color:"#fff", letterSpacing:"-0.02em" }}>
                   Aprende a vender
                   <br/>
                   <span style={{ color:"#14C9B8", fontStyle:"italic" }}>por internet</span>
                 </h1>
 
-                <div className="mb-5" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
+                <div className="mb-3" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
 
-                <p className="mb-5" style={{ fontSize:"1.0625rem", color:"#9aa3b2", lineHeight:1.65, letterSpacing:"0.01em" }}>
+                <p className="mb-3" style={{ fontSize:"0.9rem", color:"#9aa3b2", lineHeight:1.5, letterSpacing:"0.01em" }}>
                   Aprende a vender más con redes sociales, publicidad e IA. Aunque nunca hayas vendido por internet.
                 </p>
 
-                <div className="mb-4">
+                <div className="mb-2">
                   <DateChip date={eventDate}/>
                 </div>
 
@@ -343,7 +343,7 @@ export default function SeedFunnel() {
                     alt="Jorge Serratos y Manuel de León"
                     width={520} height={520}
                     className="w-full"
-                    style={{ objectFit:"contain", objectPosition:"center bottom", maxHeight:"38vh" }}
+                    style={{ objectFit:"contain", objectPosition:"center bottom", maxHeight:"30vh" }}
                   />
                 </div>
               </div>
@@ -357,7 +357,7 @@ export default function SeedFunnel() {
                 </Headline>
 
                 <Card>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <Row icon="📍">Tu negocio solo llega donde tú llegas. El cliente que no te conoce, no te compra</Row>
                     <Row icon="⏳">Si <strong style={{ color:"#fff" }}>tú</strong> no estás, no hay venta. El negocio para cuando tú paras</Row>
                     <Row icon="📉">Tu competencia ya vende en redes. Tú todavía buscas por dónde empezar</Row>
@@ -365,9 +365,9 @@ export default function SeedFunnel() {
                   </div>
                 </Card>
 
-                <div className="mt-5 rounded-xl border"
-                  style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"16px 18px" }}>
-                  <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65 }}>
+                <div className="mt-3 rounded-xl border"
+                  style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"12px 14px" }}>
+                  <p style={{ color:"#cdd5e0", fontSize:"0.9rem", lineHeight:1.5 }}>
                     <strong style={{ color:"#14C9B8" }}>No necesitas saber de tecnología.</strong> Solo necesitas el método correcto. Eso es lo que vamos a enseñarte.
                   </p>
                 </div>
@@ -382,7 +382,7 @@ export default function SeedFunnel() {
                 </Headline>
 
                 <Card>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <Row icon="📱"><strong style={{ color:"#fff" }}>Redes sociales:</strong> publica para que la gente quiera comprarte, sin necesitar miles de seguidores</Row>
                     <Row icon="🎯"><strong style={{ color:"#fff" }}>Publicidad:</strong> invierte sin tirar dinero y crea anuncios que sí venden</Row>
                     <Row icon="🤖"><strong style={{ color:"#fff" }}>IA:</strong> herramientas concretas que puedes usar esta semana para ahorrarte horas de trabajo</Row>
@@ -400,35 +400,35 @@ export default function SeedFunnel() {
                   Aprende de quienes<br/><span style={{ color:"#14C9B8" }}>ya lo lograron</span>
                 </Headline>
 
-                <div className="space-y-3 mb-5">
+                <div className="space-y-2 mb-3">
                   <Card>
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-3 mb-2">
                       <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
-                        style={{ width:"46px", height:"46px", background:"linear-gradient(135deg,#14C9B8,#0a8a80)", color:"#06080f", fontSize:"15px" }}>
+                        style={{ width:"40px", height:"40px", background:"linear-gradient(135deg,#14C9B8,#0a8a80)", color:"#06080f", fontSize:"14px" }}>
                         JS
                       </div>
                       <div>
-                        <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>Jorge Serratos</p>
-                        <p style={{ color:"#7a8299", fontSize:"13px" }}>Conferencista · Autor Bestseller</p>
+                        <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>Jorge Serratos</p>
+                        <p style={{ color:"#7a8299", fontSize:"12px" }}>Conferencista · Autor Bestseller</p>
                       </div>
                     </div>
-                    <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65 }}>
+                    <p style={{ color:"#9aa3b2", fontSize:"0.875rem", lineHeight:1.5 }}>
                       Fundador del movimiento Sinergéticos y del podcast #1 de negocios en México según Spotify. Más de 100,000 personas han transformado su negocio con su método en México y EE.UU.
                     </p>
                   </Card>
 
                   <Card>
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-3 mb-2">
                       <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
-                        style={{ width:"46px", height:"46px", background:"linear-gradient(135deg,#1e3a5f,#2d6aad)", color:"#7ab3d4", fontSize:"15px" }}>
+                        style={{ width:"40px", height:"40px", background:"linear-gradient(135deg,#1e3a5f,#2d6aad)", color:"#7ab3d4", fontSize:"14px" }}>
                         ML
                       </div>
                       <div>
-                        <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>Manuel de León</p>
-                        <p style={{ color:"#7a8299", fontSize:"13px" }}>Empresario & Conferencista</p>
+                        <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>Manuel de León</p>
+                        <p style={{ color:"#7a8299", fontSize:"12px" }}>Empresario & Conferencista</p>
                       </div>
                     </div>
-                    <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65 }}>
+                    <p style={{ color:"#9aa3b2", fontSize:"0.875rem", lineHeight:1.5 }}>
                       Tomó negocios tradicionales y los llevó a vender en línea. En el seminario te explica cómo lo hizo, sin rodeos.
                     </p>
                   </Card>
@@ -457,27 +457,27 @@ export default function SeedFunnel() {
                   Tu lugar todavía<br/><span style={{ color:"#14C9B8" }}>está disponible</span>
                 </Headline>
 
-                <div className="rounded-xl border mb-5"
-                  style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.22)", padding:"18px 20px" }}>
-                  <div className="flex items-center gap-4">
+                <div className="rounded-xl border mb-3"
+                  style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.22)", padding:"14px 16px" }}>
+                  <div className="flex items-center gap-3">
                     <div className="flex-shrink-0 rounded-xl flex flex-col items-center justify-center"
-                      style={{ width:"54px", height:"54px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
-                      <p style={{ color:"#14C9B8", fontSize:"11px", fontWeight:700, lineHeight:1, textTransform:"uppercase" }}>JUE</p>
-                      <p style={{ color:"#fff", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.25rem", lineHeight:1, marginTop:"2px" }}>8PM</p>
+                      style={{ width:"48px", height:"48px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
+                      <p style={{ color:"#14C9B8", fontSize:"10px", fontWeight:700, lineHeight:1, textTransform:"uppercase" }}>JUE</p>
+                      <p style={{ color:"#fff", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.1rem", lineHeight:1, marginTop:"2px" }}>8PM</p>
                     </div>
                     <div>
-                      <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>{eventDate.formatted}</p>
-                      <p style={{ color:"#7a8299", fontSize:"13px", marginTop:"3px" }}>8:00 PM hora México · En vivo · Gratis</p>
+                      <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>{eventDate.formatted}</p>
+                      <p style={{ color:"#7a8299", fontSize:"12px", marginTop:"2px" }}>8:00 PM hora México · En vivo · Gratis</p>
                     </div>
                   </div>
                 </div>
 
-                <p style={{ color:"#9aa3b2", fontSize:"0.875rem", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"10px" }}>
+                <p style={{ color:"#9aa3b2", fontSize:"0.8rem", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"8px" }}>
                   Cómo funciona
                 </p>
 
                 <Card>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <Row icon="✅">Es <strong style={{ color:"#fff" }}>gratis</strong>. Sin costos ocultos ni sorpresas al final</Row>
                     <Row icon="💻">100% online, entras desde cualquier dispositivo, donde estés</Row>
                     <Row icon="⚡">En vivo con Jorge Serratos. Puedes hacer tus preguntas en el momento</Row>
@@ -494,11 +494,11 @@ export default function SeedFunnel() {
                   Un paso más y<br/>tu lugar queda reservado
                 </Headline>
 
-                <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"20px" }}>
+                <p style={{ color:"#9aa3b2", fontSize:"0.9rem", lineHeight:1.5, marginBottom:"12px" }}>
                   Llena tus datos y listo. Es gratis, sin compromisos.
                 </p>
 
-                <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-3">
                   <div>
                     <label className="block font-semibold uppercase mb-2"
                       style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
@@ -542,10 +542,10 @@ export default function SeedFunnel() {
             {/* ── 6: GRACIAS ─────────────────────────────────────────── */}
             {step === 6 && (
               <div className="text-center">
-                <div className="flex justify-center mb-5">
+                <div className="flex justify-center mb-3">
                   <div className="flex items-center justify-center rounded-full border-2"
-                    style={{ width:"72px", height:"72px", borderColor:"#14C9B8", background:"rgba(20,201,184,0.07)" }}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14C9B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    style={{ width:"56px", height:"56px", borderColor:"#14C9B8", background:"rgba(20,201,184,0.07)" }}>
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14C9B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </div>
@@ -561,15 +561,15 @@ export default function SeedFunnel() {
                   </span>
                 </Headline>
 
-                <p style={{ color:"#9aa3b2", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"20px" }}>
+                <p style={{ color:"#9aa3b2", fontSize:"0.9rem", lineHeight:1.5, marginBottom:"12px" }}>
                   Revisa tu correo y WhatsApp — te confirmamos en los próximos minutos. Si no llega, revisa tu carpeta de spam.
                 </p>
 
                 <Card>
-                  <p style={{ color:"#14C9B8", fontSize:"0.8125rem", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"12px" }}>
+                  <p style={{ color:"#14C9B8", fontSize:"0.75rem", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"10px" }}>
                     Detalles del evento
                   </p>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <Row icon="📅">{eventDate.formatted} · 8:00 PM hora México</Row>
                     <Row icon="💻">Seminario en vivo · 100% online</Row>
                     <Row icon="🎯">Con Jorge Serratos y expertos invitados</Row>
@@ -583,7 +583,7 @@ export default function SeedFunnel() {
       </div>
 
       {/* ── STICKY FOOTER ─────────────────────────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-4 pb-6"
+      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-3 pb-4"
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"700px", margin:"0 auto" }}>
 
