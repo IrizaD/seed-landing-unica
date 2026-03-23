@@ -276,7 +276,7 @@ export default function SeedFunnel() {
       {/* ── STICKY HEADER ─────────────────────────────────────────────────────── */}
       <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-3 pb-2"
         style={{ background:"rgba(6,8,15,0.85)", backdropFilter:"blur(8px)" }}>
-        <div style={{ maxWidth:"700px", margin:"0 auto" }}>
+        <div className="max-w-[700px] md:max-w-none mx-auto md:mx-0">
           <Image
             src="/logo-seed.webp"
             alt="Seminario de Emprendedor a Empresario Digital"
@@ -312,9 +312,13 @@ export default function SeedFunnel() {
         </div>
       </div>
 
+      {/* ── BODY: two-column on desktop ─────────────────────────────────────── */}
+      <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+
       {/* ── SCROLLABLE CONTENT ────────────────────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto relative z-10">
-        <div className="px-5 md:px-12 pt-3 pb-1" style={{ maxWidth:"700px", margin:"0 auto" }}>
+        <div className="px-5 md:px-10 pt-3 pb-1" style={{ maxWidth:"600px", margin:"0 auto" }}>
           <div style={{ opacity:visible?1:0, transform:visible?"translateY(0)":"translateY(14px)", transition:"opacity 0.25s ease, transform 0.25s ease" }}>
 
             {/* ── 0: HOOK ────────────────────────────────────────────── */}
@@ -565,9 +569,9 @@ export default function SeedFunnel() {
       </div>
 
       {/* ── STICKY FOOTER ─────────────────────────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 px-5 md:px-12 pt-3 pb-4"
+      <div className="flex-shrink-0 relative z-10 px-5 md:px-10 pt-3 pb-4"
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
-        <div style={{ maxWidth:"700px", margin:"0 auto" }}>
+        <div style={{ maxWidth:"600px", margin:"0 auto" }}>
 
           {step === 0 && <GhostBtn onClick={() => goToStep(1)}>{COPY.step0.cta}</GhostBtn>}
           {step === 1 && <GhostBtn onClick={() => goToStep(2)}>{COPY.step1.cta}</GhostBtn>}
@@ -610,6 +614,85 @@ export default function SeedFunnel() {
 
         </div>
       </div>
+
+      </div>{/* end left column */}
+
+      {/* ── SIDEBAR (desktop only) ───────────────────────────────────────────── */}
+      <aside className="hidden md:flex flex-col flex-shrink-0 overflow-y-auto border-l relative z-10"
+        style={{ width:"300px", borderColor:"#1a2035", background:"rgba(8,10,18,0.55)", backdropFilter:"blur(12px)", padding:"24px 20px" }}>
+
+        {/* Event card */}
+        <div className="rounded-xl border mb-5" style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.2)", padding:"14px 16px" }}>
+          <p style={{ color:"#14C9B8", fontSize:"0.65rem", fontWeight:700, letterSpacing:"0.18em", textTransform:"uppercase", marginBottom:"10px" }}>
+            Próximo evento
+          </p>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex-shrink-0 rounded-xl flex flex-col items-center justify-center"
+              style={{ width:"44px", height:"44px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
+              <p style={{ color:"#14C9B8", fontSize:"9px", fontWeight:700, lineHeight:1, textTransform:"uppercase" }}>JUE</p>
+              <p style={{ color:"#fff", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"0.95rem", lineHeight:1, marginTop:"2px" }}>8PM</p>
+            </div>
+            <div>
+              <p style={{ color:"#fff", fontWeight:700, fontSize:"0.8125rem" }}>{eventDate.formatted}</p>
+              <p style={{ color:"#7a8299", fontSize:"11px", marginTop:"2px" }}>{COPY.step4.eventTime}</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {["En vivo", "100% Online", "Gratis"].map((tag) => (
+              <span key={tag} className="rounded-full" style={{ background:"rgba(20,201,184,0.1)", border:"1px solid rgba(20,201,184,0.2)", color:"#14C9B8", fontSize:"10px", fontWeight:700, padding:"3px 9px", letterSpacing:"0.04em" }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Speakers */}
+        <p style={{ color:"#7a8299", fontSize:"0.65rem", fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", marginBottom:"8px" }}>
+          Ponentes
+        </p>
+        <div className="flex flex-col gap-2 mb-5">
+          {COPY.step3.speakers.map((s, i) => (
+            <div key={s.initials} className="flex items-center gap-3 rounded-xl p-3" style={{ background:"rgba(255,255,255,0.03)", border:"1px solid #1a2035" }}>
+              <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
+                style={{ width:"34px", height:"34px", fontSize:"11px",
+                  background: i === 0 ? "linear-gradient(135deg,#14C9B8,#0a8a80)" : "linear-gradient(135deg,#1e3a5f,#2d6aad)",
+                  color: i === 0 ? "#06080f" : "#7ab3d4" }}>
+                {s.initials}
+              </div>
+              <div>
+                <p style={{ color:"#fff", fontWeight:700, fontSize:"0.8125rem" }}>{s.name}</p>
+                <p style={{ color:"#7a8299", fontSize:"11px" }}>{s.title}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-2 mb-5">
+          {COPY.step3.stats.map((s) => (
+            <div key={s.number} className="text-center rounded-xl border py-3" style={{ background:"#0d1117", borderColor:"#1e2535" }}>
+              <p style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.15rem" }}>{s.number}</p>
+              <p style={{ color:"#7a8299", fontSize:"10px", marginTop:"2px", lineHeight:1.3 }}>{s.label}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* How it works */}
+        <p style={{ color:"#7a8299", fontSize:"0.65rem", fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", marginBottom:"8px" }}>
+          {COPY.step4.howItWorksLabel}
+        </p>
+        <div className="flex flex-col gap-2.5">
+          {COPY.step4.rows.map((r) => (
+            <div key={r.icon} className="flex items-start gap-2" style={{ fontSize:"0.8rem", color:"#9aa3b2", lineHeight:1.45 }}>
+              <span style={{ fontSize:"0.875rem", flexShrink:0, marginTop:"1px" }}>{r.icon}</span>
+              <span>{r.text}</span>
+            </div>
+          ))}
+        </div>
+
+      </aside>
+
+      </div>{/* end body */}
 
     </div>
   );
