@@ -284,19 +284,9 @@ export default function SeedFunnel() {
             style={{ objectFit:"contain", objectPosition:"left" }}
             priority
           />
-          {showBar && (
-            <div className="flex items-center justify-between mt-3">
-              <button type="button" onClick={() => goToStep(step - 1)}
-                className="flex items-center gap-2 rounded-lg transition-all duration-200 focus:outline-none font-semibold"
-                style={{ color:"#9aa3b2", background:"none", border:"none", padding:"10px 0", fontSize:"0.875rem" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#14C9B8")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#9aa3b2")}
-                aria-label="Paso anterior">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                {COPY.header.backLabel}
-              </button>
+          {/* Acceso rápido al registro en pasos intermedios */}
+          {step >= 1 && step <= 4 && (
+            <div className="flex justify-end mt-2">
               <button type="button" onClick={() => goToStep(5)}
                 className="font-bold rounded-full transition-all duration-200 active:scale-[0.97] flex items-center gap-1.5"
                 style={{ background:"#14C9B8", color:"#06080f", padding:"7px 14px 7px 16px", fontSize:"0.8rem",
@@ -306,6 +296,21 @@ export default function SeedFunnel() {
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#14C9B8"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.35)"; }}>
                 {COPY.header.ctaLabel}
                 <span style={{ background:"rgba(0,0,0,0.15)", borderRadius:"999px", padding:"2px 6px", fontSize:"0.7rem" }}>→</span>
+              </button>
+            </div>
+          )}
+          {/* Botón volver en el formulario */}
+          {step === 5 && (
+            <div className="flex items-center mt-2">
+              <button type="button" onClick={() => goToStep(4)}
+                className="flex items-center gap-1.5 transition-all duration-200 font-semibold"
+                style={{ color:"#9aa3b2", background:"none", border:"none", padding:"8px 0", fontSize:"0.875rem", cursor:"pointer" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#14C9B8")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#9aa3b2")}>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                {COPY.header.backLabel}
               </button>
             </div>
           )}
@@ -569,11 +574,62 @@ export default function SeedFunnel() {
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"900px", margin:"0 auto" }}>
 
-          {step === 0 && <GhostBtn onClick={() => goToStep(1)}>{COPY.step0.cta}</GhostBtn>}
-          {step === 1 && <GhostBtn onClick={() => goToStep(2)}>{COPY.step1.cta}</GhostBtn>}
-          {step === 2 && <GhostBtn onClick={() => goToStep(3)}>{COPY.step2.cta}</GhostBtn>}
-          {step === 3 && <GhostBtn onClick={() => goToStep(4)}>{COPY.step3.cta}</GhostBtn>}
-          {step === 4 && <GhostBtn onClick={() => goToStep(5)}>{COPY.step4.cta}</GhostBtn>}
+          {step >= 0 && step <= 4 && (
+            <div className="flex flex-col gap-2.5">
+
+              {/* Navegación entre pasos */}
+              <div className="flex items-center justify-between">
+
+                {/* ← Anterior */}
+                <button type="button"
+                  onClick={() => goToStep(step - 1)}
+                  disabled={step === 0}
+                  className="flex items-center gap-1.5 rounded-lg transition-all duration-200 font-semibold select-none"
+                  style={{ color: step === 0 ? "rgba(154,163,178,0.25)" : "#9aa3b2", background:"none", border:"none",
+                    padding:"8px 0", fontSize:"0.875rem", cursor: step === 0 ? "default" : "pointer" }}
+                  onMouseEnter={(e) => { if (step > 0) (e.currentTarget as HTMLElement).style.color = "#14C9B8"; }}
+                  onMouseLeave={(e) => { if (step > 0) (e.currentTarget as HTMLElement).style.color = "#9aa3b2"; }}>
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  Anterior
+                </button>
+
+                {/* Puntos de progreso — clicables */}
+                <div className="flex items-center gap-2" role="tablist" aria-label="Pasos del seminario">
+                  {[0,1,2,3,4].map((i) => (
+                    <button key={i} type="button" role="tab"
+                      aria-selected={i === step}
+                      aria-label={`Paso ${i + 1} de 5`}
+                      onClick={() => goToStep(i)}
+                      className="rounded-full transition-all duration-300"
+                      style={{ width: i === step ? "22px" : "7px", height:"7px",
+                        background: i === step ? "#14C9B8" : "#2a3347",
+                        border:"none", padding:0, cursor:"pointer", flexShrink:0 }}/>
+                  ))}
+                </div>
+
+                {/* Siguiente → */}
+                <button type="button"
+                  onClick={() => goToStep(step + 1)}
+                  className="flex items-center gap-1.5 rounded-lg transition-all duration-200 font-semibold select-none"
+                  style={{ color:"#9aa3b2", background:"none", border:"none",
+                    padding:"8px 0", fontSize:"0.875rem", cursor:"pointer" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#14C9B8")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#9aa3b2")}>
+                  Siguiente
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+
+              </div>
+
+              {/* Botón principal de registro */}
+              <TealBtn onClick={() => goToStep(5)}>{COPY.step4.cta}</TealBtn>
+
+            </div>
+          )}
 
 
           {step === 5 && (
