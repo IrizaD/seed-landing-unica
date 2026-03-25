@@ -12,9 +12,9 @@ export const COPY = {
 
   // ── STEP 0: HOOK ──────────────────────────────────────────────────────────
   step0: {
-    headlineLine1: "Aprende a vender",
-    headlineLine2: "por internet",           // se muestra en teal e itálica
-    body: "Aprende a vender más con redes sociales, publicidad e IA. Aunque nunca hayas vendido por internet.",
+    headlineLine1: "Vende en digital",
+    headlineLine2: "sin ser experto en tecnología",           // se muestra en teal e itálica
+    body: "Redes sociales, publicidad e IA para escalar tu negocio — aunque nunca hayas vendido por internet.",
     imageAlt: "Jorge Serratos y Manuel de León",
     cta: "QUIERO SABER MÁS →",
   },
@@ -24,13 +24,13 @@ export const COPY = {
     headlineLine1: "Tu negocio podría",
     headlineLine2: "quedarse obsoleto",
     rows: [
-      { icon: "📍", text: "Tu negocio solo llega donde tú llegas. El cliente que no te conoce, no te compra" },
-      { icon: "⏳", text: "Si tú no estás, no hay venta. El negocio para cuando tú paras" },
-      { icon: "📉", text: "Tu competencia ya vende en redes. Tú todavía buscas por dónde empezar" },
-      { icon: "😰", text: "Ya lo intentaste. Sin el método correcto, el mundo digital se siente imposible" },
+      { icon: "📍", text: "Tu negocio solo llega donde tú llegas" },
+      { icon: "⏳", text: "El negocio para cuando tú paras" },
+      { icon: "📉", text: "Tu competencia ya vende en redes mientras tú buscas por dónde empezar" },
+      { icon: "😰", text: "Sin el método correcto, el mundo digital se siente imposible" },
     ],
     calloutBold: "No necesitas saber de tecnología.",
-    calloutBody: " Solo necesitas el método correcto. Eso es lo que vamos a enseñarte.",
+    calloutBody: " Solo necesitas el método correcto.",
     cta: "VER LA SOLUCIÓN →",
   },
 
@@ -41,9 +41,9 @@ export const COPY = {
     rows: [
       { icon: "📱", label: "Redes sociales:", text: " publica para que la gente quiera comprarte, sin necesitar miles de seguidores" },
       { icon: "🎯", label: "Publicidad:",     text: " invierte sin tirar dinero y crea anuncios que sí venden" },
-      { icon: "🤖", label: "IA:",             text: " herramientas concretas que puedes usar esta semana para ahorrarte horas de trabajo" },
+      { icon: "🤖", label: "IA:",             text: " herramientas que puedes usar esta semana para ahorrarte horas" },
       { icon: "🌐", label: "Escala:",         text: " vende fuera de tu ciudad sin moverte de donde estás" },
-      { icon: "🤝", label: "Networking:",     text: " entra a una red de empresarios donde 1+1 vale 3, la filosofía Sinergéticos" },
+      { icon: "🤝", label: "Networking:",     text: " entra a una red de empresarios que van en la misma dirección" },
     ],
     cta: "¿QUIÉNES LO IMPARTEN? →",
   },
@@ -57,7 +57,7 @@ export const COPY = {
         initials: "JS",
         name: "Jorge Serratos",
         title: "Conferencista · Autor Bestseller",
-        bio: "Fundador del movimiento Sinergéticos y del podcast #1 de negocios en México según Spotify. Más de 100,000 personas han transformado su negocio con su método en México y EE.UU.",
+        bio: "Fundador de Sinergéticos y del podcast #1 de negocios en México según Spotify. Más de 100K emprendedores en México y EE.UU. han transformado su negocio con su método.",
       },
       {
         initials: "ML",
@@ -81,10 +81,10 @@ export const COPY = {
     eventTime: "8:00 PM hora México · En vivo · Gratis",
     howItWorksLabel: "Cómo funciona",
     rows: [
-      { icon: "✅", text: "Es gratis. Sin costos ocultos ni sorpresas al final", boldWord: "gratis" },
-      { icon: "💻", text: "100% online, entras desde cualquier dispositivo, donde estés" },
-      { icon: "⚡", text: "En vivo con Jorge Serratos. Puedes hacer tus preguntas en el momento" },
-      { icon: "🎯", text: "Los lugares son limitados y se asignan por orden de registro" },
+      { icon: "✅", text: "Gratis. Sin costos ocultos ni sorpresas.", boldWord: "Gratis" },
+      { icon: "💻", text: "100% online, desde cualquier dispositivo" },
+      { icon: "⚡", text: "En vivo — puedes preguntar directamente a Jorge y Manuel" },
+      { icon: "🎯", text: "Los lugares se asignan por orden de registro" },
     ],
     cta: "QUIERO MI LUGAR GRATIS →",
   },
@@ -115,7 +115,7 @@ export const COPY = {
     rows: [
       { icon: "📅", text: "· 8:00 PM hora México" },   // la fecha se añade dinámicamente antes del texto
       { icon: "💻", text: "Seminario en vivo · 100% online" },
-      { icon: "🎯", text: "Con Jorge Serratos y expertos invitados" },
+      { icon: "🎯", text: "Con Jorge Serratos y Manuel de León" },
     ],
   },
 
