@@ -55,14 +55,14 @@ export const COPY = {
     speakers: [
       {
         initials: "JS",
-        photo: "/jorge.jpg",
+        photo: "/jorge.webp",
         name: "Jorge Serratos",
         title: "Conferencista · Autor Bestseller",
         bio: "Creó el movimiento Sinergéticos y el podcast #1 de negocios en México según Spotify. Más de 100K emprendedores en México y EE.UU. ya transformaron su negocio con su método.",
       },
       {
         initials: "ML",
-        photo: "/manuel.jpg",
+        photo: "/manuel.webp",
         name: "Manuel de León",
         title: "Empresario & Conferencista",
         bio: "Llevó sus propios negocios del mundo físico al digital y documentó exactamente cómo lo hizo. En el seminario comparte ese proceso, paso a paso.",
