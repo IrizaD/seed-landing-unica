@@ -10,48 +10,48 @@ export const COPY = {
     backLabel: "Atrás",
   },
 
-  // ── STEP 0: HOOK ──────────────────────────────────────────────────────────
+  // ── STEP 0: HOOK — promesa (After del BAB) ────────────────────────────────
   step0: {
-    headlineLine1: "Vende en digital",
-    headlineLine2: "sin ser experto en tecnología",           // se muestra en teal e itálica
-    body: "Redes sociales, publicidad e IA para escalar tu negocio — aunque nunca hayas vendido por internet.",
+    headlineLine1: "Aprende a vender",
+    headlineLine2: "por internet",           // se muestra en teal e itálica
+    body: "Jorge Serratos y Manuel de León te enseñan cómo hacerlo con redes sociales, publicidad e IA — en un seminario gratuito y en vivo.",
     imageAlt: "Jorge Serratos y Manuel de León",
-    cta: "QUIERO SABER MÁS →",
+    cta: "QUIERO VER CÓMO →",
   },
 
-  // ── STEP 1: EL PROBLEMA ───────────────────────────────────────────────────
+  // ── STEP 1: EL PROBLEMA — dolor (Before del BAB) ──────────────────────────
   step1: {
-    headlineLine1: "Tu negocio podría",
-    headlineLine2: "quedarse obsoleto",
+    headlineLine1: "El problema",
+    headlineLine2: "no es el esfuerzo",
     rows: [
-      { icon: "📍", text: "Tu negocio solo llega donde tú llegas" },
-      { icon: "⏳", text: "El negocio para cuando tú paras" },
-      { icon: "📉", text: "Tu competencia ya vende en redes mientras tú buscas por dónde empezar" },
-      { icon: "😰", text: "Sin el método correcto, el mundo digital se siente imposible" },
+      { icon: "📍", text: "Solo vendes a quien ya te conoce" },
+      { icon: "⏳", text: "El día que no trabajas, no entra dinero" },
+      { icon: "📉", text: "Tu competencia ya vende en redes mientras tú todavía buscas cómo empezar" },
+      { icon: "😰", text: "Lo intentaste solo y no funcionó como esperabas" },
     ],
-    calloutBold: "No necesitas saber de tecnología.",
-    calloutBody: " Solo necesitas el método correcto.",
+    calloutBold: "No es falta de esfuerzo.",
+    calloutBody: " Es falta del método correcto.",
     cta: "VER LA SOLUCIÓN →",
   },
 
-  // ── STEP 2: LO QUE VAN A APRENDER ────────────────────────────────────────
+  // ── STEP 2: LO QUE VAN A APRENDER — puente (Bridge del BAB) ───────────────
   step2: {
     headlineLine1: "Lo que vas a aprender",
     headlineLine2: "en el seminario",
     rows: [
-      { icon: "📱", label: "Redes sociales:", text: " publica para que la gente quiera comprarte, sin necesitar miles de seguidores" },
-      { icon: "🎯", label: "Publicidad:",     text: " invierte sin tirar dinero y crea anuncios que sí venden" },
-      { icon: "🤖", label: "IA:",             text: " herramientas que puedes usar esta semana para ahorrarte horas" },
-      { icon: "🌐", label: "Escala:",         text: " vende fuera de tu ciudad sin moverte de donde estás" },
-      { icon: "🤝", label: "Networking:",     text: " entra a una red de empresarios que van en la misma dirección" },
+      { icon: "📱", label: "Redes sociales:", text: " publica contenido que vende, sin necesitar miles de seguidores" },
+      { icon: "🎯", label: "Publicidad:",     text: " anuncios que generan clientes reales, no solo likes" },
+      { icon: "🤖", label: "IA:",             text: " herramientas que te ahorran horas de trabajo desde esta semana" },
+      { icon: "🌐", label: "Escala:",         text: " llega a clientes en cualquier ciudad sin moverte de donde estás" },
+      { icon: "🤝", label: "Networking:",     text: " conéctate con emprendedores que van en la misma dirección" },
     ],
     cta: "¿QUIÉNES LO IMPARTEN? →",
   },
 
-  // ── STEP 3: CREDIBILIDAD ──────────────────────────────────────────────────
+  // ── STEP 3: CREDIBILIDAD — autoridad (refuerza el Bridge) ─────────────────
   step3: {
-    headlineLine1: "Aprende de quienes",
-    headlineLine2: "ya lo lograron",         // se muestra en teal
+    headlineLine1: "Los que ya lo hicieron",
+    headlineLine2: "te enseñan cómo",        // se muestra en teal
     speakers: [
       {
         initials: "JS",
@@ -71,10 +71,10 @@ export const COPY = {
       { number: "#1",    label: "podcast de negocios" },
       { number: "100%",  label: "en vivo y gratis" },
     ],
-    cta: "VER FECHA Y HORA →",
+    cta: "VER CUÁNDO ES →",
   },
 
-  // ── STEP 4: FECHA / URGENCIA ──────────────────────────────────────────────
+  // ── STEP 4: FECHA / URGENCIA — acción ─────────────────────────────────────
   step4: {
     headlineLine1: "Tu lugar todavía",
     headlineLine2: "está disponible",        // se muestra en teal
@@ -82,14 +82,14 @@ export const COPY = {
     howItWorksLabel: "Cómo funciona",
     rows: [
       { icon: "✅", text: "Gratis. Sin costos ocultos ni sorpresas.", boldWord: "Gratis" },
-      { icon: "💻", text: "100% online, desde cualquier dispositivo" },
-      { icon: "⚡", text: "En vivo — puedes preguntar directamente a Jorge y Manuel" },
-      { icon: "🎯", text: "Los lugares se asignan por orden de registro" },
+      { icon: "💻", text: "100% en línea, desde donde estés" },
+      { icon: "⚡", text: "En vivo — pregúntale directamente a Jorge y Manuel" },
+      { icon: "🎯", text: "Los lugares se asignan por orden de llegada" },
     ],
-    cta: "QUIERO MI LUGAR GRATIS →",
+    cta: "QUIERO MI LUGAR →",
   },
 
-  // ── STEP 5: FORMULARIO ────────────────────────────────────────────────────
+  // ── STEP 5: FORMULARIO — conversión ───────────────────────────────────────
   step5: {
     headlineLine1: "Un paso más y",
     headlineLine2: "tu lugar queda reservado",
@@ -101,16 +101,16 @@ export const COPY = {
       emailLabel: "Correo electrónico",
       emailPlaceholder: "tu@correo.com",
     },
-    cta: "¡RESERVAR MI LUGAR GRATIS →",
+    cta: "RESERVAR MI LUGAR GRATIS →",
     ctaLoading: "RESERVANDO...",
     disclaimer: "Sin spam. Solo información relevante del evento.",
   },
 
-  // ── STEP 6: GRACIAS ───────────────────────────────────────────────────────
+  // ── STEP 6: GRACIAS — cierre emocional ────────────────────────────────────
   step6: {
-    badge: "¡Registro confirmado!",
+    badge: "¡Ya estás dentro!",
     headlineLine1: "Tu lugar está reservado,",  // se añade el nombre del usuario al final
-    body: "Revisa tu correo y WhatsApp — te confirmamos en los próximos minutos. Si no llega, revisa tu carpeta de spam.",
+    body: "Revisa tu correo y WhatsApp — te enviamos la confirmación en los próximos minutos. Si no llega, revisa tu carpeta de spam.",
     detailsLabel: "Detalles del evento",
     rows: [
       { icon: "📅", text: "· 8:00 PM hora México" },   // la fecha se añade dinámicamente antes del texto
