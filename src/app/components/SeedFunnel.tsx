@@ -425,8 +425,8 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}>
-        <div className="px-14 md:px-24 pt-3 pb-1 md:pt-8" style={{ maxWidth:"900px", margin:"0 auto" }}>
-          <div ref={contentRef} style={{ willChange:"transform" }}>
+        <div className="px-14 md:px-24 pt-3 md:pt-8 min-h-full flex flex-col" style={{ maxWidth:"900px", margin:"0 auto" }}>
+          <div ref={contentRef} className="flex-1" style={{ willChange:"transform" }}>
 
             {/* ── 0: HOOK ────────────────────────────────────────────── */}
             {step === 0 && (
@@ -674,9 +674,9 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
 
           </div>
 
-          {/* ── CTA pasos 0-4: fluye con el contenido ── */}
+          {/* ── CTA pasos 0-4: anclado al fondo del área ── */}
           {step >= 0 && step <= 4 && (
-            <div className="flex flex-col gap-2 mt-4 pb-6">
+            <div className="flex flex-col gap-2 mt-4 pb-4">
               <button onClick={() => goToStep(5, true)}
                 className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
                 style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
