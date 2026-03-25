@@ -21,6 +21,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
     }
 
+    // Geo + User Agent (Vercel headers)
+    const user_agent = req.headers.get("user-agent") ?? "";
+    const ip_country = req.headers.get("x-vercel-ip-country") ?? "";
+    const ip_city    = req.headers.get("x-vercel-ip-city")    ?? "";
+    const ip_region  = req.headers.get("x-vercel-ip-country-region") ?? "";
+
     // 1. Guardar en Supabase
     const { error } = await supabaseAdmin.from("registros").insert({
       funnel_slug,
@@ -33,6 +39,10 @@ export async function POST(req: NextRequest) {
       utm_campaign,
       utm_content,
       utm_term,
+      user_agent,
+      ip_country,
+      ip_city,
+      ip_region,
     });
 
     if (error) throw error;

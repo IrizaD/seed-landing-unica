@@ -18,6 +18,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
     }
 
+    const ip_country = req.headers.get("x-vercel-ip-country") ?? "";
+
     const { error } = await supabaseAdmin.from("eventos").insert({
       funnel_slug,
       session_id,
@@ -26,6 +28,7 @@ export async function POST(req: NextRequest) {
       utm_source,
       utm_medium,
       utm_campaign,
+      ip_country,
     });
 
     if (error) throw error;

@@ -33,6 +33,9 @@ interface Registro {
   utm_source: string;
   utm_medium: string;
   utm_campaign: string;
+  ip_country: string;
+  ip_city: string;
+  user_agent: string;
   created_at: string;
 }
 
@@ -192,9 +195,9 @@ function SeccionLeads({ slug }: { slug: string }) {
   );
 
   function exportCsv() {
-    const header = "Nombre,Email,Teléfono,Paso,Fuente,Medio,Campaña,Fecha";
+    const header = "Nombre,Email,Teléfono,Paso,Fuente,Medio,Campaña,País,Ciudad,User Agent,Fecha";
     const rows = filtered.map((l) =>
-      [l.nombre, l.email, l.telefono, l.desde_slide, l.utm_source, l.utm_medium, l.utm_campaign, fmt(l.created_at)]
+      [l.nombre, l.email, l.telefono, l.desde_slide, l.utm_source, l.utm_medium, l.utm_campaign, l.ip_country, l.ip_city, l.user_agent, fmt(l.created_at)]
         .map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`)
         .join(",")
     );
@@ -231,7 +234,7 @@ function SeccionLeads({ slug }: { slug: string }) {
           <table style={{ width:"100%", borderCollapse:"collapse", fontSize:"14px" }}>
             <thead>
               <tr style={{ borderBottom:"1px solid #1e2535" }}>
-                {["Nombre","Email","Teléfono","Paso","Fuente","Fecha"].map((h) => (
+                {["Nombre","Email","Teléfono","Paso","Fuente","País","Ciudad","Fecha"].map((h) => (
                   <th key={h} style={{ color:"#7a8299", fontWeight:600, padding:"10px 12px", textAlign:"left", whiteSpace:"nowrap" }}>{h}</th>
                 ))}
               </tr>
@@ -246,6 +249,8 @@ function SeccionLeads({ slug }: { slug: string }) {
                   <td style={{ color:"#cdd5e0", padding:"10px 12px" }}>{l.telefono}</td>
                   <td style={{ color:"#14C9B8", padding:"10px 12px", textAlign:"center" }}>P{l.desde_slide}</td>
                   <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.utm_source || "—"}</td>
+                  <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.ip_country || "—"}</td>
+                  <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.ip_city || "—"}</td>
                   <td style={{ color:"#9aa3b2", padding:"10px 12px", whiteSpace:"nowrap" }}>{fmt(l.created_at)}</td>
                 </tr>
               ))}
