@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { COPY } from "@/app/content/funnel-copy";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -249,6 +250,9 @@ export default function SeedFunnel() {
   const touchStartX = useRef<number>(0);
   const isDragging  = useRef(false);
   const arrowTimer  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const desdeSlide  = useRef(0); // slide donde el usuario hizo clic en "Registrarme ahora"
+
+  const { trackStep, trackCta, submitRegistro } = useAnalytics("seed-mexico");
 
   function flashArrows() {
     setShowArrows(true);
@@ -258,13 +262,23 @@ export default function SeedFunnel() {
 
   useEffect(() => {
     setForm((p) => ({ ...p, dialCode: detectDialCode() }));
+    // Deep linking: ?step=X
+    const params = new URLSearchParams(window.location.search);
+    const stepParam = parseInt(params.get("step") ?? "0", 10);
+    if (!isNaN(stepParam) && stepParam >= 0 && stepParam <= 5) {
+      setStep(stepParam);
+    }
     flashArrows();
   }, []);
 
-  function goToStep(n: number) {
+  function goToStep(n: number, fromCta = false) {
     if (isAnimating) return;
+    if (fromCta) {
+      desdeSlide.current = step;
+      trackCta(step);
+    }
     const el = contentRef.current;
-    if (!el) { setStep(n); return; }
+    if (!el) { setStep(n); trackStep(n); return; }
     const dir = n >= step ? "left" : "right";
     const w = window.innerWidth;
     setIsAnimating(true);
@@ -274,6 +288,7 @@ export default function SeedFunnel() {
       el.style.transition = "none";
       el.style.transform  = `translateX(${dir === "left" ? w : -w}px)`;
       setStep(n);
+      trackStep(n);
       requestAnimationFrame(() => requestAnimationFrame(() => {
         el.style.transition = "transform 0.32s cubic-bezier(0.4,0,0.2,1)";
         el.style.transform  = "translateX(0)";
@@ -316,8 +331,19 @@ export default function SeedFunnel() {
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    goToStep(6);
+    const ok = await submitRegistro({
+      nombre: form.nombre,
+      email:  form.email,
+      telefono: `${form.dialCode} ${form.phone}`,
+      desde_slide: desdeSlide.current,
+    });
+    if (ok) {
+      goToStep(6);
+    } else {
+      // Continuar de todas formas (no bloquear al usuario por error de red)
+      goToStep(6);
+    }
+    setSubmitting(false);
   }
 
   const showBar = step >= 1 && step <= 5;
@@ -661,7 +687,7 @@ export default function SeedFunnel() {
 
           {step >= 0 && step <= 4 && (
             <div className="flex flex-col gap-2">
-              <TealBtn onClick={() => goToStep(5)}>REGISTRARME AHORA →</TealBtn>
+              <TealBtn onClick={() => goToStep(5, true)}>REGISTRARME AHORA →</TealBtn>
               <div style={{ maxHeight: showArrows ? "2rem" : "0", overflow:"hidden",
                 opacity: showArrows ? 1 : 0, transition:"max-height 0.6s ease, opacity 0.5s ease" }}>
                 <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
