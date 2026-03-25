@@ -409,11 +409,9 @@ export default function SeedFunnel() {
             {step === 0 && (
               <div>
                 <h1 className="uppercase mb-2 md:mb-4"
-                  style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.1,
+                  style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.15,
                     fontSize:"clamp(1.5rem, 5vw, 4rem)", color:"#fff", letterSpacing:"-0.02em" }}>
-                  {COPY.step0.headlineLine1}
-                  <br/>
-                  <span style={{ color:"#14C9B8", fontStyle:"italic" }}>{COPY.step0.headlineLine2}</span>
+                  {COPY.step0.headlineLine1} <span style={{ color:"#14C9B8", fontStyle:"italic" }}>{COPY.step0.headlineLine2}</span>
                 </h1>
 
                 <div className="mb-3" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
@@ -442,7 +440,7 @@ export default function SeedFunnel() {
             {step === 1 && (
               <div>
                 <Headline>
-                  {COPY.step1.headlineLine1}<br/>{COPY.step1.headlineLine2}
+                  {COPY.step1.headlineLine1} <span style={{ color:"#14C9B8" }}>{COPY.step1.headlineLine2}</span>
                 </Headline>
 
                 <Card>
@@ -466,7 +464,7 @@ export default function SeedFunnel() {
             {step === 2 && (
               <div>
                 <Headline>
-                  {COPY.step2.headlineLine1}<br/>{COPY.step2.headlineLine2}
+                  {COPY.step2.headlineLine1} <span style={{ color:"#14C9B8" }}>{COPY.step2.headlineLine2}</span>
                 </Headline>
 
                 <Card>
@@ -485,7 +483,7 @@ export default function SeedFunnel() {
             {step === 3 && (
               <div>
                 <Headline>
-                  {COPY.step3.headlineLine1}<br/><span style={{ color:"#14C9B8" }}>{COPY.step3.headlineLine2}</span>
+                  {COPY.step3.headlineLine1} <span style={{ color:"#14C9B8" }}>{COPY.step3.headlineLine2}</span>
                 </Headline>
 
                 <div className="space-y-2 mb-3">
@@ -524,7 +522,7 @@ export default function SeedFunnel() {
             {step === 4 && (
               <div>
                 <Headline>
-                  {COPY.step4.headlineLine1}<br/><span style={{ color:"#14C9B8" }}>{COPY.step4.headlineLine2}</span>
+                  {COPY.step4.headlineLine1} <span style={{ color:"#14C9B8" }}>{COPY.step4.headlineLine2}</span>
                 </Headline>
 
                 <div className="rounded-xl border mb-3"
@@ -560,7 +558,7 @@ export default function SeedFunnel() {
             {step === 5 && (
               <div>
                 <Headline>
-                  {COPY.step5.headlineLine1}<br/>{COPY.step5.headlineLine2}
+                  {COPY.step5.headlineLine1} <span style={{ color:"#14C9B8" }}>{COPY.step5.headlineLine2}</span>
                 </Headline>
 
                 <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"16px" }}>
@@ -663,13 +661,7 @@ export default function SeedFunnel() {
 
           {step >= 0 && step <= 4 && (
             <div className="flex flex-col gap-2">
-              <TealBtn onClick={() => goToStep(5)}>
-                {step === 0 ? COPY.step0.cta :
-                 step === 1 ? COPY.step1.cta :
-                 step === 2 ? COPY.step2.cta :
-                 step === 3 ? COPY.step3.cta :
-                 COPY.step4.cta}
-              </TealBtn>
+              <TealBtn onClick={() => goToStep(5)}>REGISTRARME AHORA →</TealBtn>
               <div style={{ maxHeight: showArrows ? "2rem" : "0", overflow:"hidden",
                 opacity: showArrows ? 1 : 0, transition:"max-height 0.6s ease, opacity 0.5s ease" }}>
                 <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>

@@ -91,9 +91,9 @@ export const COPY = {
 
   // ── STEP 5: FORMULARIO ────────────────────────────────────────────────────
   step5: {
-    headlineLine1: "Tu lugar",
-    headlineLine2: "a un paso",
-    body: "Llena tus datos y tu lugar queda reservado. Es gratis.",
+    headlineLine1: "Danos tus datos",
+    headlineLine2: "y reserva tu lugar gratis",
+    body: "Llena el formulario y tu lugar queda confirmado al instante. Sin costos, sin compromisos.",
     form: {
       nameLabel: "Nombre completo",
       namePlaceholder: "Tu nombre completo",
