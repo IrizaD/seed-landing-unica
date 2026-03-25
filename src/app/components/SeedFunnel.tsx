@@ -401,7 +401,7 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
               border:"none", color:"#fff", cursor:"pointer",
               textShadow:"0 1px 4px rgba(0,0,0,0.4)" }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M10 3L5 8l5 5" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         )}
@@ -415,7 +415,7 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
               border:"none", color:"#fff", cursor:"pointer",
               textShadow:"0 1px 4px rgba(0,0,0,0.4)" }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M6 3l5 5-5 5" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         )}
