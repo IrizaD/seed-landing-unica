@@ -425,8 +425,8 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}>
-        <div className="px-14 md:px-24 pt-3 md:pt-8 min-h-full flex flex-col" style={{ maxWidth:"900px", margin:"0 auto" }}>
-          <div ref={contentRef} className="flex-1" style={{ willChange:"transform" }}>
+        <div className="px-14 md:px-24 pt-3 pb-1 md:pt-8" style={{ maxWidth:"900px", margin:"0 auto" }}>
+          <div ref={contentRef} style={{ willChange:"transform" }}>
 
             {/* ── 0: HOOK ────────────────────────────────────────────── */}
             {step === 0 && (
@@ -452,7 +452,7 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
                     src="/manujorge.png"
                     alt={COPY.step0.imageAlt}
                     width={520} height={520}
-                    className="w-full max-h-[30vh] md:max-h-[58vh]"
+                    className="w-full max-h-[30vh] md:max-h-[38vh]"
                     style={{ objectFit:"contain", objectPosition:"center bottom" }}
                   />
                 </div>
@@ -673,10 +673,17 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
             )}
 
           </div>
+        </div>
+        </div>
+      </div>
 
-          {/* ── CTA pasos 0-4: anclado al fondo del área ── */}
+      {/* ── STICKY FOOTER ─────────────────────────────────────────────────────── */}
+      <div className="flex-shrink-0 relative z-10 pt-2 pb-3"
+        style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
+        <div className="px-14 md:px-24" style={{ maxWidth:"900px", margin:"0 auto" }}>
+
           {step >= 0 && step <= 4 && (
-            <div className="flex flex-col gap-2 mt-4 pb-4">
+            <div className="flex flex-col gap-2">
               <button onClick={() => goToStep(5, true)}
                 className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
                 style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
@@ -686,20 +693,14 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
                   textShadow:"0 2px 6px rgba(0,0,0,0.45)" }}>
                 REGISTRARME AHORA →
               </button>
-              <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
-                Paso {step + 1} de 5
-              </p>
+              <div style={{ maxHeight: showArrows ? "2rem" : "0", overflow:"hidden",
+                opacity: showArrows ? 1 : 0, transition:"max-height 0.6s ease, opacity 0.5s ease" }}>
+                <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
+                  Paso {step + 1} de 5
+                </p>
+              </div>
             </div>
           )}
-
-        </div>
-        </div>
-      </div>
-
-      {/* ── STICKY FOOTER — solo pasos 5 y 6 ──────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 pt-2 pb-3"
-        style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
-        <div className="px-14 md:px-24" style={{ maxWidth:"900px", margin:"0 auto" }}>
 
 
 
