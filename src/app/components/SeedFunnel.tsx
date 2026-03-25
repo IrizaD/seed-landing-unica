@@ -367,6 +367,7 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
             src="/logo-seed.webp"
             alt="Seminario de Emprendedor a Empresario Digital"
             width={220} height={53}
+            className="w-[150px] md:w-[220px]"
             style={{ objectFit:"contain", objectPosition:"left" }}
             priority
           />
