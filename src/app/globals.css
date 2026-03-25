@@ -83,3 +83,11 @@ select option {
 .animate-cta-pulse {
   animation: cta-pulse 1.8s ease-in-out infinite;
 }
+
+@keyframes cta-pulse-teal {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(20,201,184,0.6), 0 6px 30px rgba(20,201,184,0.3); transform: scale(1); }
+  50%       { box-shadow: 0 0 0 12px rgba(20,201,184,0), 0 6px 40px rgba(20,201,184,0.55); transform: scale(1.02); }
+}
+.animate-cta-pulse-teal {
+  animation: cta-pulse-teal 1.8s ease-in-out infinite;
+}

@@ -165,7 +165,7 @@ function TealBtn({ children, onClick, type = "button", form, disabled }: {
 }) {
   return (
     <button type={type} form={form} onClick={onClick} disabled={disabled}
-      className={`w-full rounded-xl active:scale-[0.98] ${disabled ? "" : "animate-cta-pulse"}`}
+      className={`w-full rounded-xl active:scale-[0.98] ${disabled ? "" : "animate-cta-pulse-teal"}`}
       style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#fff", padding:"17px 24px",
         fontSize:"1.2rem", fontFamily:"var(--font-poppins)", fontWeight:900, letterSpacing:"0.05em",
         lineHeight:1.2, cursor: disabled ? "not-allowed" : "pointer", border:"none",
@@ -629,6 +629,24 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
                       onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
                   </div>
                 </form>
+
+                {/* CTA desktop: fluye con el form */}
+                <div className="hidden md:flex flex-col gap-2 mt-4">
+                  <TealBtn type="submit" form="seed-form" disabled={submitting}>
+                    {submitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin-slow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <circle cx="12" cy="12" r="10" strokeOpacity="0.2"/>
+                          <path d="M12 2a10 10 0 0 1 10 10"/>
+                        </svg>
+                        {COPY.step5.ctaLoading}
+                      </span>
+                    ) : COPY.step5.cta}
+                  </TealBtn>
+                  <p className="text-center" style={{ color:"#7a8299", fontSize:"13px" }}>
+                    {COPY.step5.disclaimer}
+                  </p>
+                </div>
               </div>
             )}
 
@@ -697,7 +715,7 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
 
       {/* ── STICKY FOOTER pasos 5 y 6 — todos los tamaños ────────────────────── */}
       {(step === 5 || step === 6) && (
-        <div className="flex-shrink-0 relative z-10 pt-2 pb-3"
+        <div className={`flex-shrink-0 relative z-10 pt-2 pb-3 ${step === 5 ? "md:hidden" : ""}`}
           style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
           <div className="px-14 md:px-24" style={{ maxWidth:"900px", margin:"0 auto" }}>
             {step === 5 && (
