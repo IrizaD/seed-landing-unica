@@ -670,10 +670,12 @@ export default function SeedFunnel() {
                  step === 3 ? COPY.step3.cta :
                  COPY.step4.cta}
               </TealBtn>
-              <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em",
-                opacity: showArrows ? 1 : 0, transition:"opacity 0.6s ease" }}>
-                Paso {step + 1} de 5
-              </p>
+              <div style={{ maxHeight: showArrows ? "2rem" : "0", overflow:"hidden",
+                opacity: showArrows ? 1 : 0, transition:"max-height 0.6s ease, opacity 0.5s ease" }}>
+                <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
+                  Paso {step + 1} de 5
+                </p>
+              </div>
             </div>
           )}
 
