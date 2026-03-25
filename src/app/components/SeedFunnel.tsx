@@ -409,7 +409,7 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
         )}
 
         {/* Flecha derecha */}
-        {step >= 0 && step <= 3 && (
+        {step >= 0 && step <= 4 && (
           <button type="button" onClick={() => goToStep(step + 1)} aria-label="Paso siguiente"
             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:right-4"
             style={{ width:"44px", height:"44px",
@@ -689,7 +689,13 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
 
           {step >= 0 && step <= 4 && (
             <div className="flex flex-col gap-2">
-              <TealBtn onClick={() => goToStep(5, true)}>REGISTRARME AHORA →</TealBtn>
+              <button onClick={() => goToStep(5, true)}
+                className="w-full rounded-xl active:scale-[0.98] animate-cta-pulse"
+                style={{ background:"#22c55e", color:"#000", padding:"15px 24px",
+                  fontSize:"1.0625rem", fontFamily:"var(--font-barlow)", fontWeight:900,
+                  letterSpacing:"0.04em", lineHeight:1.2, cursor:"pointer", border:"none" }}>
+                REGISTRARME AHORA →
+              </button>
               <div style={{ maxHeight: showArrows ? "2rem" : "0", overflow:"hidden",
                 opacity: showArrows ? 1 : 0, transition:"max-height 0.6s ease, opacity 0.5s ease" }}>
                 <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
