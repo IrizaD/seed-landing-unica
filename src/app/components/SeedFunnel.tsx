@@ -678,9 +678,9 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
       </div>
 
       {/* ── STICKY FOOTER ─────────────────────────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 px-5 md:px-16 pt-2 pb-3"
+      <div className="flex-shrink-0 relative z-10 pt-2 pb-3"
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
-        <div style={{ maxWidth:"900px", margin:"0 auto" }}>
+        <div className="px-14 md:px-24" style={{ maxWidth:"900px", margin:"0 auto" }}>
 
           {step >= 0 && step <= 4 && (
             <div className="flex flex-col gap-2">
