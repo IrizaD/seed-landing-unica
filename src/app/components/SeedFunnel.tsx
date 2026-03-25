@@ -152,8 +152,8 @@ function DateChip({ date }: { date: EventDate }) {
         <span className="animate-ping-teal absolute inline-flex h-full w-full rounded-full" style={{ background:"#14C9B8", opacity:0.4 }}/>
         <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ background:"#14C9B8" }}/>
       </span>
-      <span style={{ color:"#14C9B8", fontSize:"14px", fontWeight:700 }}>{date.formatted}</span>
-      <span style={{ color:"#7a8299", fontSize:"13px" }}>· 8:00 PM hora México</span>
+      <span style={{ color:"#14C9B8", fontSize:"16px", fontWeight:700 }}>{date.formatted}</span>
+      <span style={{ color:"#9aa3b2", fontSize:"15px" }}>· 8:00 PM hora México</span>
     </div>
   );
 }
@@ -210,7 +210,7 @@ function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: (
 
 function Row({ icon, children }: { icon: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-2.5 md:gap-3" style={{ color:"#9aa3b2", fontSize:"clamp(0.9rem, 1.5vw, 1.0625rem)", lineHeight:1.55, letterSpacing:"0.01em" }}>
+    <div className="flex items-start gap-2.5 md:gap-3" style={{ color:"#cdd5e0", fontSize:"clamp(1rem, 1.6vw, 1.0625rem)", lineHeight:1.65, letterSpacing:"0.01em" }}>
       <span className="flex-shrink-0 text-base md:text-lg mt-0.5">{icon}</span>
       <span>{children}</span>
     </div>
@@ -259,18 +259,18 @@ export default function SeedFunnel() {
     const dir = n >= step ? "left" : "right";
     const w = window.innerWidth;
     setIsAnimating(true);
-    el.style.transition = "transform 0.28s cubic-bezier(0.4,0,0.2,1)";
+    el.style.transition = "transform 0.32s cubic-bezier(0.4,0,0.2,1)";
     el.style.transform  = `translateX(${dir === "left" ? -w : w}px)`;
     setTimeout(() => {
       el.style.transition = "none";
       el.style.transform  = `translateX(${dir === "left" ? w : -w}px)`;
       setStep(n);
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        el.style.transition = "transform 0.28s cubic-bezier(0.4,0,0.2,1)";
+        el.style.transition = "transform 0.32s cubic-bezier(0.4,0,0.2,1)";
         el.style.transform  = "translateX(0)";
-        setTimeout(() => setIsAnimating(false), 280);
+        setTimeout(() => setIsAnimating(false), 320);
       }));
-    }, 280);
+    }, 320);
   }
 
   function handleTouchStart(e: React.TouchEvent) {
@@ -406,7 +406,7 @@ export default function SeedFunnel() {
 
                 <div className="mb-3" style={{ width:"40px", height:"3px", background:"#14C9B8", borderRadius:"2px" }}/>
 
-                <p className="mb-3" style={{ fontSize:"0.9rem", color:"#9aa3b2", lineHeight:1.5, letterSpacing:"0.01em" }}>
+                <p className="mb-3" style={{ fontSize:"1.0625rem", color:"#cdd5e0", lineHeight:1.65, letterSpacing:"0.01em" }}>
                   {COPY.step0.body}
                 </p>
 
@@ -443,7 +443,7 @@ export default function SeedFunnel() {
 
                 <div className="mt-3 rounded-xl border"
                   style={{ background:"rgba(20,201,184,0.06)", borderColor:"rgba(20,201,184,0.18)", padding:"12px 14px" }}>
-                  <p style={{ color:"#cdd5e0", fontSize:"0.9rem", lineHeight:1.5 }}>
+                  <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65 }}>
                     <strong style={{ color:"#14C9B8" }}>{COPY.step1.calloutBold}</strong>{COPY.step1.calloutBody}
                   </p>
                 </div>
@@ -487,11 +487,11 @@ export default function SeedFunnel() {
                           {s.initials}
                         </div>
                         <div>
-                          <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>{s.name}</p>
-                          <p style={{ color:"#7a8299", fontSize:"12px" }}>{s.title}</p>
+                          <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>{s.name}</p>
+                          <p style={{ color:"#9aa3b2", fontSize:"14px" }}>{s.title}</p>
                         </div>
                       </div>
-                      <p style={{ color:"#9aa3b2", fontSize:"0.875rem", lineHeight:1.5 }}>{s.bio}</p>
+                      <p style={{ color:"#cdd5e0", fontSize:"1rem", lineHeight:1.65 }}>{s.bio}</p>
                     </Card>
                   ))}
                 </div>
@@ -501,7 +501,7 @@ export default function SeedFunnel() {
                     <div key={s.number} className="text-center rounded-xl border py-3"
                       style={{ background:"#0d1117", borderColor:"#1e2535" }}>
                       <p style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.4rem" }}>{s.number}</p>
-                      <p style={{ color:"#7a8299", fontSize:"13px", marginTop:"2px" }}>{s.label}</p>
+                      <p style={{ color:"#9aa3b2", fontSize:"15px", marginTop:"4px" }}>{s.label}</p>
                     </div>
                   ))}
                 </div>
@@ -525,12 +525,12 @@ export default function SeedFunnel() {
                     </div>
                     <div>
                       <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>{eventDate.formatted}</p>
-                      <p style={{ color:"#7a8299", fontSize:"12px", marginTop:"2px" }}>{COPY.step4.eventTime}</p>
+                      <p style={{ color:"#9aa3b2", fontSize:"15px", marginTop:"4px" }}>{COPY.step4.eventTime}</p>
                     </div>
                   </div>
                 </div>
 
-                <p style={{ color:"#9aa3b2", fontSize:"0.8rem", fontWeight:600, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"8px" }}>
+                <p style={{ color:"#9aa3b2", fontSize:"0.9375rem", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:"10px" }}>
                   {COPY.step4.howItWorksLabel}
                 </p>
 
@@ -551,15 +551,15 @@ export default function SeedFunnel() {
                   {COPY.step5.headlineLine1}<br/>{COPY.step5.headlineLine2}
                 </Headline>
 
-                <p style={{ color:"#9aa3b2", fontSize:"0.9rem", lineHeight:1.5, marginBottom:"12px" }}>
+                <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"16px" }}>
                   {COPY.step5.body}
                 </p>
 
                 <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-3">
                   <div>
                     <label className="block font-semibold uppercase mb-2"
-                      style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
-                      {COPY.step5.form.nameLabel}
+                      style={{ color:"#cdd5e0", fontSize:"1rem", letterSpacing:"0.03em" }}>
+                      {COPY.step5.form.nameLabel}<span style={{color:"#14C9B8"}}> *</span>
                     </label>
                     <input type="text" required placeholder={COPY.step5.form.namePlaceholder} inputMode="text"
                       value={form.nombre} onChange={(e) => setForm((p) => ({ ...p, nombre:e.target.value }))}
@@ -571,19 +571,22 @@ export default function SeedFunnel() {
 
                   <div>
                     <label className="block font-semibold uppercase mb-2"
-                      style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
-                      {COPY.step5.form.phoneLabel}
+                      style={{ color:"#cdd5e0", fontSize:"1rem", letterSpacing:"0.03em" }}>
+                      {COPY.step5.form.phoneLabel}<span style={{color:"#14C9B8"}}> *</span>
                     </label>
                     <PhoneInput
                       dialCode={form.dialCode} phone={form.phone}
                       onDialChange={(d) => setForm((p) => ({ ...p, dialCode:d }))}
                       onPhoneChange={(v) => setForm((p) => ({ ...p, phone:v }))}/>
+                    <p style={{ color:"#9aa3b2", fontSize:"0.875rem", marginTop:"6px" }}>
+                      Te enviamos el link del evento por aquí
+                    </p>
                   </div>
 
                   <div>
                     <label className="block font-semibold uppercase mb-2"
-                      style={{ color:"#9aa3b2", fontSize:"0.875rem", letterSpacing:"0.08em" }}>
-                      {COPY.step5.form.emailLabel}
+                      style={{ color:"#cdd5e0", fontSize:"1rem", letterSpacing:"0.03em" }}>
+                      {COPY.step5.form.emailLabel}<span style={{color:"#14C9B8"}}> *</span>
                     </label>
                     <input type="email" required placeholder={COPY.step5.form.emailPlaceholder}
                       value={form.email} onChange={(e) => setForm((p) => ({ ...p, email:e.target.value }))}
@@ -608,7 +611,7 @@ export default function SeedFunnel() {
                   </div>
                 </div>
 
-                <p style={{ color:"#14C9B8", fontSize:"0.8125rem", fontWeight:700, letterSpacing:"0.22em", textTransform:"uppercase", marginBottom:"10px" }}>
+                <p style={{ color:"#14C9B8", fontSize:"0.9375rem", fontWeight:700, letterSpacing:"0.18em", textTransform:"uppercase", marginBottom:"10px" }}>
                   {COPY.step6.badge}
                 </p>
                 <Headline>
@@ -618,12 +621,12 @@ export default function SeedFunnel() {
                   </span>
                 </Headline>
 
-                <p style={{ color:"#9aa3b2", fontSize:"0.9rem", lineHeight:1.5, marginBottom:"12px" }}>
+                <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"16px" }}>
                   {COPY.step6.body}
                 </p>
 
                 <Card>
-                  <p style={{ color:"#14C9B8", fontSize:"0.75rem", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"10px" }}>
+                  <p style={{ color:"#14C9B8", fontSize:"0.9rem", fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", marginBottom:"10px" }}>
                     {COPY.step6.detailsLabel}
                   </p>
                   <div className="space-y-3">
@@ -650,20 +653,32 @@ export default function SeedFunnel() {
             <div className="flex flex-col gap-3">
 
               {/* Botón principal de registro */}
-              <TealBtn onClick={() => goToStep(5)}>{COPY.step4.cta}</TealBtn>
+              <TealBtn onClick={() => goToStep(5)}>
+                {step === 0 ? COPY.step0.cta :
+                 step === 1 ? COPY.step1.cta :
+                 step === 2 ? COPY.step2.cta :
+                 step === 3 ? COPY.step3.cta :
+                 COPY.step4.cta}
+              </TealBtn>
+
+              <p className="text-center" style={{ color:"#9aa3b2", fontSize:"0.9rem", letterSpacing:"0.05em" }}>
+                Paso {step + 1} de 5
+              </p>
 
               {/* Dots de progreso */}
-              <div className="flex items-center justify-center gap-2" role="tablist" aria-label="Pasos del seminario">
+              <div className="flex items-center justify-center gap-1" role="tablist" aria-label="Pasos del seminario">
                 {[0,1,2,3,4].map((i) => (
                   <button key={i} type="button" role="tab"
                     aria-selected={i === step}
                     aria-label={`Paso ${i + 1} de 5`}
                     onClick={() => goToStep(i)}
-                    className="rounded-full transition-all duration-300"
-                    style={{ width: i === step ? "22px" : "8px", height:"8px",
-                      background: i === step ? "#14C9B8" : "#2a3347",
-                      boxShadow: i === step ? "0 0 8px rgba(20,201,184,0.5)" : "none",
-                      border:"none", padding:0, cursor:"pointer", flexShrink:0 }}/>
+                    className="flex items-center justify-center transition-all duration-300"
+                    style={{ width:"44px", height:"44px", background:"none", border:"none", cursor:"pointer", padding:0, flexShrink:0 }}>
+                    <span className="rounded-full transition-all duration-300 block"
+                      style={{ width: i === step ? "22px" : "8px", height:"8px",
+                        background: i === step ? "#14C9B8" : "#2a3347",
+                        boxShadow: i === step ? "0 0 8px rgba(20,201,184,0.5)" : "none" }}/>
+                  </button>
                 ))}
               </div>
 
