@@ -239,31 +239,68 @@ function Card({ children }: { children: React.ReactNode }) {
 
 export default function SeedFunnel() {
   const [step, setStep]       = useState(0);
-  const [visible, setVisible] = useState(true);
   const [form, setForm]       = useState<FormData>({ nombre:"", phone:"", dialCode:"+52", email:"" });
   const [submitting, setSubmitting] = useState(false);
   const [eventDate]           = useState<EventDate>(getNextThursday);
+  const [isAnimating, setIsAnimating] = useState(false);
   const TOTAL                 = 6;
-  const touchStartX           = useRef<number>(0);
+  const contentRef  = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number>(0);
+  const isDragging  = useRef(false);
 
   useEffect(() => {
     setForm((p) => ({ ...p, dialCode: detectDialCode() }));
   }, []);
 
   function goToStep(n: number) {
-    setVisible(false);
-    setTimeout(() => { setStep(n); setVisible(true); }, 250);
+    if (isAnimating) return;
+    const el = contentRef.current;
+    if (!el) { setStep(n); return; }
+    const dir = n >= step ? "left" : "right";
+    const w = window.innerWidth;
+    setIsAnimating(true);
+    el.style.transition = "transform 0.28s cubic-bezier(0.4,0,0.2,1)";
+    el.style.transform  = `translateX(${dir === "left" ? -w : w}px)`;
+    setTimeout(() => {
+      el.style.transition = "none";
+      el.style.transform  = `translateX(${dir === "left" ? w : -w}px)`;
+      setStep(n);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.style.transition = "transform 0.28s cubic-bezier(0.4,0,0.2,1)";
+        el.style.transform  = "translateX(0)";
+        setTimeout(() => setIsAnimating(false), 280);
+      }));
+    }, 280);
   }
 
   function handleTouchStart(e: React.TouchEvent) {
+    if (isAnimating || step > 4) return;
     touchStartX.current = e.touches[0].clientX;
+    isDragging.current  = true;
+    const el = contentRef.current;
+    if (el) el.style.transition = "none";
+  }
+
+  function handleTouchMove(e: React.TouchEvent) {
+    if (!isDragging.current || !contentRef.current || step > 4) return;
+    const delta = e.touches[0].clientX - touchStartX.current;
+    let offset = delta;
+    if (delta > 0 && step === 0) offset = Math.min(delta * 0.25, 40);
+    else if (delta < 0 && step >= 4) offset = Math.max(delta * 0.25, -40);
+    contentRef.current.style.transform = `translateX(${offset}px)`;
   }
 
   function handleTouchEnd(e: React.TouchEvent) {
-    const delta = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(delta) < 50 || step > 4) return;
-    if (delta > 0 && step < 4) goToStep(step + 1);
-    if (delta < 0 && step > 0) goToStep(step - 1);
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const delta     = touchStartX.current - e.changedTouches[0].clientX;
+    const threshold = window.innerWidth * 0.3;
+    if (delta > threshold && step < 4)       goToStep(step + 1);
+    else if (delta < -threshold && step > 0) goToStep(step - 1);
+    else if (contentRef.current) {
+      contentRef.current.style.transition = "transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94)";
+      contentRef.current.style.transform  = "translateX(0)";
+    }
   }
 
   async function handleSubmit(e: React.SyntheticEvent) {
@@ -349,10 +386,12 @@ export default function SeedFunnel() {
 
         {/* Scrollable inner */}
         <div className="h-full overflow-y-auto relative z-10"
+          style={{ touchAction:"pan-y" }}
           onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}>
         <div className="px-14 md:px-24 pt-3 pb-1 md:pt-8" style={{ maxWidth:"900px", margin:"0 auto" }}>
-          <div style={{ opacity:visible?1:0, transform:visible?"translateY(0)":"translateY(14px)", transition:"opacity 0.25s ease, transform 0.25s ease" }}>
+          <div ref={contentRef} style={{ willChange:"transform" }}>
 
             {/* ── 0: HOOK ────────────────────────────────────────────── */}
             {step === 0 && (
