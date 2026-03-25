@@ -94,7 +94,7 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
   }, []);
 
   return (
-    <div className="flex gap-2" ref={ref}>
+    <div className="flex gap-2 w-full" ref={ref}>
       <div className="relative flex-shrink-0">
         <button type="button" onClick={() => setOpen((v) => !v)}
           className="flex items-center gap-1.5 rounded-xl transition-all duration-200 focus:outline-none"
@@ -108,7 +108,7 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
         </button>
         {open && (
           <div className="absolute left-0 top-full mt-1 rounded-xl overflow-hidden z-50"
-            style={{ background:"#0d1117", border:"1px solid #1e2535", width:"240px", boxShadow:"0 16px 40px rgba(0,0,0,0.6)" }}>
+            style={{ background:"#0d1117", border:"1px solid #1e2535", width:"min(240px, calc(100vw - 120px))", boxShadow:"0 16px 40px rgba(0,0,0,0.6)" }}>
             <div style={{ padding:"8px", borderBottom:"1px solid #1e2535" }}>
               <input autoFocus type="text" placeholder="Buscar país..." value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -135,8 +135,8 @@ function PhoneInput({ dialCode, phone, onDialChange, onPhoneChange }: {
       </div>
       <input type="tel" required placeholder="55 1234 5678" value={phone}
         onChange={(e) => onPhoneChange(e.target.value)}
-        className="flex-1 rounded-xl transition-all duration-200 focus:outline-none"
-        style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px", fontSize:"16px", letterSpacing:"0.01em" }}
+        className="flex-1 min-w-0 rounded-xl transition-all duration-200 focus:outline-none"
+        style={{ background:"#0d1117", border:"1px solid #1e2535", color:"#fff", padding:"14px 16px", fontSize:"16px", letterSpacing:"0.01em", minWidth:0 }}
         onFocus={(e) => (e.currentTarget.style.borderColor = "#14C9B8")}
         onBlur={(e)  => (e.currentTarget.style.borderColor = "#1e2535")}/>
     </div>

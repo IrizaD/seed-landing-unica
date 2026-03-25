@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { parseUA } from "@/lib/parseUA";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -234,9 +235,10 @@ function SeccionMetricas({ slug }: { slug: string }) {
 }
 
 function SeccionLeads({ slug }: { slug: string }) {
-  const [leads, setLeads]   = useState<Registro[]>([]);
+  const [leads, setLeads]     = useState<Registro[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [search, setSearch]   = useState("");
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`/api/leads?slug=${slug}`)
@@ -290,26 +292,63 @@ function SeccionLeads({ slug }: { slug: string }) {
           <table style={{ width:"100%", borderCollapse:"collapse", fontSize:"14px" }}>
             <thead>
               <tr style={{ borderBottom:"1px solid #1e2535" }}>
-                {["Nombre","Email","Teléfono","Paso","Fuente","País","Ciudad","Fecha"].map((h) => (
+                {["","Nombre","Email","Teléfono","Paso","Fuente","País","Ciudad","Fecha"].map((h) => (
                   <th key={h} style={{ color:"#7a8299", fontWeight:600, padding:"10px 12px", textAlign:"left", whiteSpace:"nowrap" }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {filtered.map((l) => (
-                <tr key={l.id} style={{ borderBottom:"1px solid #111827" }}
-                  onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.02)"}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.background = "transparent"}>
-                  <td style={{ color:"#fff", padding:"10px 12px" }}>{l.nombre}</td>
-                  <td style={{ color:"#cdd5e0", padding:"10px 12px" }}>{l.email}</td>
-                  <td style={{ color:"#cdd5e0", padding:"10px 12px" }}>{l.telefono}</td>
-                  <td style={{ color:"#14C9B8", padding:"10px 12px", textAlign:"center" }}>P{l.desde_slide}</td>
-                  <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.utm_source || "—"}</td>
-                  <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.ip_country || "—"}</td>
-                  <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.ip_city || "—"}</td>
-                  <td style={{ color:"#9aa3b2", padding:"10px 12px", whiteSpace:"nowrap" }}>{fmt(l.created_at)}</td>
-                </tr>
-              ))}
+              {filtered.map((l) => {
+                const isOpen = expandedId === l.id;
+                const ua = parseUA(l.user_agent ?? "");
+                return (
+                  <>
+                    <tr key={l.id}
+                      style={{ borderBottom: isOpen ? "none" : "1px solid #111827", background: isOpen ? "rgba(20,201,184,0.04)" : "transparent" }}
+                      onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.02)"; }}
+                      onMouseLeave={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "transparent"; }}>
+                      <td style={{ padding:"10px 8px 10px 12px" }}>
+                        <button
+                          onClick={() => setExpandedId(isOpen ? null : l.id)}
+                          style={{ background: isOpen ? "rgba(20,201,184,0.15)" : "rgba(255,255,255,0.05)", border:"1px solid", borderColor: isOpen ? "rgba(20,201,184,0.4)" : "#1e2535", borderRadius:"6px", width:"24px", height:"24px", display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", color: isOpen ? "#14C9B8" : "#7a8299", flexShrink:0 }}>
+                          <svg width="10" height="10" viewBox="0 0 12 12" fill="none"
+                            style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)", transition:"transform 0.2s" }}>
+                            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </button>
+                      </td>
+                      <td style={{ color:"#fff", padding:"10px 12px" }}>{l.nombre}</td>
+                      <td style={{ color:"#cdd5e0", padding:"10px 12px" }}>{l.email}</td>
+                      <td style={{ color:"#cdd5e0", padding:"10px 12px" }}>{l.telefono}</td>
+                      <td style={{ color:"#14C9B8", padding:"10px 12px", textAlign:"center" }}>P{l.desde_slide}</td>
+                      <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.utm_source || "—"}</td>
+                      <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.ip_country || "—"}</td>
+                      <td style={{ color:"#9aa3b2", padding:"10px 12px" }}>{l.ip_city || "—"}</td>
+                      <td style={{ color:"#9aa3b2", padding:"10px 12px", whiteSpace:"nowrap" }}>{fmt(l.created_at)}</td>
+                    </tr>
+                    {isOpen && (
+                      <tr key={`${l.id}-detail`} style={{ borderBottom:"1px solid #111827", background:"rgba(20,201,184,0.04)" }}>
+                        <td colSpan={9} style={{ padding:"0 12px 14px 36px" }}>
+                          <div style={{ display:"flex", flexWrap:"wrap", gap:"8px 24px" }}>
+                            {[
+                              { label:"Dispositivo", value: ua.tipo },
+                              { label:"OS",          value: ua.os },
+                              { label:"Navegador",   value: ua.browser },
+                              { label:"UTM Medium",  value: l.utm_medium  || "—" },
+                              { label:"UTM Campaign",value: l.utm_campaign || "—" },
+                            ].map(({ label, value }) => (
+                              <span key={label} style={{ fontSize:"13px" }}>
+                                <span style={{ color:"#7a8299" }}>{label}: </span>
+                                <span style={{ color:"#cdd5e0" }}>{value}</span>
+                              </span>
+                            ))}
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </>
+                );
+              })}
             </tbody>
           </table>
           <p style={{ color:"#7a8299", fontSize:"13px", marginTop:"8px" }}>{filtered.length} lead{filtered.length !== 1 ? "s" : ""}</p>
