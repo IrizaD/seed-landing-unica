@@ -7,11 +7,12 @@ export async function PUT(
 ) {
   const { slug } = await params;
   const body = await req.json();
-  const { nombre, fb_pixel_id, ghl_webhook, activo } = body;
+  const { nombre, fb_pixel_id, fb_event_name, ghl_webhook, activo } = body;
 
   const updates: Record<string, unknown> = {};
   if (nombre !== undefined) updates.nombre = nombre;
   if (fb_pixel_id !== undefined) updates.fb_pixel_id = fb_pixel_id;
+  if (fb_event_name !== undefined) updates.fb_event_name = fb_event_name;
   if (ghl_webhook !== undefined) updates.ghl_webhook = ghl_webhook;
   if (activo !== undefined) updates.activo = activo;
 

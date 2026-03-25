@@ -8,9 +8,21 @@ interface Funnel {
   slug: string;
   nombre: string;
   fb_pixel_id: string;
+  fb_event_name: string;
   ghl_webhook: string;
   activo: boolean;
 }
+
+const FB_EVENTS = [
+  "Lead",
+  "CompleteRegistration",
+  "Contact",
+  "SubmitApplication",
+  "Schedule",
+  "StartTrial",
+  "Subscribe",
+  "Purchase",
+];
 
 interface Registro {
   id: string;
@@ -264,7 +276,7 @@ function SeccionConfiguracion() {
     await fetch(`/api/funnels/${funnel.slug}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fb_pixel_id: funnel.fb_pixel_id, ghl_webhook: funnel.ghl_webhook }),
+      body: JSON.stringify({ fb_pixel_id: funnel.fb_pixel_id, fb_event_name: funnel.fb_event_name, ghl_webhook: funnel.ghl_webhook }),
     });
     setSaving(null);
     setSaved(funnel.slug);
@@ -295,6 +307,29 @@ function SeccionConfiguracion() {
                   borderRadius:"8px", padding:"12px 14px", fontSize:"15px", boxSizing:"border-box" }}
               />
             </div>
+            <div>
+              <label style={{ color:"#9aa3b2", fontSize:"13px", fontWeight:600, display:"block", marginBottom:"6px", textTransform:"uppercase", letterSpacing:"0.05em" }}>
+                Evento de conversión Meta (al enviar formulario)
+              </label>
+              <div style={{ display:"flex", gap:"8px", flexWrap:"wrap" }}>
+                {FB_EVENTS.map((ev) => (
+                  <button key={ev} type="button"
+                    onClick={() => update(f.slug, "fb_event_name", ev)}
+                    style={{
+                      padding:"8px 14px", borderRadius:"8px", fontSize:"14px", fontWeight:600, cursor:"pointer",
+                      background: f.fb_event_name === ev ? "#14C9B8" : "rgba(20,201,184,0.08)",
+                      color:      f.fb_event_name === ev ? "#06080f" : "#14C9B8",
+                      border:     f.fb_event_name === ev ? "none"    : "1px solid rgba(20,201,184,0.3)",
+                    }}>
+                    {ev}
+                  </button>
+                ))}
+              </div>
+              <p style={{ color:"#7a8299", fontSize:"12px", marginTop:"6px" }}>
+                Seleccionado: <strong style={{ color:"#14C9B8" }}>{f.fb_event_name || "Lead"}</strong>
+              </p>
+            </div>
+
             <div>
               <label style={{ color:"#9aa3b2", fontSize:"13px", fontWeight:600, display:"block", marginBottom:"6px", textTransform:"uppercase", letterSpacing:"0.05em" }}>
                 GoHighLevel Webhook URL

@@ -238,7 +238,7 @@ function Card({ children }: { children: React.ReactNode }) {
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-export default function SeedFunnel() {
+export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: string }) {
   const [step, setStep]       = useState(0);
   const [form, setForm]       = useState<FormData>({ nombre:"", phone:"", dialCode:"+52", email:"" });
   const [submitting, setSubmitting] = useState(false);
@@ -331,18 +331,20 @@ export default function SeedFunnel() {
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     setSubmitting(true);
-    const ok = await submitRegistro({
+    await submitRegistro({
       nombre: form.nombre,
       email:  form.email,
       telefono: `${form.dialCode} ${form.phone}`,
       desde_slide: desdeSlide.current,
     });
-    if (ok) {
-      goToStep(6);
-    } else {
-      // Continuar de todas formas (no bloquear al usuario por error de red)
-      goToStep(6);
-    }
+
+    // Disparar conversión en Meta Pixel
+    try {
+      const fbq = (window as unknown as Record<string, unknown>).fbq as ((...a: unknown[]) => void) | undefined;
+      if (fbq && fbEventName) fbq("track", fbEventName);
+    } catch {}
+
+    goToStep(6);
     setSubmitting(false);
   }
 
