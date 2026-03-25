@@ -81,24 +81,41 @@ function StatCard({ label, value }: { label: string; value: string | number }) {
   );
 }
 
+const STEP_NAMES: Record<string, string> = {
+  "0": "Intro",
+  "1": "Problema",
+  "2": "Solución",
+  "3": "Expertos",
+  "4": "Fecha",
+  "5": "Registro",
+  "6": "Gracias",
+};
+
 function SlideBarChart({ data, label }: { data: { slide_numero: number }[]; label: string }) {
   const counts: Record<string, number> = {};
   data.forEach((e) => { const k = String(e.slide_numero); counts[k] = (counts[k] ?? 0) + 1; });
   const entries = Object.entries(counts).sort((a, b) => Number(a[0]) - Number(b[0]));
   const max = Math.max(...entries.map(([, v]) => v), 1);
+  const BAR_H = 120;
+
   return (
-    <div style={{ background:"#0d1117", border:"1px solid #1e2535", borderRadius:"12px", padding:"20px" }}>
-      <p style={{ color:"#9aa3b2", fontSize:"13px", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"16px" }}>{label}</p>
-      <div style={{ display:"flex", alignItems:"flex-end", gap:"8px", height:"100px" }}>
-        {entries.map(([k, v]) => (
-          <div key={k} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:"4px" }}>
-            <span style={{ color:"#9aa3b2", fontSize:"11px" }}>{v}</span>
-            <div style={{ width:"100%", background:"rgba(20,201,184,0.12)", borderRadius:"4px 4px 0 0", height:`${(v/max)*100}%`, minHeight:"4px" }}>
-              <div style={{ width:"100%", height:"100%", background:"#14C9B8", borderRadius:"4px 4px 0 0" }}/>
+    <div style={{ background:"#0d1117", border:"1px solid #1e2535", borderRadius:"12px", padding:"20px 24px" }}>
+      <p style={{ color:"#9aa3b2", fontSize:"12px", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"20px" }}>{label}</p>
+      <div style={{ display:"flex", alignItems:"flex-end", gap:"12px" }}>
+        {entries.map(([k, v]) => {
+          const barH = Math.max(Math.round((v / max) * BAR_H), 6);
+          return (
+            <div key={k} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:"6px" }}>
+              <span style={{ color:"#fff", fontSize:"13px", fontWeight:700 }}>{v}</span>
+              <div style={{ width:"100%", height:`${BAR_H}px`, display:"flex", alignItems:"flex-end" }}>
+                <div style={{ width:"100%", height:`${barH}px`, background:"linear-gradient(to top, #14C9B8, rgba(20,201,184,0.4))", borderRadius:"6px 6px 0 0" }}/>
+              </div>
+              <span style={{ color:"#9aa3b2", fontSize:"11px", textAlign:"center", lineHeight:1.3 }}>
+                {STEP_NAMES[k] ?? `Paso ${k}`}
+              </span>
             </div>
-            <span style={{ color:"#7a8299", fontSize:"11px" }}>P{k}</span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
