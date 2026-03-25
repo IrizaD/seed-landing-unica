@@ -39,28 +39,32 @@ interface Registro {
   created_at: string;
 }
 
+interface Breakdown { label: string; count: number }
+
+interface AudienciaData {
+  tipo:    Breakdown[];
+  os:      Breakdown[];
+  browser: Breakdown[];
+  pais:    Breakdown[];
+  ciudad:  Breakdown[];
+}
+
 interface MetricasData {
-  totalRegistros: number;
-  sesionesUnicas: number;
-  registrosPorDia: { created_at: string }[];
-  eventosPorSlide: { slide_numero: number }[];
+  totalSesiones:   number;
+  totalRegistros:  number;
+  tasaConversion:  string;
+  eventosPorSlide: { slide_numero: number; tipo: string }[];
   clicksPorSlide:  { slide_numero: number }[];
-  registrosDesdeSlide: { desde_slide: number }[];
-  utms: { utm_source: string; utm_medium: string; utm_campaign: string }[];
+  registradosDesde: Breakdown[];
+  utmSources:      Breakdown[];
+  registrosPorDia: Record<string, number>;
+  visitantes:      AudienciaData;
+  registrados:     AudienciaData;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const SLUG = "seed-mexico";
-
-function countBy<T>(arr: T[], key: keyof T): Record<string, number> {
-  const out: Record<string, number> = {};
-  arr.forEach((item) => {
-    const k = String(item[key] ?? "");
-    out[k] = (out[k] ?? 0) + 1;
-  });
-  return out;
-}
 
 function fmt(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("es-MX", { day:"2-digit", month:"short", year:"numeric" });
@@ -77,21 +81,20 @@ function StatCard({ label, value }: { label: string; value: string | number }) {
   );
 }
 
-function BarChart({ data, label }: { data: Record<string, number>; label: string }) {
-  const entries = Object.entries(data).sort((a, b) => Number(a[0]) - Number(b[0]));
+function SlideBarChart({ data, label }: { data: { slide_numero: number }[]; label: string }) {
+  const counts: Record<string, number> = {};
+  data.forEach((e) => { const k = String(e.slide_numero); counts[k] = (counts[k] ?? 0) + 1; });
+  const entries = Object.entries(counts).sort((a, b) => Number(a[0]) - Number(b[0]));
   const max = Math.max(...entries.map(([, v]) => v), 1);
-
   return (
     <div style={{ background:"#0d1117", border:"1px solid #1e2535", borderRadius:"12px", padding:"20px" }}>
       <p style={{ color:"#9aa3b2", fontSize:"13px", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"16px" }}>{label}</p>
-      <div style={{ display:"flex", alignItems:"flex-end", gap:"8px", height:"120px" }}>
+      <div style={{ display:"flex", alignItems:"flex-end", gap:"8px", height:"100px" }}>
         {entries.map(([k, v]) => (
           <div key={k} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:"4px" }}>
             <span style={{ color:"#9aa3b2", fontSize:"11px" }}>{v}</span>
-            <div style={{ width:"100%", background:"rgba(20,201,184,0.15)", borderRadius:"4px 4px 0 0",
-              height:`${(v/max)*100}%`, minHeight:"4px", position:"relative" }}>
-              <div style={{ position:"absolute", bottom:0, left:0, right:0, background:"#14C9B8",
-                borderRadius:"4px 4px 0 0", height:`${(v/max)*100}%` }}/>
+            <div style={{ width:"100%", background:"rgba(20,201,184,0.12)", borderRadius:"4px 4px 0 0", height:`${(v/max)*100}%`, minHeight:"4px" }}>
+              <div style={{ width:"100%", height:"100%", background:"#14C9B8", borderRadius:"4px 4px 0 0" }}/>
             </div>
             <span style={{ color:"#7a8299", fontSize:"11px" }}>P{k}</span>
           </div>
@@ -101,10 +104,51 @@ function BarChart({ data, label }: { data: Record<string, number>; label: string
   );
 }
 
+function BreakdownList({ items, label, color = "#14C9B8" }: { items: Breakdown[]; label: string; color?: string }) {
+  const total = items.reduce((s, i) => s + i.count, 0);
+  if (items.length === 0) return null;
+  return (
+    <div style={{ background:"#0d1117", border:"1px solid #1e2535", borderRadius:"12px", padding:"16px 20px" }}>
+      <p style={{ color:"#9aa3b2", fontSize:"12px", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"12px" }}>{label}</p>
+      <div style={{ display:"flex", flexDirection:"column", gap:"8px" }}>
+        {items.slice(0, 6).map((item) => {
+          const pct = total > 0 ? Math.round((item.count / total) * 100) : 0;
+          return (
+            <div key={item.label}>
+              <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"3px" }}>
+                <span style={{ color:"#cdd5e0", fontSize:"13px" }}>{item.label}</span>
+                <span style={{ color, fontSize:"13px", fontWeight:700 }}>{item.count} <span style={{ color:"#7a8299", fontWeight:400 }}>({pct}%)</span></span>
+              </div>
+              <div style={{ height:"4px", background:"rgba(255,255,255,0.05)", borderRadius:"2px" }}>
+                <div style={{ height:"100%", width:`${pct}%`, background:color, borderRadius:"2px" }}/>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function AudienciaPanel({ data, title, color }: { data: AudienciaData; title: string; color: string }) {
+  return (
+    <div>
+      <h3 style={{ color:"#fff", fontWeight:700, fontSize:"1rem", marginBottom:"12px" }}>{title}</h3>
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))", gap:"12px" }}>
+        <BreakdownList items={data.tipo}    label="Dispositivo" color={color} />
+        <BreakdownList items={data.os}      label="Sistema operativo" color={color} />
+        <BreakdownList items={data.browser} label="Navegador" color={color} />
+        <BreakdownList items={data.pais}    label="País" color={color} />
+        <BreakdownList items={data.ciudad}  label="Ciudad" color={color} />
+      </div>
+    </div>
+  );
+}
+
 // ─── Secciones ────────────────────────────────────────────────────────────────
 
 function SeccionMetricas({ slug }: { slug: string }) {
-  const [data, setData]     = useState<MetricasData | null>(null);
+  const [data, setData]       = useState<MetricasData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -116,62 +160,57 @@ function SeccionMetricas({ slug }: { slug: string }) {
   if (loading) return <p style={{ color:"#7a8299" }}>Cargando métricas...</p>;
   if (!data)   return <p style={{ color:"#f87171" }}>Error al cargar</p>;
 
-  const tasa = data.sesionesUnicas > 0
-    ? ((data.totalRegistros / data.sesionesUnicas) * 100).toFixed(1)
-    : "0";
-
-  const vistasSlide  = countBy(data.eventosPorSlide, "slide_numero");
-  const clicksSlide  = countBy(data.clicksPorSlide, "slide_numero");
-  const desdeSlide   = countBy(data.registrosDesdeSlide, "desde_slide");
-  const utmSources   = countBy(data.utms, "utm_source");
-
-  // Registros por día (últimos 7 días)
-  const porDia: Record<string, number> = {};
-  data.registrosPorDia.forEach(({ created_at }) => {
-    const d = new Date(created_at).toLocaleDateString("es-MX", { day:"2-digit", month:"short" });
-    porDia[d] = (porDia[d] ?? 0) + 1;
-  });
+  const hayDatos = data.totalSesiones > 0;
 
   return (
-    <div style={{ display:"flex", flexDirection:"column", gap:"20px" }}>
-      {/* Stats principales */}
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))", gap:"16px" }}>
-        <StatCard label="Total registros" value={data.totalRegistros} />
-        <StatCard label="Sesiones únicas" value={data.sesionesUnicas} />
-        <StatCard label="Tasa de conversión" value={`${tasa}%`} />
+    <div style={{ display:"flex", flexDirection:"column", gap:"28px" }}>
+
+      {/* ── KPIs ── */}
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(150px,1fr))", gap:"14px" }}>
+        <StatCard label="Visitantes únicos"  value={data.totalSesiones} />
+        <StatCard label="Registros"          value={data.totalRegistros} />
+        <StatCard label="Tasa conversión"    value={`${data.tasaConversion}%`} />
       </div>
 
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"16px" }}>
-        {Object.keys(vistasSlide).length > 0 && (
-          <BarChart data={vistasSlide} label="Vistas por paso" />
-        )}
-        {Object.keys(clicksSlide).length > 0 && (
-          <BarChart data={clicksSlide} label="Clics en CTA por paso" />
-        )}
-        {Object.keys(desdeSlide).length > 0 && (
-          <BarChart data={desdeSlide} label="Registros: desde qué paso" />
-        )}
-      </div>
-
-      {/* UTMs */}
-      {Object.keys(utmSources).length > 0 && (
-        <div style={{ background:"#0d1117", border:"1px solid #1e2535", borderRadius:"12px", padding:"20px" }}>
-          <p style={{ color:"#9aa3b2", fontSize:"13px", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"12px" }}>Fuentes de tráfico (UTM)</p>
-          <div style={{ display:"flex", flexDirection:"column", gap:"8px" }}>
-            {Object.entries(utmSources).sort((a,b) => b[1]-a[1]).map(([source, count]) => (
-              <div key={source} style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                <span style={{ color:"#cdd5e0", fontSize:"15px" }}>{source || "(directo)"}</span>
-                <span style={{ color:"#14C9B8", fontWeight:700 }}>{count}</span>
-              </div>
-            ))}
-          </div>
+      {!hayDatos && (
+        <div style={{ background:"rgba(20,201,184,0.05)", border:"1px solid rgba(20,201,184,0.15)", borderRadius:"12px", padding:"24px", textAlign:"center" }}>
+          <p style={{ color:"#7a8299" }}>Aún no hay visitas registradas. Los datos aparecerán en cuanto lleguen visitas al funnel.</p>
         </div>
       )}
 
-      {Object.keys(vistasSlide).length === 0 && (
-        <div style={{ background:"rgba(20,201,184,0.05)", border:"1px solid rgba(20,201,184,0.15)", borderRadius:"12px", padding:"24px", textAlign:"center" }}>
-          <p style={{ color:"#7a8299" }}>Aún no hay eventos registrados. Las métricas aparecerán cuando haya visitas al funnel.</p>
-        </div>
+      {hayDatos && (
+        <>
+          {/* ── Funnel ── */}
+          <div>
+            <h3 style={{ color:"#fff", fontWeight:700, fontSize:"1rem", marginBottom:"12px" }}>Comportamiento en el funnel</h3>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))", gap:"12px" }}>
+              {data.eventosPorSlide.length > 0 && <SlideBarChart data={data.eventosPorSlide} label="Vistas por paso" />}
+              {data.clicksPorSlide.length  > 0 && <SlideBarChart data={data.clicksPorSlide}  label="Clics en CTA por paso" />}
+              {data.registradosDesde.length > 0 && (
+                <BreakdownList items={data.registradosDesde} label="Registros desde qué paso" />
+              )}
+              {data.utmSources.length > 0 && (
+                <BreakdownList items={data.utmSources} label="Fuentes UTM" />
+              )}
+            </div>
+          </div>
+
+          {/* ── Audiencia general ── */}
+          <AudienciaPanel
+            data={data.visitantes}
+            title="Audiencia general (todos los visitantes)"
+            color="#14C9B8"
+          />
+
+          {/* ── Audiencia registrados ── */}
+          {data.totalRegistros > 0 && (
+            <AudienciaPanel
+              data={data.registrados}
+              title="Audiencia registrada"
+              color="#818cf8"
+            />
+          )}
+        </>
       )}
     </div>
   );
