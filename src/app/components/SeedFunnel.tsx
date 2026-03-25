@@ -764,9 +764,9 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
                 className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
                 style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                   color:"#fff", padding:"17px 24px",
-                  fontSize:"1.2rem", fontFamily:"var(--font-poppins)", fontWeight:900,
-                  letterSpacing:"0.05em", lineHeight:1.2, cursor:"pointer", border:"none",
-                  textShadow:"0 2px 6px rgba(0,0,0,0.45)" }}>
+                  fontSize:"1rem", fontFamily:"var(--font-poppins)", fontWeight:900,
+                  letterSpacing:"0.03em", lineHeight:1.2, cursor:"pointer", border:"none",
+                  textShadow:"0 2px 6px rgba(0,0,0,0.45)", whiteSpace:"nowrap" }}>
                 REGISTRARME AHORA →
               </button>
               <div style={{ maxHeight: showArrows ? "2rem" : "0", overflow:"hidden",
