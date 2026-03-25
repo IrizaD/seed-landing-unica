@@ -583,10 +583,6 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
                   {COPY.step5.headlineLine1} <span style={{ color:"#14C9B8" }}>{COPY.step5.headlineLine2}</span>
                 </Headline>
 
-                <p style={{ color:"#cdd5e0", fontSize:"1.0625rem", lineHeight:1.65, marginBottom:"16px" }}>
-                  {COPY.step5.body}
-                </p>
-
                 <form id="seed-form" onSubmit={handleSubmit} className="flex flex-col gap-3">
                   <div>
                     <label className="block font-semibold uppercase mb-2"
@@ -642,9 +638,6 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
                       </span>
                     ) : COPY.step5.cta}
                   </TealBtn>
-                  <p className="text-center" style={{ color:"#7a8299", fontSize:"13px" }}>
-                    {COPY.step5.disclaimer}
-                  </p>
                 </div>
               </div>
             )}
@@ -730,9 +723,6 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
                     </span>
                   ) : COPY.step5.cta}
                 </TealBtn>
-                <p className="text-center mt-2" style={{ color:"#7a8299", fontSize:"13px" }}>
-                  {COPY.step5.disclaimer}
-                </p>
               </>
             )}
             {step === 6 && (

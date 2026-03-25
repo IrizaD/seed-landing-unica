@@ -95,7 +95,6 @@ export const COPY = {
   step5: {
     headlineLine1: "Rellena tus datos",
     headlineLine2: "y reserva tu lugar gratis",
-    body: "Llena el formulario y tu lugar queda confirmado al instante. Sin costos, sin compromisos.",
     form: {
       nameLabel: "Nombre completo",
       namePlaceholder: "Tu nombre completo",
@@ -103,9 +102,8 @@ export const COPY = {
       emailLabel: "Correo electrónico",
       emailPlaceholder: "tu@correo.com",
     },
-    cta: "RESERVAR MI LUGAR GRATIS →",
+    cta: "TERMINAR REGISTRO →",
     ctaLoading: "RESERVANDO...",
-    disclaimer: "Sin spam. Solo información relevante del evento.",
   },
 
   // ── STEP 6: GRACIAS ───────────────────────────────────────────────────────
