@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { isBot } from "@/lib/isBot";
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,10 +19,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
     }
 
-    const user_agent = req.headers.get("user-agent")             ?? "";
-    const ip_country = req.headers.get("x-vercel-ip-country")    ?? "";
-    const ip_city    = req.headers.get("x-vercel-ip-city")       ?? "";
-    const ip_region  = req.headers.get("x-vercel-ip-country-region") ?? "";
+    const user_agent = req.headers.get("user-agent") ?? "";
+
+    // Ignorar bots y crawlers
+    if (isBot(user_agent)) return NextResponse.json({ ok: true, skipped: true });
+
+    const ip_country = req.headers.get("x-vercel-ip-country") ?? "";
+    const ip_city    = decodeURIComponent(req.headers.get("x-vercel-ip-city") ?? "");
+    const ip_region  = decodeURIComponent(req.headers.get("x-vercel-ip-country-region") ?? "");
 
     const { error } = await supabaseAdmin.from("eventos").insert({
       funnel_slug,
