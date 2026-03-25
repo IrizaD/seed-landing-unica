@@ -243,13 +243,22 @@ export default function SeedFunnel() {
   const [submitting, setSubmitting] = useState(false);
   const [eventDate]           = useState<EventDate>(getNextThursday);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showArrows, setShowArrows]   = useState(true);
   const TOTAL                 = 6;
   const contentRef  = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number>(0);
   const isDragging  = useRef(false);
+  const arrowTimer  = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function flashArrows() {
+    setShowArrows(true);
+    if (arrowTimer.current) clearTimeout(arrowTimer.current);
+    arrowTimer.current = setTimeout(() => setShowArrows(false), 2500);
+  }
 
   useEffect(() => {
     setForm((p) => ({ ...p, dialCode: detectDialCode() }));
+    flashArrows();
   }, []);
 
   function goToStep(n: number) {
@@ -270,6 +279,7 @@ export default function SeedFunnel() {
         el.style.transform  = "translateX(0)";
         setTimeout(() => setIsAnimating(false), 320);
       }));
+      flashArrows();
     }, 320);
   }
 
@@ -356,12 +366,14 @@ export default function SeedFunnel() {
 
         {/* Flecha izquierda */}
         {step >= 1 && step <= 4 && (
-          <button type="button" onClick={() => goToStep(step - 1)} aria-label="Paso anterior"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full transition-all duration-200 active:scale-90 select-none md:left-4"
+          <button type="button" onClick={() => { flashArrows(); goToStep(step - 1); }} aria-label="Paso anterior"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:left-4"
             style={{ width:"44px", height:"44px",
               background:"rgba(20,201,184,0.08)", border:"1.5px solid rgba(20,201,184,0.35)",
-              boxShadow:"0 0 14px rgba(20,201,184,0.25)", color:"#14C9B8", cursor:"pointer" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
+              boxShadow:"0 0 14px rgba(20,201,184,0.25)", color:"#14C9B8", cursor:"pointer",
+              opacity: showArrows ? 1 : 0, transition:"opacity 0.5s ease, box-shadow 0.2s, background 0.2s",
+              pointerEvents: showArrows ? "auto" : "none" }}
+            onMouseEnter={(e) => { flashArrows(); (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.25)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.08)"; }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -371,12 +383,14 @@ export default function SeedFunnel() {
 
         {/* Flecha derecha */}
         {step >= 0 && step <= 3 && (
-          <button type="button" onClick={() => goToStep(step + 1)} aria-label="Paso siguiente"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full transition-all duration-200 active:scale-90 select-none md:right-4"
+          <button type="button" onClick={() => { flashArrows(); goToStep(step + 1); }} aria-label="Paso siguiente"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:right-4"
             style={{ width:"44px", height:"44px",
               background:"rgba(20,201,184,0.08)", border:"1.5px solid rgba(20,201,184,0.35)",
-              boxShadow:"0 0 14px rgba(20,201,184,0.25)", color:"#14C9B8", cursor:"pointer" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
+              boxShadow:"0 0 14px rgba(20,201,184,0.25)", color:"#14C9B8", cursor:"pointer",
+              opacity: showArrows ? 1 : 0, transition:"opacity 0.5s ease, box-shadow 0.2s, background 0.2s",
+              pointerEvents: showArrows ? "auto" : "none" }}
+            onMouseEnter={(e) => { flashArrows(); (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.25)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.08)"; }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -645,14 +659,12 @@ export default function SeedFunnel() {
       </div>
 
       {/* ── STICKY FOOTER ─────────────────────────────────────────────────────── */}
-      <div className="flex-shrink-0 relative z-10 px-5 md:px-16 pt-3 pb-4"
+      <div className="flex-shrink-0 relative z-10 px-5 md:px-16 pt-2 pb-3"
         style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
         <div style={{ maxWidth:"900px", margin:"0 auto" }}>
 
           {step >= 0 && step <= 4 && (
-            <div className="flex flex-col gap-3">
-
-              {/* Botón principal de registro */}
+            <div className="flex flex-col gap-2">
               <TealBtn onClick={() => goToStep(5)}>
                 {step === 0 ? COPY.step0.cta :
                  step === 1 ? COPY.step1.cta :
@@ -660,28 +672,9 @@ export default function SeedFunnel() {
                  step === 3 ? COPY.step3.cta :
                  COPY.step4.cta}
               </TealBtn>
-
-              <p className="text-center" style={{ color:"#9aa3b2", fontSize:"0.9rem", letterSpacing:"0.05em" }}>
+              <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
                 Paso {step + 1} de 5
               </p>
-
-              {/* Dots de progreso */}
-              <div className="flex items-center justify-center gap-1" role="tablist" aria-label="Pasos del seminario">
-                {[0,1,2,3,4].map((i) => (
-                  <button key={i} type="button" role="tab"
-                    aria-selected={i === step}
-                    aria-label={`Paso ${i + 1} de 5`}
-                    onClick={() => goToStep(i)}
-                    className="flex items-center justify-center transition-all duration-300"
-                    style={{ width:"44px", height:"44px", background:"none", border:"none", cursor:"pointer", padding:0, flexShrink:0 }}>
-                    <span className="rounded-full transition-all duration-300 block"
-                      style={{ width: i === step ? "22px" : "8px", height:"8px",
-                        background: i === step ? "#14C9B8" : "#2a3347",
-                        boxShadow: i === step ? "0 0 8px rgba(20,201,184,0.5)" : "none" }}/>
-                  </button>
-                ))}
-              </div>
-
             </div>
           )}
 
