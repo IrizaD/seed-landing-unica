@@ -111,7 +111,7 @@ function SlideBarChart({ data, label }: { data: { slide_numero: number }[]; labe
                 <div style={{ width:"100%", height:`${barH}px`, background:"linear-gradient(to top, #14C9B8, rgba(20,201,184,0.4))", borderRadius:"6px 6px 0 0" }}/>
               </div>
               <span style={{ color:"#9aa3b2", fontSize:"11px", textAlign:"center", lineHeight:1.3 }}>
-                {STEP_NAMES[k] ?? `Paso ${k}`}
+                Paso {Number(k) + 1}
               </span>
             </div>
           );
