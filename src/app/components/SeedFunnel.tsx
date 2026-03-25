@@ -395,15 +395,13 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
         {/* Flecha izquierda */}
         {step >= 1 && step <= 4 && (
           <button type="button" onClick={() => goToStep(step - 1)} aria-label="Paso anterior"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:left-4"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:left-4 animate-cta-pulse"
             style={{ width:"44px", height:"44px",
-              background:"rgba(20,201,184,0.08)", border:"1.5px solid rgba(20,201,184,0.35)",
-              boxShadow:"0 0 14px rgba(20,201,184,0.25)", color:"#14C9B8", cursor:"pointer",
-              transition:"box-shadow 0.2s, background 0.2s" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.25)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.08)"; }}>
+              background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
+              border:"none", color:"#fff", cursor:"pointer",
+              textShadow:"0 1px 4px rgba(0,0,0,0.4)" }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         )}
@@ -411,15 +409,13 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
         {/* Flecha derecha */}
         {step >= 0 && step <= 4 && (
           <button type="button" onClick={() => goToStep(step + 1)} aria-label="Paso siguiente"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:right-4"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:right-4 animate-cta-pulse"
             style={{ width:"44px", height:"44px",
-              background:"rgba(20,201,184,0.08)", border:"1.5px solid rgba(20,201,184,0.35)",
-              boxShadow:"0 0 14px rgba(20,201,184,0.25)", color:"#14C9B8", cursor:"pointer",
-              transition:"box-shadow 0.2s, background 0.2s" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.25)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.08)"; }}>
+              background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
+              border:"none", color:"#fff", cursor:"pointer",
+              textShadow:"0 1px 4px rgba(0,0,0,0.4)" }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         )}
