@@ -1,12 +1,13 @@
 export interface ParsedUA {
   tipo:        "📱 Mobile" | "🖥️ Desktop" | "📟 Tablet";
-  os:          string;
+  os:          string;   // normalizado para agrupar (ej. "iOS", "Android")
+  osDetail:    string;   // con versión exacta (ej. "iOS 18.7", "Android 13")
   browser:     string;
-  dispositivo: string; // resumen legible
+  dispositivo: string;   // resumen legible
 }
 
 export function parseUA(ua: string): ParsedUA {
-  if (!ua) return { tipo:"🖥️ Desktop", os:"Desconocido", browser:"Desconocido", dispositivo:"Desconocido" };
+  if (!ua) return { tipo:"🖥️ Desktop", os:"Desconocido", osDetail:"Desconocido", browser:"Desconocido", dispositivo:"Desconocido" };
 
   // ── Tipo ──────────────────────────────────────────────
   const isTablet = /iPad|Tablet|PlayBook|Silk/i.test(ua) || (/Android/i.test(ua) && !/Mobile/i.test(ua));
@@ -14,23 +15,31 @@ export function parseUA(ua: string): ParsedUA {
   const tipo = isTablet ? "📟 Tablet" : isMobile ? "📱 Mobile" : "🖥️ Desktop";
 
   // ── OS ────────────────────────────────────────────────
-  let os = "Otro";
+  let os       = "Otro";
+  let osDetail = "Otro";
+
   if (/iPhone|iPod/.test(ua)) {
     const v = ua.match(/OS (\d+[_\d]*)/);
-    os = `iOS ${v ? v[1].replace(/_/g, ".") : ""}`.trim();
+    const ver = v ? v[1].replace(/_/g, ".") : "";
+    os       = "iOS";
+    osDetail = `iOS ${ver}`.trim();
   } else if (/iPad/.test(ua)) {
     const v = ua.match(/OS (\d+[_\d]*)/);
-    os = `iPadOS ${v ? v[1].replace(/_/g, ".") : ""}`.trim();
+    const ver = v ? v[1].replace(/_/g, ".") : "";
+    os       = "iPadOS";
+    osDetail = `iPadOS ${ver}`.trim();
   } else if (/Android/.test(ua)) {
     const v = ua.match(/Android (\d+\.?\d*)/);
-    os = `Android ${v ? v[1] : ""}`.trim();
-  } else if (/Windows NT 10/.test(ua))  os = "Windows 10/11";
-  else if (/Windows NT 6\.3/.test(ua))  os = "Windows 8.1";
-  else if (/Windows NT 6\.1/.test(ua))  os = "Windows 7";
-  else if (/Windows/.test(ua))          os = "Windows";
-  else if (/Mac OS X/.test(ua))         os = "macOS";
-  else if (/CrOS/.test(ua))             os = "ChromeOS";
-  else if (/Linux/.test(ua))            os = "Linux";
+    const ver = v ? v[1] : "";
+    os       = "Android";
+    osDetail = `Android ${ver}`.trim();
+  } else if (/Windows NT 10/.test(ua))  { os = "Windows 10/11"; osDetail = os; }
+  else if (/Windows NT 6\.3/.test(ua))  { os = "Windows 8.1";  osDetail = os; }
+  else if (/Windows NT 6\.1/.test(ua))  { os = "Windows 7";    osDetail = os; }
+  else if (/Windows/.test(ua))          { os = "Windows";      osDetail = os; }
+  else if (/Mac OS X/.test(ua))         { os = "macOS";        osDetail = os; }
+  else if (/CrOS/.test(ua))             { os = "ChromeOS";     osDetail = os; }
+  else if (/Linux/.test(ua))            { os = "Linux";        osDetail = os; }
 
   // ── Browser ───────────────────────────────────────────
   let browser = "Otro";
@@ -44,9 +53,9 @@ export function parseUA(ua: string): ParsedUA {
   else if (/Safari\//.test(ua))                browser = "Safari";
 
   // ── Resumen legible ───────────────────────────────────
-  const dispositivo = `${tipo} · ${os} · ${browser}`;
+  const dispositivo = `${tipo} · ${osDetail} · ${browser}`;
 
-  return { tipo, os, browser, dispositivo };
+  return { tipo, os, osDetail, browser, dispositivo };
 }
 
 // Agrupa un array por una función clave y cuenta ocurrencias

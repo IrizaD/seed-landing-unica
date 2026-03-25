@@ -332,7 +332,7 @@ function SeccionLeads({ slug }: { slug: string }) {
                           <div style={{ display:"flex", flexWrap:"wrap", gap:"8px 24px" }}>
                             {[
                               { label:"Dispositivo", value: ua.tipo },
-                              { label:"OS",          value: ua.os },
+                              { label:"OS",          value: ua.osDetail },
                               { label:"Navegador",   value: ua.browser },
                               { label:"UTM Medium",  value: l.utm_medium  || "—" },
                               { label:"UTM Campaign",value: l.utm_campaign || "—" },
