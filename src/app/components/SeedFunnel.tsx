@@ -265,11 +265,11 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
     // Deep linking: ?step=X
     const params = new URLSearchParams(window.location.search);
     const stepParam = parseInt(params.get("step") ?? "0", 10);
-    if (!isNaN(stepParam) && stepParam >= 0 && stepParam <= 5) {
-      setStep(stepParam);
-    }
+    const initialStep = (!isNaN(stepParam) && stepParam >= 0 && stepParam <= 5) ? stepParam : 0;
+    setStep(initialStep);
+    trackStep(initialStep);
     flashArrows();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function goToStep(n: number, fromCta = false) {
     if (isAnimating) return;
