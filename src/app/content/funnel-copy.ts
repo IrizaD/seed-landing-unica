@@ -14,7 +14,7 @@ export const COPY = {
   step0: {
     headlineLine1: "Aprende a vender",
     headlineLine2: "por internet",           // se muestra en teal e itálica
-    body: "Un seminario gratuito y en vivo con Jorge Serratos y Manuel de León para llevar tu negocio a donde tus clientes ya están — sin necesitar saber de tecnología.",
+    body: "Un seminario gratuito y en vivo con Jorge Serratos y Manuel de León para llevar tu negocio a donde tus clientes ya están — aunque no sepas nada de tecnología.",
     imageAlt: "Jorge Serratos y Manuel de León",
     cta: "VER CÓMO →",
   },
@@ -25,12 +25,12 @@ export const COPY = {
     headlineLine2: "frena tu negocio",
     rows: [
       { icon: "📍", text: "Tu mercado se limita a quien te puede ver o escuchar en persona" },
-      { icon: "⏳", text: "Cada peso que entra requiere que tú estés trabajando detrás" },
-      { icon: "📉", text: "Hay negocios como el tuyo escalando en digital todos los días — sin que tú lo notes" },
+      { icon: "⏳", text: "Si tú no estás, no hay venta. El negocio para cuando tú paras" },
+      { icon: "📉", text: "Negocios como el tuyo están creciendo en internet todos los días mientras tú buscas por dónde empezar" },
       { icon: "🔍", text: "Hay demasiada información, ninguna ruta clara y el tiempo se va sin avanzar" },
     ],
     calloutBold: "La diferencia no es la tecnología.",
-    calloutBody: " Es que alguien ya les mostró el mapa correcto.",
+    calloutBody: " Es tener el método correcto y a alguien que te lo enseñe.",
     cta: "QUIERO ESE MAPA →",
   },
 
@@ -50,24 +50,24 @@ export const COPY = {
 
   // ── STEP 3: CREDIBILIDAD ──────────────────────────────────────────────────
   step3: {
-    headlineLine1: "No teorías.",
-    headlineLine2: "Experiencia real.",      // se muestra en teal
+    headlineLine1: "Aprende de quienes",
+    headlineLine2: "ya lo lograron",      // se muestra en teal
     speakers: [
       {
         initials: "JS",
         name: "Jorge Serratos",
         title: "Conferencista · Autor Bestseller",
-        bio: "Creó el movimiento Sinergéticos y el podcast #1 de negocios en México según Spotify. Más de 100K emprendedores en México y EE.UU. ya aplicaron su método para cruzar al mundo digital.",
+        bio: "Creó el movimiento Sinergéticos y el podcast #1 de negocios en México según Spotify. Más de 100K emprendedores en México y EE.UU. ya transformaron su negocio con su método.",
       },
       {
         initials: "ML",
         name: "Manuel de León",
         title: "Empresario & Conferencista",
-        bio: "Tomó sus propios negocios del modelo tradicional al digital y documentó exactamente cómo lo hizo. En el seminario comparte ese proceso, paso a paso.",
+        bio: "Llevó sus propios negocios del mundo físico al digital y documentó exactamente cómo lo hizo. En el seminario comparte ese proceso, paso a paso.",
       },
     ],
     stats: [
-      { number: "+100K", label: "emprendedores impactados" },
+      { number: "+100K", label: "negocios transformados" },
       { number: "#1",    label: "podcast de negocios en México" },
       { number: "100%",  label: "en vivo y gratis" },
     ],
@@ -84,7 +84,7 @@ export const COPY = {
       { icon: "✅", text: "Gratis. Sin costos al final ni sorpresas.", boldWord: "Gratis" },
       { icon: "💻", text: "En línea, desde tu computadora o teléfono" },
       { icon: "⚡", text: "En vivo con Jorge y Manuel — les puedes preguntar directamente" },
-      { icon: "🎯", text: "Los lugares se asignan conforme se registran" },
+      { icon: "🎯", text: "Los lugares se asignan por orden de llegada" },
     ],
     cta: "RESERVAR MI LUGAR →",
   },
@@ -108,7 +108,7 @@ export const COPY = {
 
   // ── STEP 6: GRACIAS ───────────────────────────────────────────────────────
   step6: {
-    badge: "¡Estás dentro!",
+    badge: "¡Quedaste registrado!",
     headlineLine1: "Bienvenido al seminario,",  // se añade el nombre del usuario al final
     body: "Ya tienes tu lugar. Revisa tu correo y WhatsApp — te mandamos los detalles en los próximos minutos. Si no llega, revisa spam.",
     detailsLabel: "Detalles del evento",
