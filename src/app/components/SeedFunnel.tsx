@@ -690,10 +690,12 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
           {step >= 0 && step <= 4 && (
             <div className="flex flex-col gap-2">
               <button onClick={() => goToStep(5, true)}
-                className="w-full rounded-xl active:scale-[0.98] animate-cta-pulse"
-                style={{ background:"#22c55e", color:"#000", padding:"15px 24px",
-                  fontSize:"1.0625rem", fontFamily:"var(--font-barlow)", fontWeight:900,
-                  letterSpacing:"0.04em", lineHeight:1.2, cursor:"pointer", border:"none" }}>
+                className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
+                style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
+                  color:"#0a0500", padding:"17px 24px",
+                  fontSize:"1.2rem", fontFamily:"var(--font-barlow)", fontWeight:900,
+                  letterSpacing:"0.07em", lineHeight:1.2, cursor:"pointer", border:"none",
+                  textShadow:"0 1px 0 rgba(255,255,255,0.15)" }}>
                 REGISTRARME AHORA →
               </button>
               <div style={{ maxHeight: showArrows ? "2rem" : "0", overflow:"hidden",
