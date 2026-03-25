@@ -514,11 +514,9 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
                   {COPY.step3.speakers.map((s, i) => (
                     <Card key={s.initials}>
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="flex-shrink-0 rounded-full flex items-center justify-center font-black"
-                          style={{ width:"40px", height:"40px", fontSize:"14px",
-                            background: i === 0 ? "linear-gradient(135deg,#14C9B8,#0a8a80)" : "linear-gradient(135deg,#1e3a5f,#2d6aad)",
-                            color: i === 0 ? "#06080f" : "#7ab3d4" }}>
-                          {s.initials}
+                        <div className="flex-shrink-0 rounded-full overflow-hidden"
+                          style={{ width:"40px", height:"40px" }}>
+                          <Image src={s.photo} alt={s.name} width={40} height={40} style={{ objectFit:"cover" }} />
                         </div>
                         <div>
                           <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>{s.name}</p>
