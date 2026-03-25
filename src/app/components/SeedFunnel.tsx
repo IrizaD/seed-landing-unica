@@ -165,12 +165,11 @@ function TealBtn({ children, onClick, type = "button", form, disabled }: {
 }) {
   return (
     <button type={type} form={form} onClick={onClick} disabled={disabled}
-      className="w-full rounded-xl transition-all duration-200 active:scale-[0.98]"
-      style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#06080f", padding:"15px 24px",
-        fontSize:"1.0625rem", fontFamily:"var(--font-barlow)", fontWeight:800, letterSpacing:"0.04em",
-        lineHeight:1.2, cursor: disabled ? "not-allowed" : "pointer" }}
-      onMouseEnter={(e) => { if (!disabled) (e.currentTarget as HTMLElement).style.background = "#1FE5D2"; }}
-      onMouseLeave={(e) => { if (!disabled) (e.currentTarget as HTMLElement).style.background = "#14C9B8"; }}>
+      className={`w-full rounded-xl active:scale-[0.98] ${disabled ? "" : "animate-cta-pulse"}`}
+      style={{ background: disabled ? "#0a8a80" : "#14C9B8", color:"#fff", padding:"17px 24px",
+        fontSize:"1.2rem", fontFamily:"var(--font-poppins)", fontWeight:900, letterSpacing:"0.05em",
+        lineHeight:1.2, cursor: disabled ? "not-allowed" : "pointer", border:"none",
+        textShadow: disabled ? "none" : "0 2px 6px rgba(0,0,0,0.35)" }}>
       {children}
     </button>
   );
