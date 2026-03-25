@@ -22,7 +22,7 @@ export const COPY = {
   // ── STEP 1: EL PROBLEMA — dolor (Before del BAB) ──────────────────────────
   step1: {
     headlineLine1: "El problema",
-    headlineLine2: "no es el esfuerzo",
+    headlineLine2: "no es el esfuerzo, el problema es",
     rows: [
       { icon: "📍", text: "Solo vendes a quien ya te conoce" },
       { icon: "⏳", text: "El día que no trabajas, no entra dinero" },
@@ -40,8 +40,8 @@ export const COPY = {
     headlineLine2: "en el seminario",
     rows: [
       { icon: "📱", label: "Redes sociales:", text: " publica contenido que vende, sin necesitar miles de seguidores" },
-      { icon: "🎯", label: "Publicidad:",     text: " anuncios que generan clientes reales, no solo likes" },
-      { icon: "🤖", label: "IA:",             text: " herramientas que te ahorran horas de trabajo desde esta semana" },
+      { icon: "🎯", label: "Publicidad:",     text: " genera anuncios que traigan a clientes reales, no solo likes" },
+      { icon: "🤖", label: "IA:",             text: " herramientas que te ahorran horas de trabajo desde hoy" },
       { icon: "🌐", label: "Escala:",         text: " llega a clientes en cualquier ciudad sin moverte de donde estás" },
       { icon: "🤝", label: "Networking:",     text: " conéctate con emprendedores que van en la misma dirección" },
     ],
@@ -57,18 +57,18 @@ export const COPY = {
         initials: "JS",
         name: "Jorge Serratos",
         title: "Conferencista · Autor Bestseller",
-        bio: "Fundador de Sinergéticos y del podcast #1 de negocios en México según Spotify. Más de 100K emprendedores en México y EE.UU. han transformado su negocio con su método.",
+        bio: "Empresario, Fundador del movimiento Sinergético y del podcast #1 de negocios en México según Spotify. Ayudando a más de 100K emprendedores en México y EE.UU. a transformar su negocio.",
       },
       {
         initials: "ML",
         name: "Manuel de León",
         title: "Empresario & Conferencista",
-        bio: "Tomó negocios tradicionales y los llevó a vender en línea. En el seminario te explica cómo lo hizo, sin rodeos.",
+        bio: "Experto en ventas y marketing digital. Tomó negocios tradicionales y los llevó a vender en línea. En el seminario te explica cómo lo hizo, sin rodeos.",
       },
     ],
     stats: [
       { number: "+100K", label: "personas impactadas" },
-      { number: "#1",    label: "podcast de negocios" },
+      { number: "Podcast #1",    label: "de negocios en México" },
       { number: "100%",  label: "en vivo y gratis" },
     ],
     cta: "VER CUÁNDO ES →",
