@@ -366,14 +366,13 @@ export default function SeedFunnel() {
 
         {/* Flecha izquierda */}
         {step >= 1 && step <= 4 && (
-          <button type="button" onClick={() => { flashArrows(); goToStep(step - 1); }} aria-label="Paso anterior"
+          <button type="button" onClick={() => goToStep(step - 1)} aria-label="Paso anterior"
             className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:left-4"
             style={{ width:"44px", height:"44px",
               background:"rgba(20,201,184,0.08)", border:"1.5px solid rgba(20,201,184,0.35)",
               boxShadow:"0 0 14px rgba(20,201,184,0.25)", color:"#14C9B8", cursor:"pointer",
-              opacity: showArrows ? 1 : 0, transition:"opacity 0.5s ease, box-shadow 0.2s, background 0.2s",
-              pointerEvents: showArrows ? "auto" : "none" }}
-            onMouseEnter={(e) => { flashArrows(); (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
+              transition:"box-shadow 0.2s, background 0.2s" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.25)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.08)"; }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -383,14 +382,13 @@ export default function SeedFunnel() {
 
         {/* Flecha derecha */}
         {step >= 0 && step <= 3 && (
-          <button type="button" onClick={() => { flashArrows(); goToStep(step + 1); }} aria-label="Paso siguiente"
+          <button type="button" onClick={() => goToStep(step + 1)} aria-label="Paso siguiente"
             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none md:right-4"
             style={{ width:"44px", height:"44px",
               background:"rgba(20,201,184,0.08)", border:"1.5px solid rgba(20,201,184,0.35)",
               boxShadow:"0 0 14px rgba(20,201,184,0.25)", color:"#14C9B8", cursor:"pointer",
-              opacity: showArrows ? 1 : 0, transition:"opacity 0.5s ease, box-shadow 0.2s, background 0.2s",
-              pointerEvents: showArrows ? "auto" : "none" }}
-            onMouseEnter={(e) => { flashArrows(); (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
+              transition:"box-shadow 0.2s, background 0.2s" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 22px rgba(20,201,184,0.55)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.16)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(20,201,184,0.25)"; (e.currentTarget as HTMLElement).style.background = "rgba(20,201,184,0.08)"; }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -672,7 +670,8 @@ export default function SeedFunnel() {
                  step === 3 ? COPY.step3.cta :
                  COPY.step4.cta}
               </TealBtn>
-              <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
+              <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em",
+                opacity: showArrows ? 1 : 0, transition:"opacity 0.6s ease" }}>
                 Paso {step + 1} de 5
               </p>
             </div>
