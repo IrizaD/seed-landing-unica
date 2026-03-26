@@ -378,10 +378,11 @@ export default function QuizFunnel({
         {/* Flecha izquierda */}
         {step >= 1 && step <= 4 && (
           <button type="button" onClick={() => goToStep(step - 1)} aria-label="Paso anterior"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none arrow-left animate-cta-pulse"
             style={{ width:"44px", height:"44px",
               background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
-              border:"none", color:"#fff", cursor:"pointer" }}>
+              border:"none", color:"#fff", cursor:"pointer",
+              textShadow:"0 1px 4px rgba(0,0,0,0.4)" }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M10 3L5 8l5 5" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -391,10 +392,11 @@ export default function QuizFunnel({
         {/* Flecha derecha */}
         {step >= 0 && step <= 4 && (
           <button type="button" onClick={() => goToStep(step + 1)} aria-label="Paso siguiente"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none arrow-right animate-cta-pulse"
             style={{ width:"44px", height:"44px",
               background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
-              border:"none", color:"#fff", cursor:"pointer" }}>
+              border:"none", color:"#fff", cursor:"pointer",
+              textShadow:"0 1px 4px rgba(0,0,0,0.4)" }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M6 3l5 5-5 5" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
