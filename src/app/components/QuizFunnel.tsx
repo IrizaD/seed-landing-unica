@@ -507,28 +507,28 @@ export default function QuizFunnel({
                     {COPY.step3.headlineLine1}{" "}
                     <span style={{ color:"#14C9B8" }}>{COPY.step3.headlineLine2}</span>
                   </Headline>
-                  <div className="space-y-2 mb-3">
+                  {/* Mentores — solo foto, nombre y título */}
+                  <div className="grid grid-cols-2 gap-3 mb-3">
                     {COPY.step3.speakers.map((s) => (
-                      <Card key={s.initials}>
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="flex-shrink-0 rounded-full overflow-hidden" style={{ width:"40px", height:"40px" }}>
-                            <Image src={s.photo} alt={s.name} width={40} height={40} style={{ objectFit:"cover" }} />
-                          </div>
-                          <div>
-                            <p style={{ color:"#fff", fontWeight:700, fontSize:"1.0625rem" }}>{s.name}</p>
-                            <p style={{ color:"#9aa3b2", fontSize:"14px" }}>{s.title}</p>
-                          </div>
+                      <div key={s.initials} className="flex items-center gap-3 rounded-xl border"
+                        style={{ background:"#0d1117", borderColor:"#1e2535", padding:"12px 14px" }}>
+                        <div className="flex-shrink-0 rounded-full overflow-hidden" style={{ width:"44px", height:"44px" }}>
+                          <Image src={s.photo} alt={s.name} width={44} height={44} style={{ objectFit:"cover" }} />
                         </div>
-                        <p style={{ color:"#cdd5e0", fontSize:"1rem", lineHeight:1.65 }}>{s.bio}</p>
-                      </Card>
+                        <div>
+                          <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem", lineHeight:1.2 }}>{s.name}</p>
+                          <p style={{ color:"#9aa3b2", fontSize:"12px", marginTop:"2px" }}>{s.title}</p>
+                        </div>
+                      </div>
                     ))}
                   </div>
-                  <div className="grid grid-cols-3 gap-2 mb-4">
+                  {/* Stats compactos en fila */}
+                  <div className="flex gap-2 mb-4">
                     {COPY.step3.stats.map((s) => (
-                      <div key={s.number} className="text-center rounded-xl border py-3"
+                      <div key={s.number} className="flex-1 text-center rounded-xl border py-2"
                         style={{ background:"#0d1117", borderColor:"#1e2535" }}>
-                        <p style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.4rem" }}>{s.number}</p>
-                        <p style={{ color:"#9aa3b2", fontSize:"15px", marginTop:"4px" }}>{s.label}</p>
+                        <p style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.1rem", lineHeight:1 }}>{s.number}</p>
+                        <p style={{ color:"#9aa3b2", fontSize:"11px", marginTop:"3px", lineHeight:1.3 }}>{s.label}</p>
                       </div>
                     ))}
                   </div>
