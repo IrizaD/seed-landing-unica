@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { COPY } from "@/app/content/funnel-copy";
+import { COPY as DEFAULT_COPY } from "@/app/content/funnel-copy";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -237,7 +237,7 @@ function Card({ children }: { children: React.ReactNode }) {
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: string }) {
+export default function SeedFunnel({ fbEventName = "Lead", copy: COPY = DEFAULT_COPY, slug = "seed-mexico" }: { fbEventName?: string; copy?: typeof DEFAULT_COPY; slug?: string }) {
   const [step, setStep]       = useState(0);
   const [form, setForm]       = useState<FormData>({ nombre:"", phone:"", dialCode:"+52", email:"" });
   const [submitting, setSubmitting] = useState(false);
@@ -251,7 +251,7 @@ export default function SeedFunnel({ fbEventName = "Lead" }: { fbEventName?: str
   const arrowTimer  = useRef<ReturnType<typeof setTimeout> | null>(null);
   const desdeSlide  = useRef(0); // slide donde el usuario hizo clic en "Registrarme ahora"
 
-  const { trackStep, trackCta, submitRegistro } = useAnalytics("seed-mexico");
+  const { trackStep, trackCta, submitRegistro } = useAnalytics(slug);
 
   function flashArrows() {
     setShowArrows(true);
