@@ -13,7 +13,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { slug, nombre, fb_pixel_id = "", ghl_webhook = "" } = body;
+  const { slug, nombre, fb_pixel_id = "", fb_event_name = "Lead", ghl_webhook = "" } = body;
 
   if (!slug || !nombre) {
     return NextResponse.json({ error: "slug y nombre son requeridos" }, { status: 400 });
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
   const { data, error } = await supabaseAdmin
     .from("funnels")
-    .insert({ slug, nombre, fb_pixel_id, ghl_webhook })
+    .insert({ slug, nombre, fb_pixel_id, fb_event_name, ghl_webhook })
     .select()
     .single();
 

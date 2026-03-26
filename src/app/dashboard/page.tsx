@@ -65,8 +65,6 @@ interface MetricasData {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-const SLUG = "seed-mexico";
-
 function fmt(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("es-MX", { day:"2-digit", month:"short", year:"numeric" });
 }
@@ -81,16 +79,6 @@ function StatCard({ label, value }: { label: string; value: string | number }) {
     </div>
   );
 }
-
-const STEP_NAMES: Record<string, string> = {
-  "0": "Intro",
-  "1": "Problema",
-  "2": "Solución",
-  "3": "Expertos",
-  "4": "Fecha",
-  "5": "Registro",
-  "6": "Gracias",
-};
 
 function SlideBarChart({ data, label }: { data: { slide_numero: number }[]; label: string }) {
   const counts: Record<string, number> = {};
@@ -170,6 +158,8 @@ function SeccionMetricas({ slug }: { slug: string }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+    setData(null);
     fetch(`/api/metricas?slug=${slug}`)
       .then((r) => r.json())
       .then((d) => { setData(d); setLoading(false); });
@@ -241,6 +231,8 @@ function SeccionLeads({ slug }: { slug: string }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
+    setLeads([]);
     fetch(`/api/leads?slug=${slug}`)
       .then((r) => r.json())
       .then((d) => { setLeads(Array.isArray(d) ? d : []); setLoading(false); });
@@ -358,18 +350,21 @@ function SeccionLeads({ slug }: { slug: string }) {
   );
 }
 
-function SeccionConfiguracion() {
-  const [funnels, setFunnels] = useState<Funnel[]>([]);
-  const [saving, setSaving]   = useState<string | null>(null);
-  const [saved, setSaved]     = useState<string | null>(null);
+function SeccionConfiguracion({
+  funnels,
+  onRefresh,
+  onSelectSlug,
+}: {
+  funnels: Funnel[];
+  onRefresh: () => Promise<void>;
+  onSelectSlug: (slug: string) => void;
+}) {
+  const [localFunnels, setLocalFunnels] = useState<Funnel[]>(funnels);
+  const [saving,    setSaving]    = useState<string | null>(null);
+  const [saved,     setSaved]     = useState<string | null>(null);
+  const [duplicating, setDuplicating] = useState<string | null>(null);
 
-  const loadFunnels = useCallback(async () => {
-    const r = await fetch("/api/funnels");
-    const d = await r.json();
-    setFunnels(Array.isArray(d) ? d : []);
-  }, []);
-
-  useEffect(() => { loadFunnels(); }, [loadFunnels]);
+  useEffect(() => { setLocalFunnels(funnels); }, [funnels]);
 
   async function handleSave(funnel: Funnel) {
     setSaving(funnel.slug);
@@ -383,15 +378,46 @@ function SeccionConfiguracion() {
     setTimeout(() => setSaved(null), 2000);
   }
 
+  async function handleDuplicate(funnel: Funnel) {
+    setDuplicating(funnel.slug);
+    const newSlug = `${funnel.slug}-copia`;
+    const res = await fetch("/api/funnels", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        slug: newSlug,
+        nombre: `${funnel.nombre} (copia)`,
+        fb_pixel_id: funnel.fb_pixel_id,
+        fb_event_name: funnel.fb_event_name,
+        ghl_webhook: funnel.ghl_webhook,
+      }),
+    });
+    setDuplicating(null);
+    if (res.ok) {
+      await onRefresh();
+      onSelectSlug(newSlug);
+    }
+  }
+
   function update(slug: string, key: keyof Funnel, value: string) {
-    setFunnels((prev) => prev.map((f) => f.slug === slug ? { ...f, [key]: value } : f));
+    setLocalFunnels((prev) => prev.map((f) => f.slug === slug ? { ...f, [key]: value } : f));
   }
 
   return (
     <div style={{ display:"flex", flexDirection:"column", gap:"20px" }}>
-      {funnels.map((f) => (
+      {localFunnels.map((f) => (
         <div key={f.slug} style={{ background:"#0d1117", border:"1px solid #1e2535", borderRadius:"12px", padding:"24px" }}>
-          <h3 style={{ color:"#fff", fontWeight:700, fontSize:"1.1rem", marginBottom:"4px" }}>{f.nombre}</h3>
+          <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", marginBottom:"4px" }}>
+            <h3 style={{ color:"#fff", fontWeight:700, fontSize:"1.1rem", margin:0 }}>{f.nombre}</h3>
+            <button
+              onClick={() => handleDuplicate(f)}
+              disabled={duplicating === f.slug}
+              style={{ background:"rgba(255,255,255,0.04)", border:"1px solid #1e2535", color:"#9aa3b2",
+                borderRadius:"8px", padding:"6px 14px", fontSize:"13px", fontWeight:600, cursor:"pointer",
+                opacity: duplicating === f.slug ? 0.5 : 1, flexShrink:0 }}>
+              {duplicating === f.slug ? "Duplicando..." : "Duplicar funnel"}
+            </button>
+          </div>
           <p style={{ color:"#7a8299", fontSize:"13px", marginBottom:"20px" }}>slug: {f.slug}</p>
 
           <div style={{ display:"flex", flexDirection:"column", gap:"14px" }}>
@@ -454,7 +480,7 @@ function SeccionConfiguracion() {
         </div>
       ))}
 
-      {funnels.length === 0 && (
+      {localFunnels.length === 0 && (
         <p style={{ color:"#7a8299" }}>No hay funnels configurados aún.</p>
       )}
     </div>
@@ -466,13 +492,30 @@ function SeccionConfiguracion() {
 type Tab = "metricas" | "leads" | "config";
 
 export default function DashboardPage() {
-  const [tab, setTab]   = useState<Tab>("metricas");
-  const router          = useRouter();
+  const [tab, setTab]               = useState<Tab>("metricas");
+  const [funnels, setFunnels]       = useState<Funnel[]>([]);
+  const [selectedSlug, setSelectedSlug] = useState<string>("");
+  const router                      = useRouter();
+
+  const loadFunnels = useCallback(async () => {
+    const r = await fetch("/api/funnels");
+    const d = await r.json();
+    const list: Funnel[] = Array.isArray(d) ? d : [];
+    setFunnels(list);
+    setSelectedSlug((prev) => {
+      if (prev && list.find((f) => f.slug === prev)) return prev;
+      return list[0]?.slug ?? "";
+    });
+  }, []);
+
+  useEffect(() => { loadFunnels(); }, [loadFunnels]);
 
   async function handleLogout() {
     await fetch("/api/auth/login", { method: "DELETE" });
     router.push("/dashboard/login");
   }
+
+  const selectedFunnel = funnels.find((f) => f.slug === selectedSlug);
 
   const tabs: { id: Tab; label: string; emoji: string }[] = [
     { id:"metricas", label:"Métricas", emoji:"📊" },
@@ -483,15 +526,51 @@ export default function DashboardPage() {
   return (
     <div style={{ minHeight:"100vh", background:"#06080f", color:"#fff", fontFamily:"system-ui,sans-serif" }}>
       {/* Header */}
-      <div style={{ background:"rgba(13,17,23,0.95)", borderBottom:"1px solid #1e2535", padding:"16px 24px",
-        display:"flex", alignItems:"center", justifyContent:"space-between", position:"sticky", top:0, zIndex:10 }}>
-        <div>
-          <h1 style={{ color:"#14C9B8", fontWeight:800, fontSize:"1.1rem", margin:0 }}>Dashboard SEED</h1>
-          <p style={{ color:"#7a8299", fontSize:"12px", margin:"2px 0 0" }}>seed-mexico</p>
+      <div style={{ background:"rgba(13,17,23,0.95)", borderBottom:"1px solid #1e2535", padding:"14px 24px",
+        display:"flex", alignItems:"center", justifyContent:"space-between", gap:"16px",
+        position:"sticky", top:0, zIndex:10 }}>
+
+        {/* Selector de funnel */}
+        <div style={{ display:"flex", alignItems:"center", gap:"12px", flex:1, minWidth:0 }}>
+          <span style={{ color:"#14C9B8", fontWeight:800, fontSize:"1.1rem", flexShrink:0 }}>Dashboard</span>
+          {funnels.length > 0 && (
+            <div style={{ position:"relative", flex:1, maxWidth:"320px" }}>
+              <select
+                value={selectedSlug}
+                onChange={(e) => setSelectedSlug(e.target.value)}
+                style={{
+                  width:"100%",
+                  background:"#0d1117",
+                  border:"1px solid #1e2535",
+                  color:"#fff",
+                  borderRadius:"8px",
+                  padding:"8px 32px 8px 12px",
+                  fontSize:"14px",
+                  fontWeight:600,
+                  cursor:"pointer",
+                  appearance:"none",
+                  WebkitAppearance:"none",
+                }}>
+                {funnels.map((f) => (
+                  <option key={f.slug} value={f.slug}>{f.nombre}</option>
+                ))}
+              </select>
+              <svg style={{ position:"absolute", right:"10px", top:"50%", transform:"translateY(-50%)", pointerEvents:"none" }}
+                width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 4l4 4 4-4" stroke="#7a8299" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          )}
+          {selectedFunnel && (
+            <span style={{ color:"#7a8299", fontSize:"12px", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>
+              {selectedFunnel.slug}
+            </span>
+          )}
         </div>
+
         <button onClick={handleLogout}
           style={{ background:"transparent", border:"1px solid #1e2535", color:"#9aa3b2",
-            borderRadius:"8px", padding:"8px 16px", fontSize:"13px", cursor:"pointer" }}>
+            borderRadius:"8px", padding:"8px 16px", fontSize:"13px", cursor:"pointer", flexShrink:0 }}>
           Cerrar sesión
         </button>
       </div>
@@ -510,9 +589,21 @@ export default function DashboardPage() {
 
       {/* Content */}
       <div style={{ maxWidth:"1100px", margin:"0 auto", padding:"24px 20px" }}>
-        {tab === "metricas" && <SeccionMetricas slug={SLUG} />}
-        {tab === "leads"    && <SeccionLeads    slug={SLUG} />}
-        {tab === "config"   && <SeccionConfiguracion />}
+        {!selectedSlug ? (
+          <p style={{ color:"#7a8299" }}>Cargando funnels...</p>
+        ) : (
+          <>
+            {tab === "metricas" && <SeccionMetricas slug={selectedSlug} />}
+            {tab === "leads"    && <SeccionLeads    slug={selectedSlug} />}
+            {tab === "config"   && (
+              <SeccionConfiguracion
+                funnels={funnels}
+                onRefresh={loadFunnels}
+                onSelectSlug={(slug) => { setSelectedSlug(slug); setTab("metricas"); }}
+              />
+            )}
+          </>
+        )}
       </div>
     </div>
   );
