@@ -355,8 +355,8 @@ export default function QuizFunnel({
       {/* ── CONTENT AREA ───────────────────────────────────────────────────────── */}
       <div className="flex-1 relative overflow-hidden">
 
-        {/* Flecha izquierda — solo en pasos no-quiz */}
-        {step >= 1 && step <= 4 && !isQuizStep && (
+        {/* Flecha izquierda */}
+        {step >= 1 && step <= 4 && (
           <button type="button" onClick={() => goToStep(step - 1)} aria-label="Paso anterior"
             className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none"
             style={{ width:"44px", height:"44px",
@@ -368,19 +368,8 @@ export default function QuizFunnel({
           </button>
         )}
 
-        {/* Flecha izquierda en pasos quiz — discreta */}
-        {isQuizStep && step > 1 && (
-          <button type="button" onClick={() => goToStep(step - 1)} aria-label="Volver"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90"
-            style={{ width:"36px", height:"36px", background:"rgba(255,255,255,0.05)", border:"1px solid #1e2535", cursor:"pointer" }}>
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3L5 8l5 5" stroke="#7a8299" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        )}
-
-        {/* Flecha derecha — solo en pasos no-quiz */}
-        {step >= 0 && step <= 4 && !isQuizStep && (
+        {/* Flecha derecha */}
+        {step >= 0 && step <= 4 && (
           <button type="button" onClick={() => goToStep(step + 1)} aria-label="Paso siguiente"
             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none"
             style={{ width:"44px", height:"44px",
@@ -717,17 +706,17 @@ export default function QuizFunnel({
 
             </div>{/* contentRef */}
 
-            {/* CTA desktop — solo paso 0 */}
-            {step === 0 && (
+            {/* CTA desktop — pasos 0, 3, 4 */}
+            {[0, 3, 4].includes(step) && (
               <div className="hidden md:flex flex-col gap-2 mt-4 pb-4">
-                <button onClick={() => handleCta(1)}
+                <button onClick={() => handleCta(step === 0 ? 1 : step === 3 ? 4 : 5)}
                   className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
                   style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                     color:"#fff", padding:"17px 24px",
                     fontSize:"1.2rem", fontFamily:"var(--font-poppins)", fontWeight:900,
                     letterSpacing:"0.05em", lineHeight:1.2, cursor:"pointer", border:"none",
                     textShadow:"0 2px 6px rgba(0,0,0,0.45)" }}>
-                  {COPY.step0.cta}
+                  {step === 0 ? COPY.step0.cta : step === 3 ? COPY.step3.cta : COPY.step4.cta}
                 </button>
               </div>
             )}
@@ -766,19 +755,19 @@ export default function QuizFunnel({
         </div>
       )}
 
-      {/* ── STICKY FOOTER mobile — solo paso 0 ──────────────────────────────── */}
-      {step === 0 && (
+      {/* ── STICKY FOOTER mobile — pasos 0, 3, 4 ────────────────────────────── */}
+      {[0, 3, 4].includes(step) && (
         <div className="md:hidden flex-shrink-0 relative z-10 pt-2 pb-3"
           style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
           <div className="px-14" style={{ maxWidth:"900px", margin:"0 auto" }}>
-            <button onClick={() => handleCta(1)}
+            <button onClick={() => handleCta(step === 0 ? 1 : step === 3 ? 4 : 5)}
               className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
               style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                 color:"#fff", padding:"17px 24px",
                 fontSize:"1rem", fontFamily:"var(--font-poppins)", fontWeight:900,
                 letterSpacing:"0.03em", lineHeight:1.2, cursor:"pointer", border:"none",
                 textShadow:"0 2px 6px rgba(0,0,0,0.45)", whiteSpace:"nowrap" }}>
-              {COPY.step0.cta}
+              {step === 0 ? COPY.step0.cta : step === 3 ? COPY.step3.cta : COPY.step4.cta}
             </button>
           </div>
         </div>

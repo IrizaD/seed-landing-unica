@@ -68,6 +68,7 @@ export const COPY = {
       { number: "#1",    label: "podcast de negocios en México" },
       { number: "+18 Millones", label: "de seguidores en redes" },
     ],
+    cta: "VER CUÁNDO ES →",
     question: "¿Con cuál de los dos te identificas más?",
     subtitle: "Selecciona para continuar",
     answers: [
@@ -88,6 +89,7 @@ export const COPY = {
       { icon: "⚡", text: "En vivo con Jorge y Manuel — les puedes preguntar directamente" },
       { icon: "🎯", text: "Los lugares se asignan por orden de llegada" },
     ],
+    cta: "RESERVAR MI LUGAR →",
     question: "¿Listo para reservar tu lugar?",
     subtitle: "Es gratis — sin costos ni sorpresas",
     answers: [
