@@ -1,58 +1,52 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// CONTENIDO DEL EMBUDO: seed-mexico-copia
-// Modifica aquí para personalizar este funnel.
+// CONTENIDO DEL EMBUDO: seed-mexico-qz  (formato quiz)
+// Steps 1 y 2 son preguntas con respuestas seleccionables.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const COPY = {
 
   // ── HEADER ────────────────────────────────────────────────────────────────
   header: {
-    ctaLabel: "Registrarme ahora",
     backLabel: "Atrás",
   },
 
   // ── STEP 0: HOOK ──────────────────────────────────────────────────────────
   step0: {
     headlineLine1: "Aprende a vender",
-    headlineLine2: "por internet",           // se muestra en teal e itálica
+    headlineLine2: "por internet",
     body: "Transmisión en vivo con Jorge Serratos y Manuel de León para llevar tu negocio a internet — aunque no sepas nada de tecnología.",
     imageAlt: "Jorge Serratos y Manuel de León",
-    cta: "VER CÓMO →",
+    cta: "EMPEZAR →",
   },
 
-  // ── STEP 1: EL PROBLEMA ───────────────────────────────────────────────────
+  // ── STEP 1: QUIZ — DOLOR ──────────────────────────────────────────────────
   step1: {
-    headlineLine1: "Esto es lo que",
-    headlineLine2: "frena tu negocio",
-    rows: [
-      { icon: "📍", text: "Tu mercado se limita a quien te puede ver o escuchar en persona" },
-      { icon: "⏳", text: "Si tú no estás, no hay venta. El negocio se detiene cuando no estás" },
-      { icon: "📉", text: "Negocios como el tuyo están creciendo en internet todos los días mientras tú nisiquiera has iniciado" },
-      { icon: "🔍", text: "Hay demasiada información, ninguna ruta clara y el tiempo se va sin avanzar" },
+    question: "¿Cuál es el mayor obstáculo de tu negocio hoy?",
+    subtitle: "Selecciona el que más te identifica",
+    answers: [
+      { icon: "📍", text: "Mis clientes solo son locales — no llego a más gente" },
+      { icon: "⏳", text: "Si yo paro, el negocio para. No puedo escalar" },
+      { icon: "📉", text: "La competencia está en internet y yo me estoy quedando atrás" },
+      { icon: "🔍", text: "No sé por dónde empezar sin perder tiempo y dinero" },
     ],
-    calloutBold: "La diferencia no es la tecnología.",
-    calloutBody: " Es tener el método correcto y a alguien que te lo enseñe.",
-    cta: "QUIERO ESE MAPA →",
   },
 
-  // ── STEP 2: LO QUE VAN A APRENDER ────────────────────────────────────────
+  // ── STEP 2: QUIZ — OBJETIVO ───────────────────────────────────────────────
   step2: {
-    headlineLine1: "Lo que cambia",
-    headlineLine2: "después del seminario",
-    rows: [
-      { icon: "📱", label: "Redes sociales:", text: " convierte tu perfil en una fuente constante de clientes" },
-      { icon: "🎯", label: "Publicidad:",     text: " aprende a invertir en anuncios que se pagan solos" },
-      { icon: "🤖", label: "IA:",             text: " las herramientas que hacen crecer tu negocio — y cómo aplicarlas" },
-      { icon: "🌐", label: "Escala:",         text: " vende sin que el negocio dependa de que tú estés presente" },
-      { icon: "🤝", label: "Networking:",     text: " el círculo correcto de personas acelera años de aprendizaje" },
+    question: "¿Qué es lo que más quieres lograr?",
+    subtitle: "Elige tu objetivo principal",
+    answers: [
+      { icon: "💰", text: "Generar más ventas sin que todo dependa de que yo esté" },
+      { icon: "📱", text: "Conseguir clientes por internet de forma constante" },
+      { icon: "🌐", text: "Llevar mi negocio del mundo físico al digital" },
+      { icon: "🚀", text: "Crear un sistema que trabaje para mí aunque yo no esté" },
     ],
-    cta: "¿QUIÉNES LO ENSEÑAN? →",
   },
 
   // ── STEP 3: CREDIBILIDAD ──────────────────────────────────────────────────
   step3: {
     headlineLine1: "Aprende de quienes",
-    headlineLine2: "ya lo lograron",      // se muestra en teal
+    headlineLine2: "ya lo lograron",
     speakers: [
       {
         initials: "JS",
@@ -72,7 +66,7 @@ export const COPY = {
     stats: [
       { number: "+100K", label: "negocios transformados" },
       { number: "#1",    label: "podcast de negocios en México" },
-      { number: "+18 Millones",  label: "de seguidores en redes" },
+      { number: "+18 Millones", label: "de seguidores en redes" },
     ],
     cta: "VER CUÁNDO ES →",
   },
@@ -80,7 +74,7 @@ export const COPY = {
   // ── STEP 4: FECHA / URGENCIA ──────────────────────────────────────────────
   step4: {
     headlineLine1: "Todavía",
-    headlineLine2: "llegas a tiempo",        // se muestra en teal
+    headlineLine2: "llegas a tiempo",
     eventTime: "8:00 PM hora México · En vivo · Gratis",
     howItWorksLabel: "Cómo funciona",
     rows: [
@@ -110,11 +104,11 @@ export const COPY = {
   // ── STEP 6: GRACIAS ───────────────────────────────────────────────────────
   step6: {
     badge: "¡Quedaste registrado!",
-    headlineLine1: "Bienvenido al seminario,",  // se añade el nombre del usuario al final
+    headlineLine1: "Bienvenido al seminario,",
     body: "Ya tienes tu lugar. Revisa tu correo y WhatsApp — te mandamos los detalles en los próximos minutos. Si no llega, revisa spam.",
     detailsLabel: "Detalles del evento",
     rows: [
-      { icon: "📅", text: "· 8:00 PM hora México" },   // la fecha se añade dinámicamente antes del texto
+      { icon: "📅", text: "· 8:00 PM hora México" },
       { icon: "💻", text: "Seminario en vivo · 100% online" },
       { icon: "🎯", text: "Con Jorge Serratos y Manuel de León" },
     ],

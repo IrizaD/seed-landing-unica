@@ -2,12 +2,13 @@ import { notFound } from "next/navigation";
 import { supabaseAdmin } from "@/lib/supabase";
 import { FacebookPixel } from "@/app/components/FacebookPixel";
 import SeedFunnel from "@/app/components/SeedFunnel";
-import { FUNNEL_COPY } from "@/config/funnels";
+import QuizFunnel from "@/app/components/QuizFunnel";
+import { FUNNELS } from "@/config/funnels";
 
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  return Object.keys(FUNNEL_COPY).map((slug) => ({ slug }));
+  return Object.keys(FUNNELS).map((slug) => ({ slug }));
 }
 
 export default async function FunnelPage({
@@ -17,8 +18,8 @@ export default async function FunnelPage({
 }) {
   const { slug } = await params;
 
-  const copy = FUNNEL_COPY[slug];
-  if (!copy) notFound();
+  const funnel = FUNNELS[slug];
+  if (!funnel) notFound();
 
   let pixelId = "";
   let fbEventName = "Lead";
@@ -37,7 +38,11 @@ export default async function FunnelPage({
   return (
     <>
       <FacebookPixel pixelId={pixelId} />
-      <SeedFunnel fbEventName={fbEventName} copy={copy} slug={slug} />
+      {funnel.type === "quiz" ? (
+        <QuizFunnel fbEventName={fbEventName} copy={funnel.copy} slug={slug} />
+      ) : (
+        <SeedFunnel fbEventName={fbEventName} copy={funnel.copy} slug={slug} />
+      )}
     </>
   );
 }
