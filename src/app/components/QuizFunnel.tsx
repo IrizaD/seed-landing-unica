@@ -188,34 +188,54 @@ function Card({ children }: { children: React.ReactNode }) {
 
 // ─── Quiz card ────────────────────────────────────────────────────────────────
 
-function QuizCard({ answer, selected, disabled, onClick }: {
+function QuizCard({ answer, selected, disabled, onClick, index = 0 }: {
   answer: { icon: string; text: string };
   selected: boolean;
   disabled: boolean;
   onClick: () => void;
+  index?: number;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="w-full flex items-center gap-4 rounded-xl transition-all duration-200 active:scale-[0.98]"
+      className="w-full flex items-center gap-4 rounded-xl active:scale-[0.98]"
       style={{
-        background: selected ? "rgba(20,201,184,0.12)" : "rgba(255,255,255,0.03)",
-        border: `1px solid ${selected ? "#14C9B8" : "#1e2535"}`,
+        background: selected ? "rgba(20,201,184,0.12)" : "rgba(255,255,255,0.04)",
+        border: `1px solid ${selected ? "#14C9B8" : "rgba(255,255,255,0.12)"}`,
         padding: "16px 18px",
         cursor: disabled ? "default" : "pointer",
         textAlign: "left",
+        transition: "background 0.18s, border-color 0.18s, transform 0.15s",
+        animation: `quiz-card-in 0.35s ease both`,
+        animationDelay: `${index * 80}ms`,
       }}
-      onMouseEnter={(e) => { if (!selected && !disabled) (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.06)"; }}
-      onMouseLeave={(e) => { if (!selected && !disabled) (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)"; }}>
+      onMouseEnter={(e) => {
+        if (!selected && !disabled) {
+          const el = e.currentTarget as HTMLElement;
+          el.style.background = "rgba(20,201,184,0.07)";
+          el.style.borderColor = "rgba(20,201,184,0.45)";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!selected && !disabled) {
+          const el = e.currentTarget as HTMLElement;
+          el.style.background = "rgba(255,255,255,0.04)";
+          el.style.borderColor = "rgba(255,255,255,0.12)";
+        }
+      }}>
       <span style={{ fontSize:"1.5rem", flexShrink:0 }}>{answer.icon}</span>
       <span style={{ color: selected ? "#14C9B8" : "#cdd5e0", fontSize:"1rem", lineHeight:1.5, fontWeight: selected ? 600 : 400, flex:1 }}>
         {answer.text}
       </span>
-      {selected && (
+      {selected ? (
         <svg style={{ flexShrink:0 }} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14C9B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      ) : (
+        <svg style={{ flexShrink:0, color:"#4a5568" }} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 18l6-6-6-6"/>
         </svg>
       )}
     </button>
@@ -435,6 +455,7 @@ export default function QuizFunnel({
                     {COPY.step1.answers.map((a, idx) => (
                       <QuizCard
                         key={idx}
+                        index={idx}
                         answer={a}
                         selected={selectedInStep === idx}
                         disabled={selectedInStep !== null}
@@ -466,6 +487,7 @@ export default function QuizFunnel({
                     {COPY.step2.answers.map((a, idx) => (
                       <QuizCard
                         key={idx}
+                        index={idx}
                         answer={a}
                         selected={selectedInStep === idx}
                         disabled={selectedInStep !== null}
@@ -522,6 +544,7 @@ export default function QuizFunnel({
                     {COPY.step3.answers.map((a, idx) => (
                       <QuizCard
                         key={idx}
+                        index={idx}
                         answer={a}
                         selected={selectedInStep === idx}
                         disabled={selectedInStep !== null}
@@ -577,6 +600,7 @@ export default function QuizFunnel({
                     {COPY.step4.answers.map((a, idx) => (
                       <QuizCard
                         key={idx}
+                        index={idx}
                         answer={a}
                         selected={selectedInStep === idx}
                         disabled={selectedInStep !== null}
