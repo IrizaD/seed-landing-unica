@@ -224,7 +224,7 @@ function QuizCard({ answer, selected, disabled, onClick }: {
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-const QUIZ_STEPS = [1, 2];
+const QUIZ_STEPS = [1, 2, 3, 4];
 
 export default function QuizFunnel({
   fbEventName = "Lead",
@@ -510,13 +510,34 @@ export default function QuizFunnel({
                       </Card>
                     ))}
                   </div>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-2 mb-4">
                     {COPY.step3.stats.map((s) => (
                       <div key={s.number} className="text-center rounded-xl border py-3"
                         style={{ background:"#0d1117", borderColor:"#1e2535" }}>
                         <p style={{ color:"#14C9B8", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.4rem" }}>{s.number}</p>
                         <p style={{ color:"#9aa3b2", fontSize:"15px", marginTop:"4px" }}>{s.label}</p>
                       </div>
+                    ))}
+                  </div>
+                  <h2 className="mb-2 md:mb-3"
+                    style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.15,
+                      fontSize:"clamp(1.3rem, 3.5vw, 2.75rem)", color:"#fff", letterSpacing:"-0.01em" }}>
+                    {COPY.step3.question}
+                  </h2>
+                  {COPY.step3.subtitle && (
+                    <p style={{ color:"#9aa3b2", fontSize:"0.9375rem", marginBottom:"16px" }}>
+                      {COPY.step3.subtitle}
+                    </p>
+                  )}
+                  <div className="flex flex-col gap-3">
+                    {COPY.step3.answers.map((a, idx) => (
+                      <QuizCard
+                        key={idx}
+                        answer={a}
+                        selected={selectedInStep === idx}
+                        disabled={selectedInStep !== null}
+                        onClick={() => handleAnswer(3, a.text)}
+                      />
                     ))}
                   </div>
                 </div>
@@ -553,6 +574,27 @@ export default function QuizFunnel({
                       ))}
                     </div>
                   </Card>
+                  <h2 className="mt-4 mb-2 md:mb-3"
+                    style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.15,
+                      fontSize:"clamp(1.3rem, 3.5vw, 2.75rem)", color:"#fff", letterSpacing:"-0.01em" }}>
+                    {COPY.step4.question}
+                  </h2>
+                  {COPY.step4.subtitle && (
+                    <p style={{ color:"#9aa3b2", fontSize:"0.9375rem", marginBottom:"16px" }}>
+                      {COPY.step4.subtitle}
+                    </p>
+                  )}
+                  <div className="flex flex-col gap-3">
+                    {COPY.step4.answers.map((a, idx) => (
+                      <QuizCard
+                        key={idx}
+                        answer={a}
+                        selected={selectedInStep === idx}
+                        disabled={selectedInStep !== null}
+                        onClick={() => handleAnswer(4, a.text)}
+                      />
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -675,17 +717,17 @@ export default function QuizFunnel({
 
             </div>{/* contentRef */}
 
-            {/* CTA desktop — pasos no-quiz 0, 3, 4 */}
-            {[0, 3, 4].includes(step) && (
+            {/* CTA desktop — solo paso 0 */}
+            {step === 0 && (
               <div className="hidden md:flex flex-col gap-2 mt-4 pb-4">
-                <button onClick={() => handleCta(step === 0 ? 1 : step === 3 ? 4 : 5)}
+                <button onClick={() => handleCta(1)}
                   className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
                   style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                     color:"#fff", padding:"17px 24px",
                     fontSize:"1.2rem", fontFamily:"var(--font-poppins)", fontWeight:900,
                     letterSpacing:"0.05em", lineHeight:1.2, cursor:"pointer", border:"none",
                     textShadow:"0 2px 6px rgba(0,0,0,0.45)" }}>
-                  {step === 0 ? COPY.step0.cta : step === 3 ? COPY.step3.cta : COPY.step4.cta}
+                  {COPY.step0.cta}
                 </button>
               </div>
             )}
@@ -724,19 +766,19 @@ export default function QuizFunnel({
         </div>
       )}
 
-      {/* ── STICKY FOOTER mobile — pasos no-quiz 0, 3, 4 ──────────────────────── */}
-      {[0, 3, 4].includes(step) && (
+      {/* ── STICKY FOOTER mobile — solo paso 0 ──────────────────────────────── */}
+      {step === 0 && (
         <div className="md:hidden flex-shrink-0 relative z-10 pt-2 pb-3"
           style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
           <div className="px-14" style={{ maxWidth:"900px", margin:"0 auto" }}>
-            <button onClick={() => handleCta(step === 0 ? 1 : step === 3 ? 4 : 5)}
+            <button onClick={() => handleCta(1)}
               className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
               style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                 color:"#fff", padding:"17px 24px",
                 fontSize:"1rem", fontFamily:"var(--font-poppins)", fontWeight:900,
                 letterSpacing:"0.03em", lineHeight:1.2, cursor:"pointer", border:"none",
                 textShadow:"0 2px 6px rgba(0,0,0,0.45)", whiteSpace:"nowrap" }}>
-              {step === 0 ? COPY.step0.cta : step === 3 ? COPY.step3.cta : COPY.step4.cta}
+              {COPY.step0.cta}
             </button>
           </div>
         </div>

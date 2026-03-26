@@ -68,7 +68,12 @@ export const COPY = {
       { number: "#1",    label: "podcast de negocios en México" },
       { number: "+18 Millones", label: "de seguidores en redes" },
     ],
-    cta: "VER CUÁNDO ES →",
+    question: "¿Con cuál de los dos te identificas más?",
+    subtitle: "Selecciona para continuar",
+    answers: [
+      { icon: "🎤", text: "Con Jorge — quiero construir una marca y llegar a más gente" },
+      { icon: "🏢", text: "Con Manuel — tengo un negocio físico y quiero digitalizarlo" },
+    ],
   },
 
   // ── STEP 4: FECHA / URGENCIA ──────────────────────────────────────────────
@@ -83,7 +88,12 @@ export const COPY = {
       { icon: "⚡", text: "En vivo con Jorge y Manuel — les puedes preguntar directamente" },
       { icon: "🎯", text: "Los lugares se asignan por orden de llegada" },
     ],
-    cta: "RESERVAR MI LUGAR →",
+    question: "¿Listo para reservar tu lugar?",
+    subtitle: "Es gratis — sin costos ni sorpresas",
+    answers: [
+      { icon: "🚀", text: "Sí, quiero asegurar mi lugar ahora" },
+      { icon: "📋", text: "Sí, tengo dudas pero me apunto igual" },
+    ],
   },
 
   // ── STEP 5: FORMULARIO ────────────────────────────────────────────────────
