@@ -244,7 +244,7 @@ function QuizCard({ answer, selected, disabled, onClick, index = 0 }: {
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-const QUIZ_STEPS = [1, 2, 3, 4];
+const QUIZ_STEPS = [1, 2, 3];
 
 export default function QuizFunnel({
   fbEventName = "Lead",
@@ -327,7 +327,7 @@ export default function QuizFunnel({
       const fbq = (window as unknown as Record<string, unknown>).fbq as ((...a: unknown[]) => void) | undefined;
       if (fbq && fbEventName) fbq("track", fbEventName);
     } catch {}
-    goToStep(6);
+    goToStep(5);
     setSubmitting(false);
   }
 
@@ -355,9 +355,9 @@ export default function QuizFunnel({
             style={{ objectFit:"contain", objectPosition:"left" }}
             priority
           />
-          {step === 5 && (
+          {step === 4 && (
             <div className="flex items-center mt-2">
-              <button type="button" onClick={() => goToStep(4)}
+              <button type="button" onClick={() => goToStep(3)}
                 className="flex items-center gap-1.5 transition-all duration-200 font-semibold"
                 style={{ color:"#9aa3b2", background:"none", border:"none", padding:"8px 0", fontSize:"0.875rem", cursor:"pointer" }}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#14C9B8")}
@@ -390,7 +390,7 @@ export default function QuizFunnel({
         )}
 
         {/* Flecha derecha */}
-        {step >= 0 && step <= 4 && (
+        {step >= 0 && step <= 3 && (
           <button type="button" onClick={() => goToStep(step + 1)} aria-label="Paso siguiente"
             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full active:scale-90 select-none arrow-right animate-cta-pulse"
             style={{ width:"44px", height:"44px",
@@ -557,7 +557,7 @@ export default function QuizFunnel({
                 </div>
               )}
 
-              {/* ── 4: FECHA / URGENCIA ────────────────────────────────── */}
+              {/* ── 4: FECHA + FORMULARIO ──────────────────────────────── */}
               {step === 4 && (
                 <div>
                   <Headline>
@@ -588,40 +588,10 @@ export default function QuizFunnel({
                       ))}
                     </div>
                   </Card>
-                  <h2 className="mt-4 mb-2 md:mb-3"
-                    style={{ fontFamily:"var(--font-barlow)", fontWeight:900, lineHeight:1.15,
-                      fontSize:"clamp(1.3rem, 3.5vw, 2.75rem)", color:"#fff", letterSpacing:"-0.01em" }}>
-                    {COPY.step4.question}
-                  </h2>
-                  {COPY.step4.subtitle && (
-                    <p style={{ color:"#9aa3b2", fontSize:"0.9375rem", marginBottom:"16px" }}>
-                      {COPY.step4.subtitle}
-                    </p>
-                  )}
-                  <div className="flex flex-col gap-3">
-                    {COPY.step4.answers.map((a, idx) => (
-                      <QuizCard
-                        key={idx}
-                        index={idx}
-                        answer={a}
-                        selected={selectedInStep === idx}
-                        disabled={selectedInStep !== null}
-                        onClick={() => handleAnswer(4, a.text)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
 
-              {/* ── 5: FORM ────────────────────────────────────────────── */}
-              {step === 5 && (
-                <div>
-                  <Headline>
-                    {COPY.step5.headlineLine1}{" "}
-                    <span style={{ color:"#14C9B8" }}>{COPY.step5.headlineLine2}</span>
-                  </Headline>
+                  <div className="my-4" style={{ width:"40px", height:"2px", background:"#1e2535", borderRadius:"2px" }}/>
 
-                  {/* Resumen de respuestas del quiz */}
+                  {/* Resumen quiz */}
                   {(quizAnswers[1] || quizAnswers[2]) && (
                     <div className="rounded-xl border mb-4"
                       style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.18)", padding:"12px 16px" }}>
@@ -629,14 +599,10 @@ export default function QuizFunnel({
                         Tu perfil
                       </p>
                       {quizAnswers[1] && (
-                        <p style={{ color:"#cdd5e0", fontSize:"0.9rem", lineHeight:1.5, marginBottom:"4px" }}>
-                          · {quizAnswers[1]}
-                        </p>
+                        <p style={{ color:"#cdd5e0", fontSize:"0.9rem", lineHeight:1.5, marginBottom:"4px" }}>· {quizAnswers[1]}</p>
                       )}
                       {quizAnswers[2] && (
-                        <p style={{ color:"#cdd5e0", fontSize:"0.9rem", lineHeight:1.5 }}>
-                          · {quizAnswers[2]}
-                        </p>
+                        <p style={{ color:"#cdd5e0", fontSize:"0.9rem", lineHeight:1.5 }}>· {quizAnswers[2]}</p>
                       )}
                     </div>
                   )}
@@ -693,8 +659,8 @@ export default function QuizFunnel({
                 </div>
               )}
 
-              {/* ── 6: GRACIAS ─────────────────────────────────────────── */}
-              {step === 6 && (
+              {/* ── 5: GRACIAS ─────────────────────────────────────────── */}
+              {step === 5 && (
                 <div className="text-center">
                   <div className="flex justify-center mb-3">
                     <div className="flex items-center justify-center rounded-full border-2"
@@ -732,10 +698,10 @@ export default function QuizFunnel({
 
             </div>{/* contentRef */}
 
-            {/* CTA desktop — pasos 0-4 */}
-            {step >= 0 && step <= 4 && (
+            {/* CTA desktop — pasos 0-3 */}
+            {step >= 0 && step <= 3 && (
               <div className="hidden md:flex flex-col gap-2 mt-4 pb-4">
-                <button onClick={() => handleCta(5)}
+                <button onClick={() => handleCta(4)}
                   className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
                   style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                     color:"#fff", padding:"17px 24px",
@@ -745,7 +711,7 @@ export default function QuizFunnel({
                   REGISTRARME AHORA →
                 </button>
                 <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
-                  Paso {step + 1} de 5
+                  Paso {step + 1} de 4
                 </p>
               </div>
             )}
@@ -755,11 +721,11 @@ export default function QuizFunnel({
       </div>{/* flex-1 */}
 
       {/* ── STICKY FOOTER pasos 5 y 6 ──────────────────────────────────────────── */}
-      {(step === 5 || step === 6) && (
-        <div className={`flex-shrink-0 relative z-10 pt-2 pb-3 ${step === 5 ? "md:hidden" : ""}`}
+      {(step === 4 || step === 5) && (
+        <div className={`flex-shrink-0 relative z-10 pt-2 pb-3 ${step === 4 ? "md:hidden" : ""}`}
           style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
           <div className="px-14 md:px-24" style={{ maxWidth:"900px", margin:"0 auto" }}>
-            {step === 5 && (
+            {step === 4 && (
               <button type="submit" form="quiz-form" disabled={submitting}
                 className="w-full rounded-xl active:scale-[0.98]"
                 style={{ background: submitting ? "#0a8a80" : "#14C9B8", color:"#fff", padding:"17px 24px",
@@ -768,7 +734,7 @@ export default function QuizFunnel({
                 {submitting ? COPY.step5.ctaLoading : COPY.step5.cta}
               </button>
             )}
-            {step === 6 && (
+            {step === 5 && (
               <button
                 className="w-full font-bold rounded-xl transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2.5"
                 style={{ background:"#25D366", color:"#fff", padding:"18px 24px", fontSize:"1.0625rem" }}
@@ -784,12 +750,12 @@ export default function QuizFunnel({
         </div>
       )}
 
-      {/* ── STICKY FOOTER mobile — pasos 0-4 ─────────────────────────────────── */}
-      {step >= 0 && step <= 4 && (
+      {/* ── STICKY FOOTER mobile — pasos 0-3 ─────────────────────────────────── */}
+      {step >= 0 && step <= 3 && (
         <div className="md:hidden flex-shrink-0 relative z-10 pt-2 pb-3"
           style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
           <div className="px-14 flex flex-col gap-2" style={{ maxWidth:"900px", margin:"0 auto" }}>
-            <button onClick={() => handleCta(5)}
+            <button onClick={() => handleCta(4)}
               className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
               style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                 color:"#fff", padding:"17px 24px",
