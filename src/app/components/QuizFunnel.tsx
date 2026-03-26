@@ -732,18 +732,21 @@ export default function QuizFunnel({
 
             </div>{/* contentRef */}
 
-            {/* CTA desktop — pasos 0, 3, 4 */}
-            {[0, 3, 4].includes(step) && (
+            {/* CTA desktop — pasos 0-4 */}
+            {step >= 0 && step <= 4 && (
               <div className="hidden md:flex flex-col gap-2 mt-4 pb-4">
-                <button onClick={() => handleCta(step === 0 ? 1 : step === 3 ? 4 : 5)}
+                <button onClick={() => handleCta(5)}
                   className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
                   style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                     color:"#fff", padding:"17px 24px",
                     fontSize:"1.2rem", fontFamily:"var(--font-poppins)", fontWeight:900,
                     letterSpacing:"0.05em", lineHeight:1.2, cursor:"pointer", border:"none",
                     textShadow:"0 2px 6px rgba(0,0,0,0.45)" }}>
-                  {step === 0 ? COPY.step0.cta : step === 3 ? COPY.step3.cta : COPY.step4.cta}
+                  REGISTRARME AHORA →
                 </button>
+                <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
+                  Paso {step + 1} de 5
+                </p>
               </div>
             )}
 
@@ -781,31 +784,26 @@ export default function QuizFunnel({
         </div>
       )}
 
-      {/* ── STICKY FOOTER mobile — pasos 0, 3, 4 ────────────────────────────── */}
-      {[0, 3, 4].includes(step) && (
+      {/* ── STICKY FOOTER mobile — pasos 0-4 ─────────────────────────────────── */}
+      {step >= 0 && step <= 4 && (
         <div className="md:hidden flex-shrink-0 relative z-10 pt-2 pb-3"
           style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
-          <div className="px-14" style={{ maxWidth:"900px", margin:"0 auto" }}>
-            <button onClick={() => handleCta(step === 0 ? 1 : step === 3 ? 4 : 5)}
+          <div className="px-14 flex flex-col gap-2" style={{ maxWidth:"900px", margin:"0 auto" }}>
+            <button onClick={() => handleCta(5)}
               className="w-full rounded-xl active:scale-[0.97] animate-cta-pulse"
               style={{ background:"linear-gradient(135deg, #FF8C00 0%, #FFD600 100%)",
                 color:"#fff", padding:"17px 24px",
                 fontSize:"1rem", fontFamily:"var(--font-poppins)", fontWeight:900,
                 letterSpacing:"0.03em", lineHeight:1.2, cursor:"pointer", border:"none",
                 textShadow:"0 2px 6px rgba(0,0,0,0.45)", whiteSpace:"nowrap" }}>
-              {step === 0 ? COPY.step0.cta : step === 3 ? COPY.step3.cta : COPY.step4.cta}
+              REGISTRARME AHORA →
             </button>
+            {[1, 2].includes(step) && (
+              <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
+                Selecciona una respuesta para continuar
+              </p>
+            )}
           </div>
-        </div>
-      )}
-
-      {/* Hint en pasos quiz mobile — solo pasos 1 y 2 (los que no tienen CTA) */}
-      {[1, 2].includes(step) && (
-        <div className="md:hidden flex-shrink-0 relative z-10 pt-2 pb-3"
-          style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
-          <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
-            Selecciona una respuesta para continuar
-          </p>
         </div>
       )}
 
