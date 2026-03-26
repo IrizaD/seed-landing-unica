@@ -557,39 +557,13 @@ export default function QuizFunnel({
                 </div>
               )}
 
-              {/* ── 4: FECHA + FORMULARIO ──────────────────────────────── */}
+              {/* ── 4: FORMULARIO + FECHA ──────────────────────────────── */}
               {step === 4 && (
                 <div>
                   <Headline>
-                    {COPY.step4.headlineLine1}{" "}
-                    <span style={{ color:"#14C9B8" }}>{COPY.step4.headlineLine2}</span>
+                    {COPY.step5.headlineLine1}{" "}
+                    <span style={{ color:"#14C9B8" }}>{COPY.step5.headlineLine2}</span>
                   </Headline>
-                  <div className="rounded-xl border mb-3"
-                    style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.22)", padding:"14px 16px" }}>
-                    <div className="flex items-center gap-3">
-                      <div className="flex-shrink-0 rounded-xl flex flex-col items-center justify-center"
-                        style={{ width:"48px", height:"48px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
-                        <p style={{ color:"#14C9B8", fontSize:"10px", fontWeight:700, lineHeight:1, textTransform:"uppercase" }}>JUE</p>
-                        <p style={{ color:"#fff", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.1rem", lineHeight:1, marginTop:"2px" }}>8PM</p>
-                      </div>
-                      <div>
-                        <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>{eventDate.formatted}</p>
-                        <p style={{ color:"#9aa3b2", fontSize:"15px", marginTop:"4px" }}>{COPY.step4.eventTime}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <p style={{ color:"#9aa3b2", fontSize:"0.9375rem", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:"10px" }}>
-                    {COPY.step4.howItWorksLabel}
-                  </p>
-                  <Card>
-                    <div className="space-y-3">
-                      {COPY.step4.rows.map((r) => (
-                        <Row key={r.icon} icon={r.icon}>{r.text}</Row>
-                      ))}
-                    </div>
-                  </Card>
-
-                  <div className="my-4" style={{ width:"40px", height:"2px", background:"#1e2535", borderRadius:"2px" }}/>
 
                   {/* Resumen quiz */}
                   {(quizAnswers[1] || quizAnswers[2]) && (
@@ -655,6 +629,33 @@ export default function QuizFunnel({
                         lineHeight:1.2, cursor: submitting ? "not-allowed" : "pointer", border:"none" }}>
                       {submitting ? COPY.step5.ctaLoading : COPY.step5.cta}
                     </button>
+                  </div>
+
+                  <div className="mt-5" style={{ borderTop:"1px solid #1e2535", paddingTop:"16px" }}>
+                    <div className="rounded-xl border mb-3"
+                      style={{ background:"rgba(20,201,184,0.05)", borderColor:"rgba(20,201,184,0.22)", padding:"14px 16px" }}>
+                      <div className="flex items-center gap-3">
+                        <div className="flex-shrink-0 rounded-xl flex flex-col items-center justify-center"
+                          style={{ width:"48px", height:"48px", background:"rgba(20,201,184,0.12)", border:"1px solid rgba(20,201,184,0.25)" }}>
+                          <p style={{ color:"#14C9B8", fontSize:"10px", fontWeight:700, lineHeight:1, textTransform:"uppercase" }}>JUE</p>
+                          <p style={{ color:"#fff", fontFamily:"var(--font-barlow)", fontWeight:900, fontSize:"1.1rem", lineHeight:1, marginTop:"2px" }}>8PM</p>
+                        </div>
+                        <div>
+                          <p style={{ color:"#fff", fontWeight:700, fontSize:"0.9375rem" }}>{eventDate.formatted}</p>
+                          <p style={{ color:"#9aa3b2", fontSize:"15px", marginTop:"4px" }}>{COPY.step4.eventTime}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <p style={{ color:"#9aa3b2", fontSize:"0.9375rem", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:"10px" }}>
+                      {COPY.step4.howItWorksLabel}
+                    </p>
+                    <Card>
+                      <div className="space-y-3">
+                        {COPY.step4.rows.map((r) => (
+                          <Row key={r.icon} icon={r.icon}>{r.text}</Row>
+                        ))}
+                      </div>
+                    </Card>
                   </div>
                 </div>
               )}
