@@ -7,9 +7,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { COPY as seedMexicoCopy } from "@/app/content/funnel-copy";
-import { COPY as seedMexicoCopiaCopy } from "@/funnels/seed-mexico-copia/copy";
+import { COPY as seedMexicoQzCopy } from "@/funnels/seed-mexico-qz/copy";
 
 export const FUNNEL_COPY: Record<string, typeof seedMexicoCopy> = {
-  "seed-mexico":       seedMexicoCopy,
-  "seed-mexico-copia": seedMexicoCopiaCopy,
+  "seed-mexico":    seedMexicoCopy,
+  "seed-mexico-qz": seedMexicoQzCopy,
 };
