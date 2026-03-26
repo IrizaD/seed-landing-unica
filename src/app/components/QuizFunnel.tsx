@@ -797,8 +797,8 @@ export default function QuizFunnel({
         </div>
       )}
 
-      {/* Hint en pasos quiz mobile */}
-      {isQuizStep && (
+      {/* Hint en pasos quiz mobile — solo pasos 1 y 2 (los que no tienen CTA) */}
+      {[1, 2].includes(step) && (
         <div className="md:hidden flex-shrink-0 relative z-10 pt-2 pb-3"
           style={{ background:"rgba(6,8,15,0.9)", backdropFilter:"blur(8px)" }}>
           <p className="text-center" style={{ color:"#7a8299", fontSize:"0.85rem", letterSpacing:"0.05em" }}>
